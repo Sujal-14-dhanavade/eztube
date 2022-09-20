@@ -2,12 +2,12 @@ const express = require("express");
 const _ = require("lodash");
 const bodyParser = require("body-parser");
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.route("/")
+app.route("/getData")
     .get((req, res) => {
         res.send("Hello World");
     })
