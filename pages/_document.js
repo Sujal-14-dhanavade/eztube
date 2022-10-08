@@ -1,15 +1,16 @@
-import Document, {Head, Main, NextScript} from "next/document";
+import Document, {Head, Main, NextScript, Html} from "next/document";
 
 export default function Documnet() {
     return(
-        <html>
+        <Html>
             <Head>
-                <title> Nextjs Awesome </title>
+                
             </Head>
+            <title> Nextjs Awesome </title>
             <body>
                 <Main />
                 <NextScript />
             </body>
-        </html>
+        </Html>
     )
 }

@@ -4,11 +4,13 @@ require('dotenv').config();
 const express = require('express');
 const next = require('next');
 const homeRoute = require('./routes/home');
-const mongoose = require('mongoose');
+const connect = require('mongoose').connect;
+const bodyParser = require("body-parser");
+
 
 // connecting to database
 const database = "mongodb+srv://surojeet:" + process.env.ATLAS_PASSWORD +"@cluster0.qhibn.mongodb.net/EzTube?retryWrites=true&w=majority";
-mongoose.connect(database)
+connect(database)
     .then(() => {
         console.log("Database Connected");
     })
@@ -33,6 +35,7 @@ const handle = app.getRequestHandler();
 // preparing next app to connect to express server as backend
 app.prepare().then( () => {
     const server = express();
+    server.use(bodyParser.urlencoded({extended: true}));
     server.use("/api", homeRoute);
     server.get("*", (req, res) => {
         return handle(req, res);
