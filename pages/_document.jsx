@@ -1,6 +1,6 @@
 import Document, {Head, Main, NextScript, Html} from "next/document";
 
-export default function Documnet() {
+export default function Document() {
     return(
         <Html>
             <Head>

@@ -6,6 +6,11 @@ const router = express.Router();
 
 router.route('/')
 .get((req, res) => {
+    res.send("express working");
+})
+
+router.route('/uploadVid')
+.get((req, res) => {
     res.send("Hello");
 })
 .post((req, res) => {
