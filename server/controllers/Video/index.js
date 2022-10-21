@@ -1,4 +1,4 @@
-const user = require("../../models/Video/video");
+const user = require("../../models/Video");
 const insert = async (req) => {
     const userData = new user({
         name: req.name,

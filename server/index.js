@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const express = require('express');
 const next = require('next');
-const homeRoute = require('./routes/home');
+const homeRoute = require('./routes');
 const connect = require('mongoose').connect;
 const bodyParser = require("body-parser");
 

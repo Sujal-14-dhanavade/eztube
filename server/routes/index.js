@@ -1,5 +1,5 @@
 const express = require('express');
-const insertUser = require("../controllers/Video/crud");
+const insertUser = require("../controllers/Video");
 
 
 const router = express.Router();
@@ -17,5 +17,4 @@ router.route('/uploadVid')
     insertUser(req.body);
     res.send("done");
 })
-
 module.exports = router;
