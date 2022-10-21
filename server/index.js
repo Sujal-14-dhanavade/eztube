@@ -11,19 +11,17 @@ const {
   mongoose,
   multer,
   GridFsStorage,
-  Grid,
   path,
   crypto,
   cors,
   _,
 } = require("./library");
-Grid.mongo = mongoose.mongo;
 
 // MONGO CONNECTION
 
 const database = "mongodb://localhost:27017/eztube";
 
-let gfs, video;
+let video;
 
 mongoose
   .connect(database)
@@ -31,8 +29,6 @@ mongoose
     console.log("database connected");
     mongoose.connection.once("open", function () {
       console.log("connected");
-      gfs = Grid(mongoose.connection.db);
-      gfs.collection("videos");
     });
     const storage = new GridFsStorage({
       url: database,
@@ -100,15 +96,47 @@ app.prepare().then(() => {
   // @Routes POST /watch/videoTitle
   // @desc get videos from mongo server
   server.get("/watch/:videoTitle", (req, res) => {
-    gfs.exist(req.params.videoTitle)
-    .then((err, files) => {
-      if (!files || files.length == 0) {
-        return res.status(404).json({
-          err: "No files exists",
-        });
-      }
-      return res.status(200).send("File found");
+    const range = req.headers.range;
+    if (!range) {
+      res.status(400).send("Requires Range header");
+    }
+    let gfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
+      bucketName: "videos",
     });
+    const id = mongoose.Types.ObjectId(req.params.videoTitle);
+    gfs
+      .find({ _id: id })
+      .toArray()
+      .then((files) => {
+        if (!files || files.length === 0) {
+          res.status(404).json({
+            err: "No Files Exist",
+          });
+        }
+        let file = files[0];
+        const videoSize = file.length;
+        
+        const start = Number(range.replace(/\D/g, ""));
+        const chunkSize = file.chunkSize;
+        const end = Math.min(videoSize - 1, chunkSize + start);
+        const contentLength = end - start + 1;
+        const headers = {
+          "Content-Range": `bytes ${start}-${end}/${videoSize}`,
+          "Accept-Ranges": "bytes",
+          "Content-Length": contentLength,
+          "Content-Type": "video/mp4",
+        };
+        
+
+        // HTTP Status 206 for Partial Content
+        res.writeHead(206, headers);
+        const downloadStream = gfs.openDownloadStream(file._id, {
+          start,
+          end
+        });
+
+        downloadStream.pipe(res);
+      });
   });
 
   // @Routes rest are handled by next.js
