@@ -5,9 +5,9 @@ import React from "react";
 export default function About() {
   return (
     <div>
-      <video id="videoPlayer" width="650" controls>
-        <source src="/watch/6352cfec37f3f416bcef3427" type="video/mp4" />
-      </video>
+      <audio controls>
+        <source src="/watch/6353926eaac20665000d852e" type="audio/mpeg"/>
+      </audio>
     </div>
   );
 }

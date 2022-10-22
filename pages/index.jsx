@@ -19,7 +19,7 @@ export default function About() {
         {data}
       </Typography>
       <form
-        action="/api/videoUpload"
+        action="/api/audioUpload"
         method="POST"
         encType="multipart/form-data"
         onSubmit={onSubmit}
@@ -27,7 +27,7 @@ export default function About() {
         <TextField
           variant="standard"
           type={"file"}
-          name={"videoFile"}
+          name={"audioFile"}
           onChange={onFileChange}
         ></TextField>
         <br />

@@ -15,23 +15,23 @@ const {
   crypto,
   cors,
   _,
+  watchRoute
 } = require("./library");
 
 // MONGO CONNECTION
 
-const database = "mongodb://localhost:27017/eztube";
 
-let video;
+let audio;
 
 mongoose
-  .connect(database)
+  .connect(process.env.DATABASE)
   .then(() => {
     console.log("database connected");
     mongoose.connection.once("open", function () {
       console.log("connected");
     });
     const storage = new GridFsStorage({
-      url: database,
+      url: process.env.DATABASE,
       file: (req, file) => {
         return new Promise((resolve, reject) => {
           crypto.randomBytes(16, (err, buf) => {
@@ -42,20 +42,20 @@ mongoose
               buf.toString("hex") + path.extname(file.originalname);
             const fileInfo = {
               filename: filename,
-              bucketName: "videos",
+              bucketName: "audios",
             };
             resolve(fileInfo);
           });
         });
       },
     });
-    video = multer({ storage });
+    audio = multer({ storage });
   })
   .catch((err) => {
     console.error("Database connection error:", error);
   });
 
-// create storage engine for video
+// create storage engine for audio
 
 // starting development mode
 
@@ -87,57 +87,15 @@ app.prepare().then(() => {
   // @desc CRUD operation with mongoDB
   server.use("/api", homeRoute);
 
-  // @Routes POST /api/videoUpload
-  // @desc uploads videos to mongo server
-  server.post("/api/videoUpload", video.single("videoFile"), (req, res) => {
-    res.send("video upload");
+  // @Routes POST /api/audioUpload
+  // @desc uploads audios to mongo server
+  server.post("/api/audioUpload", audio.single("audioFile"), (req, res) => {
+    res.send("audio upload");
   });
 
-  // @Routes POST /watch/videoTitle
-  // @desc get videos from mongo server
-  server.get("/watch/:videoTitle", (req, res) => {
-    const range = req.headers.range;
-    if (!range) {
-      res.status(400).send("Requires Range header");
-    }
-    let gfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
-      bucketName: "videos",
-    });
-    const id = mongoose.Types.ObjectId(req.params.videoTitle);
-    gfs
-      .find({ _id: id })
-      .toArray()
-      .then((files) => {
-        if (!files || files.length === 0) {
-          res.status(404).json({
-            err: "No Files Exist",
-          });
-        }
-        let file = files[0];
-        const videoSize = file.length;
-        
-        const start = Number(range.replace(/\D/g, ""));
-        const chunkSize = file.chunkSize;
-        const end = Math.min(videoSize - 1, chunkSize + start);
-        const contentLength = end - start + 1;
-        const headers = {
-          "Content-Range": `bytes ${start}-${end}/${videoSize}`,
-          "Accept-Ranges": "bytes",
-          "Content-Length": contentLength,
-          "Content-Type": "video/mp4",
-        };
-        
-
-        // HTTP Status 206 for Partial Content
-        res.writeHead(206, headers);
-        const downloadStream = gfs.openDownloadStream(file._id, {
-          start,
-          end
-        });
-
-        downloadStream.pipe(res);
-      });
-  });
+  // @Routes POST /watch/audioTitle
+  // @desc get audios from mongo server
+  server.use("/watch", watchRoute);
 
   // @Routes rest are handled by next.js
   server.get("*", (req, res) => {
