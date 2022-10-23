@@ -106,7 +106,7 @@ app.prepare().then(() => {
     console.log("Server Started");
   });
 
-  // handled abrupt disconnection
+  // handles abrupt disconnection
   process.on("SIGINT", (_) => {
     appServer.close(() => {
       console.log("server closed :- reason -> interrupted");
