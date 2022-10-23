@@ -77,7 +77,7 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   // express server
   const server = express();
-
+  server.use(express.static(__dirname + "/public"));
   // initializing server
   server.use(bodyParser.urlencoded({ extended: true }));
   server.use(bodyParser.json());
@@ -86,6 +86,11 @@ app.prepare().then(() => {
   // @Routes API
   // @desc CRUD operation with mongoDB
   server.use("/api", homeRoute);
+
+  // @Routes for testing
+  server.get("/api/redirect", (req, res) => {
+    res.redirect("/");
+  })
 
   // @Routes POST /api/audioUpload
   // @desc uploads audios to mongo server

@@ -1,0 +1,17 @@
+body {
+    background-color: #393E46;
+    font-family: 'Open Sans', sans-serif;
+    color: #EEEEEE
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+}
+
+.dark-navbar {
+    background-color: #222831;
+}
+
+.text-color:hover {
+    color: #00ADB5
+}
