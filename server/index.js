@@ -90,6 +90,30 @@ app.prepare().then(() => {
     res.send("audio upload");
   });
 
+  // @Routes POST /api/userPicUpload
+  // @desc uploads user avatar to mongo server
+  server.post("/api/userPicUpload", userPic.single("userPicFile"), (req, res) => {
+    res.send("user Pic uploaded");
+  });
+
+  // @Routes POST /api/albumPicUpload
+  // @desc uploads album avatar to mongo server
+  server.post("/api/albumPicUpload", albumPic.single("albumPicFile"), (req, res) => {
+    res.send("album Pic upload");
+  });
+
+  // @Routes POST /api/playlistPicUpload
+  // @desc uploads playlist avatar to mongo server
+  server.post("/api/playlistPicUpload", audio.single("playlistPicFile"), (req, res) => {
+    res.send("playlist Pic upload");
+  });
+
+  // @Routes POST /api/songPicUpload
+  // @desc uploads audios to mongo server
+  server.post("/api/songPicUpload", audio.single("songPicFile"), (req, res) => {
+    res.send("song Pic upload");
+  });
+
   // @Routes POST /watch/audioTitle
   // @desc get audios from mongo server
   server.use("/watch", watchRoute);
