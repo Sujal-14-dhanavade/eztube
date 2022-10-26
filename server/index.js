@@ -11,6 +11,7 @@ const {
   mongoose,
   multer,
   cors,
+  GridFsStorage,
   _,
   watchRoute,
   getPicRoute
@@ -37,11 +38,16 @@ mongoose
       console.log("connected");
     });
 
-    audio = multer({ audioStorage });
-    userPic = multer({userAvatarStorage});
-    songPic = multer({songAvatarStorage});
-    playListPic = multer({playlistAvatarStorage});
-    albumPic = multer({albumAvatarStorage});
+    const audioGrid = new GridFsStorage(audioStorage);
+    const userGrid = new GridFsStorage(userAvatarStorage);
+    const albumGrid = new GridFsStorage(albumAvatarStorage);
+    const playlistGrid = new GridFsStorage(playlistAvatarStorage);
+    const songGrid = new GridFsStorage(songAvatarStorage);
+    audio = multer({ storage: audioGrid });
+    userPic = multer({storage: userGrid});
+    songPic = multer({storage: songGrid});
+    playlistPic = multer({storage: playlistGrid});
+    albumPic = multer({storage: albumGrid});
   })
   .catch((err) => {
     console.error("Database connection error:", error);
@@ -79,15 +85,10 @@ app.prepare().then(() => {
   // @desc CRUD operation with mongoDB
   server.use("/api", homeRoute);
 
-  // @Routes for testing
-  server.get("/api/redirect", (req, res) => {
-    res.redirect("/");
-  });
-
   // @Routes POST /api/audioUpload
   // @desc uploads audios to mongo server
   server.post("/api/audioUpload", audio.single("audioFile"), (req, res) => {
-    res.send("audio upload");
+    res.json({file: req.file});
   });
 
   // @Routes POST /api/userPicUpload
@@ -104,13 +105,13 @@ app.prepare().then(() => {
 
   // @Routes POST /api/playlistPicUpload
   // @desc uploads playlist avatar to mongo server
-  server.post("/api/playlistPicUpload", audio.single("playlistPicFile"), (req, res) => {
+  server.post("/api/playlistPicUpload", playlistPic.single("playlistPicFile"), (req, res) => {
     res.send("playlist Pic upload");
   });
 
   // @Routes POST /api/songPicUpload
   // @desc uploads audios to mongo server
-  server.post("/api/songPicUpload", audio.single("songPicFile"), (req, res) => {
+  server.post("/api/songPicUpload", songPic.single("songPicFile"), (req, res) => {
     res.send("song Pic upload");
   });
 

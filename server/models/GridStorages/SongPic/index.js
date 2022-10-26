@@ -1,7 +1,7 @@
 require("dotenv").config();
-const { GridFsStorage, crypto, path } = require("../../../library");
+const { crypto, path } = require("../../../library");
 
-const storage = new GridFsStorage({
+const storage = {
   url: process.env.DATABASE,
   file: (req, file) => {
     return new Promise((resolve, reject) => {
@@ -18,6 +18,6 @@ const storage = new GridFsStorage({
       });
     });
   },
-});
+};
 
 module.exports = storage;
