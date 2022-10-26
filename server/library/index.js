@@ -10,5 +10,6 @@ const crypto = require("crypto");
 const cors = require("cors");
 const _ = require("lodash");
 const watchRoute = require("../routes/watch");
+const getPicRoute = require("../routes/getPic");
 
-module.exports = {express, next, homeRoute, bodyParser, mongoose, multer, GridFsStorage, path, crypto, cors, _, watchRoute};
+module.exports = {express, next, homeRoute, bodyParser, mongoose, multer, GridFsStorage, path, crypto, cors, _, watchRoute, getPicRoute};

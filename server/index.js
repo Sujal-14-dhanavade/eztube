@@ -13,6 +13,7 @@ const {
   cors,
   _,
   watchRoute,
+  getPicRoute
 } = require("./library");
 
 // importing GRID storages
@@ -92,6 +93,10 @@ app.prepare().then(() => {
   // @Routes POST /watch/audioTitle
   // @desc get audios from mongo server
   server.use("/watch", watchRoute);
+
+  // @Routes POST /avatar/picType/id
+  // @desc get pic from mongo server
+  server.use("/avatar", getPicRoute);
 
   // @Routes rest are handled by next.js
   server.get("*", (req, res) => {
