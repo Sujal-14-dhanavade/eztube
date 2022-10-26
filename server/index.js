@@ -10,18 +10,23 @@ const {
   bodyParser,
   mongoose,
   multer,
-  GridFsStorage,
-  path,
-  crypto,
   cors,
   _,
-  watchRoute
+  watchRoute,
 } = require("./library");
 
-// MONGO CONNECTION
+// importing GRID storages
+const {
+  audioStorage,
+  songAvatarStorage,
+  playlistAvatarStorage,
+  userAvatarStorage,
+  albumAvatarStorage,
+} = require("./models/GridStorages");
 
+// MONGO CONNECTION AND GRID FS MODALS AUDIO, AND PLAYLIST, ALBUM, USER AND SONG PIC
 
-let audio;
+let audio, userPic, albumPic, playlistPic, songPic;
 
 mongoose
   .connect(process.env.DATABASE)
@@ -30,26 +35,12 @@ mongoose
     mongoose.connection.once("open", function () {
       console.log("connected");
     });
-    const storage = new GridFsStorage({
-      url: process.env.DATABASE,
-      file: (req, file) => {
-        return new Promise((resolve, reject) => {
-          crypto.randomBytes(16, (err, buf) => {
-            if (err) {
-              return reject(err);
-            }
-            const filename =
-              buf.toString("hex") + path.extname(file.originalname);
-            const fileInfo = {
-              filename: filename,
-              bucketName: "audios",
-            };
-            resolve(fileInfo);
-          });
-        });
-      },
-    });
-    audio = multer({ storage });
+
+    audio = multer({ audioStorage });
+    userPic = multer({userAvatarStorage});
+    songPic = multer({songAvatarStorage});
+    playListPic = multer({playlistAvatarStorage});
+    albumPic = multer({albumAvatarStorage});
   })
   .catch((err) => {
     console.error("Database connection error:", error);
@@ -90,7 +81,7 @@ app.prepare().then(() => {
   // @Routes for testing
   server.get("/api/redirect", (req, res) => {
     res.redirect("/");
-  })
+  });
 
   // @Routes POST /api/audioUpload
   // @desc uploads audios to mongo server
