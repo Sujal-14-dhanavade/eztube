@@ -19,6 +19,10 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Playfair+Display&display=swap"
           rel="stylesheet"
         />
+        <script
+          src="https://kit.fontawesome.com/8100311596.js"
+          crossOrigin="anonymous"
+        />
         <link rel="icon" href="images/wave.ico" />
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"

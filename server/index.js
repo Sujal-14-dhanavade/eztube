@@ -14,7 +14,8 @@ const {
   GridFsStorage,
   _,
   watchRoute,
-  getPicRoute
+  getPicRoute,
+  bcrypt
 } = require("./library");
 
 // importing GRID storages
