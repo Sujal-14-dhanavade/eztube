@@ -17,10 +17,10 @@ export default function collapseMenu() {
       <div className="collapse navbar-collapse toggle-list" id="navbarNav">
         <ul className="navbar-nav">
           <li className="mx-md-2 mx-lg-2 my-md-auto my-lg-auto my-3">
-            <button className="signIn">Sign in</button>
+            <button className="signIn rounded">Sign in</button>
           </li>
           <li className="mx-md-4 mx-lg-4 my-md-auto my-lg-auto my-3">
-            <button className="create">Create account</button>
+            <button className="create rounded">Create account</button>
           </li>
           <li className="navbar-text d-none d-md-flex d-lg-flex align-items-center">For Creators</li>
         </ul>

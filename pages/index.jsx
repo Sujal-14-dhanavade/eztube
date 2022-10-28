@@ -1,5 +1,5 @@
 import Navbar from "../components/NavBar";
-import Body from "../components/Body";
+import DefaultBody from "../components/DefaultBody";
 import React from "react";
 
 export default function About() {
@@ -7,7 +7,7 @@ export default function About() {
   return (
     <div>
       <Navbar />
-      <Body />
+      <DefaultBody />
     </div>
   );
 }
