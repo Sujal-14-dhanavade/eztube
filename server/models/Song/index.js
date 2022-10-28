@@ -8,7 +8,7 @@ const songSchema = new Schema({
         unique: true
     },
     songPic: {type: Schema.Types.ObjectId},
-    artist: {type: Schema.Types.ObjectId, required: true},
+    owner: {type: Schema.Types.ObjectId, required: true},
     album: {type: Schema.Types.ObjectId, required: true},
     date_created: {
         type: Date,
@@ -21,6 +21,26 @@ const songSchema = new Schema({
     views: {
         type: Number,
         default: 0,
+    },
+    genre: {
+        type: String,
+        required: true
+    },
+    language: {
+        type: String,
+        required: true
+    },
+    artist: {
+        type: [String],
+        required: true
+    },
+    producer: {
+        type: [String],
+        required: true 
+    },
+    writer: {
+        type: [String],
+        required: true
     }
 });
 
