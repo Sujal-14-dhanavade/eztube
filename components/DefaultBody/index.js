@@ -3,6 +3,7 @@ import React from "react";
 export default function DefaultBody() {
   return (
     <React.Fragment>
+      {/* HomeBody */}
       <div className="homeBody wave-img d-flex flex-column justify-content-center align-items-center">
         <p className="display-2 intro-heading">Ride on Waves</p>
         <p className="text-center intro-body">
@@ -11,7 +12,9 @@ export default function DefaultBody() {
         </p>
         <button className="create py-2 px-4 rounded">Sign up for free</button>
       </div>
-      <div className="feature container-fluid p-5 bg-light text-center">
+
+      {/* Feature */}
+      <div className="feature container-fluid bg-light text-center">
         <div className="row">
           <div className="col-md-6 col-sm-12 d-inline-block">
             <img
@@ -22,22 +25,33 @@ export default function DefaultBody() {
           </div>
           <div className="col-md-6 col-sm-12 feature-content">
             <p className="feature-heading">Never stop listening</p>
+            <hr className="feature-divider" />
             <p className="feature-body">
               SoundCloud is available on Web, iOS, Android, Sonos, Chromecast,
               and Xbox One.
             </p>
-            <div className="row pt-5">
-              <div className="col">
-                <button className="btn btn-dark p-2">
-                  <i className="fa-brands fa-apple"></i>  Download
-                </button>
-              </div>
-              <div className="col">
-                <button className="btn btn-dark p-2">
-                  <i className="fa-brands fa-google-play"></i>  Download
-                </button>
-              </div>
+            <div className="pt-5">
+              <a className="btn btn-dark p-2 me-3" href="https://www.apple.com/in/store">
+                <i className="fa-brands fa-apple"></i> Download
+              </a>
+              <a className="btn btn-dark p-2" href="https://play.google.com/">
+                <i className="fa-brands fa-google-play"></i> Download
+              </a>
             </div>
+          </div>
+        </div>
+      </div>
+      {/* Calling Out */}
+      <div className="feature container-fluid bg-stair text-light">
+        <div className="row">
+          <div className="col-md-6 col-sm-12 d-inline-block my-4">
+            <p className="display-6 mt-5">Calling all creators</p>
+            <p className="mt-5">
+              Get on WaveCloud to connect with fans, share your sounds, and grow your audience. What are you waiting for?
+            </p>
+          </div>
+          <div className="col-md-6 col-sm-12">
+            <img className="calling-img" src="../images/creator.jpg" alt="creator" />
           </div>
         </div>
       </div>

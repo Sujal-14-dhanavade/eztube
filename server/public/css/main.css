@@ -23,14 +23,10 @@ h1, h2, h3, h4, h5, h6{
     border-color: #FF0000;
     background-color: #000000;
 }
-
 .footer {
-    background-image: url('../images/layer.svg');
-    aspect-ratio: 960/300;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    background-color: #000000;
+    padding: 10px;
+    font-weight: 900;
 }
 
 .text-color:hover {
@@ -118,8 +114,15 @@ button.create {
 .feature {
     color: black;
     padding: 7% 15%;
+    letter-spacing: 1px;
 }
-
+.feature-divider {
+    width: 25%;
+    margin: auto 0 30px auto;
+    background: linear-gradient(90deg, red 40%,rgb(3, 3, 56) );
+    padding: 2px;
+    font-weight: 900;
+}
 .feature-img {
     width: 100%;
     height: auto;
@@ -140,6 +143,22 @@ button.create {
     margin-right: 0;
 }
 
+.calling-img {
+    width: 100%;
+    height: 110%;
+    border-radius: 10%;
+}
+
+.bg-black {
+    background-color: #000000;
+}
+
+.bg-stair {
+    background-image: url("../images/cornered-stairs.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
 @media screen and (max-width: 768px) {
     .feature-content{
@@ -148,5 +167,11 @@ button.create {
     }
     .feature-body {
         margin: auto;
+    }
+    .feature-divider {
+        margin: auto auto 30px auto;
+    }
+    .bg-stair {
+        text-align: center;
     }
 }
