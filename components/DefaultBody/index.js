@@ -10,7 +10,7 @@ export default function DefaultBody() {
           Discover, stream, and share a constantly expanding mix of music from
           emerging and major artists around the world.
         </p>
-        <button className="create py-2 px-4 rounded">Sign up for free</button>
+        <button className="create py-2 px-4 rounded" data-bs-toggle="modal" data-bs-target="#signUpForm">Sign up for free</button>
       </div>
 
       {/* Feature */}

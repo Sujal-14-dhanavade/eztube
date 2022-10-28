@@ -1,5 +1,5 @@
 import React from "react";
-import CollapseMenu from "./CollapseMenu";
+import CollapseMenu from "../CollapseMenu";
 
 const Navbar = () => {
     
