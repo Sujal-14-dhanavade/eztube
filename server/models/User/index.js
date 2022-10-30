@@ -1,6 +1,17 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const historySchema= new Schema({
+    song_id: {
+        type: Schema.Types.ObjectId,
+        required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
+})
+
 const userSchema = new Schema({
     userPic: {type: Schema.Types.ObjectId},
     username: {
@@ -41,6 +52,9 @@ const userSchema = new Schema({
     date_created: {
         type: Date,
         default: Date.now
+    },
+    recent_Played: {
+        type: [historySchema]
     }
 });
 
