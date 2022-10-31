@@ -7,7 +7,7 @@ export default function About() {
   
   return (
     <div>
-      <Navbar />
+      <Navbar CollapseMenu = {true}/>
       <DefaultBody />
       <Footer />
     </div>

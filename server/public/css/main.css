@@ -3,10 +3,11 @@
 
 body {
     overflow-x: hidden;
-    background-image: url("../images/constellation.svg");
     font-family: 'Open Sans', sans-serif;
     color: #EEEEEE
 }
+
+
 
 h1, h2, h3, h4, h5, h6{
     font-family: 'Playfair Display', serif;
@@ -17,6 +18,16 @@ h1, h2, h3, h4, h5, h6{
 
 /* Class styling */
 
+.constellation {
+    background-image: url("../images/constellation.svg");
+}
+
+.registerBack {
+    background-image: url("../images/registerBack.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .navbar {
     border-top: solid;
     border-top-width: 4px;
@@ -162,6 +173,12 @@ button.create {
 
 .formButton {
     background-color: #FF0000;
+}
+
+.register {
+    color: #fff;
+    background-image: -webkit-linear-gradient(15deg, #3f3f3f 40%, #000000 40%);
+    box-shadow: rgba(255, 255, 255, 1) 0px 3px 8px;
 }
 @media screen and (max-width: 768px) {
     .feature-content{

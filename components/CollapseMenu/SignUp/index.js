@@ -5,7 +5,7 @@ import IsEmail from "isemail";
 
 export default function SignUp(props) {
   const [email, changeEmail] = React.useState({
-    data: null,
+    data: "",
     error: false,
     helper: ""
   });
@@ -19,11 +19,9 @@ export default function SignUp(props) {
   }
 
   function validate(e) {
-    e.preventDefault();
     if(email.error === true) {
+      e.preventDefault();
       changeEmail({...email,helper: "Email is not valid" });
-    } else {
-      props.changeReg({...props.reg, email: email.data});
     }
   }
 

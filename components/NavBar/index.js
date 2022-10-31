@@ -1,7 +1,7 @@
 import React from "react";
 import CollapseMenu from "../CollapseMenu";
 
-const Navbar = () => {
+const Navbar = (props) => {
     
   return (
     <nav className="navbar navbar-expand-md">
@@ -16,7 +16,7 @@ const Navbar = () => {
             WaveCloud
           </h1>
         </a>
-        <CollapseMenu />
+        {(props.CollapseMenu === false)? null : < CollapseMenu />} 
       </div>
     </nav>
   );
