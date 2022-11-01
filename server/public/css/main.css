@@ -175,6 +175,9 @@ button.create {
     background-color: #FF0000;
 }
 
+.register-container {
+    background-color: #000000;
+}
 .register {
     color: #fff;
     background-image: -webkit-linear-gradient(15deg, #3f3f3f 40%, #000000 40%);

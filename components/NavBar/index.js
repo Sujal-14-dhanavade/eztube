@@ -8,7 +8,7 @@ const Navbar = (props) => {
       <div className="container">
         <a className="navbar-brand" href="#">
           <img
-            src="images/wave.png"
+            src="../images/wave.png"
             alt="waveCloud Logo"
             className="brand-logo d-inline-block align-text-center"
           />

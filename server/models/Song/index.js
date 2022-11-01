@@ -45,4 +45,4 @@ const songSchema = new Schema({
 });
 
 const Song = mongoose.model("song", songSchema);
-exports.default = Song;
+module.exports = Song;

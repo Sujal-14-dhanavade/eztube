@@ -1,12 +1,14 @@
 import React from "react";
+import { useEffect } from "react";
 import {Footer} from "../../components/Footer";
 import NavBar from "../../components/NavBar";
+import $ from "jQuery";
 
 export default function Register() {
   return (
-    <React.Fragment>
+    <div>
       <NavBar CollapseMenu = {false}/>
-      <section className="register-container registerBack p-5">
+      <section className="register-container p-5">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center">
             <div className="col-lg-12 col-xl-11">
@@ -27,7 +29,7 @@ export default function Register() {
                               id="form3Example1c"
                               className="form-control"
                             />
-                            <label className="form-label" for="form3Example1c">
+                            <label className="form-label" htmlFor="form3Example1c">
                               Your Name
                             </label>
                           </div>
@@ -41,7 +43,7 @@ export default function Register() {
                               id="form3Example3c"
                               className="form-control"
                             />
-                            <label className="form-label" for="form3Example3c">
+                            <label className="form-label" htmlFor="form3Example3c">
                               Your Email
                             </label>
                           </div>
@@ -55,7 +57,7 @@ export default function Register() {
                               id="form3Example4c"
                               className="form-control"
                             />
-                            <label className="form-label" for="form3Example4c">
+                            <label className="form-label" htmlFor="form3Example4c">
                               Password
                             </label>
                           </div>
@@ -69,7 +71,7 @@ export default function Register() {
                               id="form3Example4cd"
                               className="form-control"
                             />
-                            <label className="form-label" for="form3Example4cd">
+                            <label className="form-label" htmlFor="form3Example4cd">
                               Repeat your password
                             </label>
                           </div>
@@ -84,7 +86,7 @@ export default function Register() {
                           />
                           <label
                             className="form-check-label"
-                            for="form2Example3"
+                            htmlFor="form2Example3"
                           >
                             I agree all statements in{" "}
                             <a href="#!">Terms of service</a>
@@ -103,7 +105,7 @@ export default function Register() {
                     </div>
                     <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                       <img
-                        src="./images/register.webp"
+                        src="../images/register.webp"
                         className="img-fluid"
                         alt="Sample image"
                       />
@@ -116,6 +118,6 @@ export default function Register() {
         </div>
       </section>
       <Footer />
-    </React.Fragment>
+    </div>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function DefaultBody() {
   return (
-    <React.Fragment>
+    <div>
       {/* HomeBody */}
       <div className="homeBody wave-img d-flex flex-column justify-content-center align-items-center">
         <p className="display-2 intro-heading">Ride on Waves</p>
@@ -55,6 +55,6 @@ export default function DefaultBody() {
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 }

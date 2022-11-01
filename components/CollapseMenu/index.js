@@ -4,7 +4,7 @@ import SignUp from "./SignUp";
 
 export default function collapseMenu() {
   return (
-    <React.Fragment>
+    <div>
       <button
         className="navbar-toggler red-shade outline-none"
         type="button"
@@ -29,6 +29,6 @@ export default function collapseMenu() {
           <li className="navbar-text d-none d-md-flex d-lg-flex align-items-center">For Creators</li>
         </ul>
       </div>
-    </React.Fragment>
+    </div>
   );
 }
