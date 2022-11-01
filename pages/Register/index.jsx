@@ -1,10 +1,10 @@
-import React from "react";
-import { useEffect } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import {Footer} from "../../components/Footer";
 import NavBar from "../../components/NavBar";
-import $ from "jQuery";
 
 export default function Register() {
+  
   return (
     <div>
       <NavBar CollapseMenu = {false}/>

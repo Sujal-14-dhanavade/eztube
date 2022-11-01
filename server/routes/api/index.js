@@ -1,6 +1,5 @@
 const Router = require("express").Router;
 const router = Router();
-const mongoose = require("mongoose");
 const isEmailAvailable = require("../../controllers/api").isEmailAvailable;
 
 router.route("/").get((req, res) => {

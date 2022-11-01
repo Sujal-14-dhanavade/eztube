@@ -1,47 +1,18 @@
 import React from "react";
-import { TextField, Typography } from "@mui/material";
-import IsEmail from "isemail";
-import axios from "axios";
+import { Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import $ from "jQuery";
 
 export default function SignUp(props) {
   const router = useRouter();
-  const [email, changeEmail] = React.useState({
-    data: "",
-    error: false,
-    helper: "",
-  });
-  const [isLoading, setLoader] = React.useState(false);
-
-  function emailChange(e) {
-    if (IsEmail.validate(e.target.value, { errorLevel: false }) === true) {
-      changeEmail({ data: e.target.value, error: false, helper: "" });
-    } else {
-      changeEmail({ data: e.target.value, error: true, helper: "" });
-    }
-  }
-
+  
   function validate(e) {
     e.preventDefault();
-    if (email.error === true) {
-      changeEmail({ ...email, helper: "Email is not valid" });
-    } else {
-      setLoader(true);
-      axios.get(`/api/isEmailAvailable/${email.data}`).then((res) => {
-        const data = res.data;
-        if (data.available === true) {
-          var body = $("body");
-          body.removeAttr("style");
-          body.removeAttr("class");
-          $(".modal-backdrop").remove();
-          router.push(`/Register/${email.data}`);
-        } else {
-          changeEmail({ ...email, helper: "Email is already registered" });
-        }
-      });
-      setLoader(false);
-    }
+    var body = $("body");
+    body.removeAttr("style");
+    body.removeAttr("class");
+    $(".modal-backdrop").remove()
+    router.push(`/Register`);
   }
 
   return (
@@ -59,23 +30,7 @@ export default function SignUp(props) {
           </div>
           <div className="modal-body">
             <form className="text-center" onSubmit={validate}>
-              <TextField
-                className="mx-2 mt-4"
-                fullWidth
-                variant="standard"
-                error={email.error}
-                type={"email"}
-                label={"Your email address"}
-                required
-                name="email"
-                value={email.data}
-                onChange={emailChange}
-              />
-              {isLoading === true ? (
-                <div class="spinner-border text-danger" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              ) : null}
+              <div className="display-1 text-danger"><i className="fa-solid fa-right-to-bracket"></i></div>
               <button
                 type="submit"
                 className="my-5 btn btn-danger w-100"
