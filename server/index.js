@@ -78,7 +78,7 @@ app.prepare().then(() => {
   const server = express();
   server.use(express.static(__dirname + "/public"));
   // initializing server
-  server.use(bodyParser.urlencoded({ extended: true }));
+  server.use(bodyParser.urlencoded({extended: true}));
   server.use(bodyParser.json());
   server.use(cors());
 
