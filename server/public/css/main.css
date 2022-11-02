@@ -183,6 +183,10 @@ button.create {
     background-image: -webkit-linear-gradient(15deg, #3f3f3f 40%, #000000 40%);
     box-shadow: rgba(255, 255, 255, 1) 0px 3px 8px;
 }
+
+.register-input-outline:focus {
+    box-shadow: #fa3434;
+}
 @media screen and (max-width: 768px) {
     .feature-content{
         text-align: center;

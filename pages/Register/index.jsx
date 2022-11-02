@@ -2,9 +2,12 @@ import React from "react";
 import { Footer } from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import { getNameList } from "country-list";
-import { InputLabel, NativeSelect, FormControl } from "@mui/material";
 
 export default function Register() {
+  const getDate = () => {
+    const date = new Date();
+    return date.toISOString().split("T")[0];
+  };
   return (
     <div>
       <NavBar CollapseMenu={false} />
@@ -27,12 +30,9 @@ export default function Register() {
                             <input
                               type="text"
                               id="username"
-                              className="form-control"
+                              className="form-control register-input-outline"
                             />
-                            <label
-                              className="form-label"
-                              htmlFor="form3Example1c"
-                            >
+                            <label className="form-label" htmlFor="username">
                               User Name / Handler
                             </label>
                           </div>
@@ -44,38 +44,31 @@ export default function Register() {
                             <input
                               type="email"
                               id="email"
-                              className="form-control"
+                              className="form-control register-input-outline"
                             />
-                            <label
-                              className="form-label"
-                              htmlFor="form3Example3c"
-                            >
+                            <label className="form-label" htmlFor="email">
                               Your Email
                             </label>
                           </div>
                         </div>
                         <div className="d-flex flex-row align-items-center mb-4">
-                          <FormControl fullWidth>
-                            <InputLabel
-                              variant="standard"
-                              htmlFor="uncontrolled-native"
+                          <i className="fa-solid fa-earth-americas fa-lg me-3 fa-fw" />
+                          <div className="form-outline flex-fill mb-0">
+                            <select
+                              className="form-select register-input-outline"
+                              id="country"
                             >
-                              Select a Country
-                            </InputLabel>
-                            <NativeSelect
-                              variant="filled"
-                              inputProps={{
-                                name: "country",
-                                id: "uncontrolled-native",
-                              }}
-                            >
+                              <option selected>Select Country</option>
                               {Object.keys(getNameList()).map((item, idx) => (
                                 <option key={idx} value={item}>
                                   {item}
                                 </option>
                               ))}
-                            </NativeSelect>
-                          </FormControl>
+                            </select>
+                            <label className="form-label" htmlFor="country">
+                              Country
+                            </label>
+                          </div>
                         </div>
 
                         <div className="d-flex flex-row align-items-center mb-4">
@@ -83,13 +76,10 @@ export default function Register() {
                           <div className="form-outline flex-fill mb-0">
                             <input
                               type="password"
-                              id="form3Example4c"
-                              className="form-control"
+                              id="password"
+                              className="form-control register-input-outline"
                             />
-                            <label
-                              className="form-label"
-                              htmlFor="form3Example4c"
-                            >
+                            <label className="form-label" htmlFor="password">
                               Password
                             </label>
                           </div>
@@ -101,12 +91,9 @@ export default function Register() {
                             <input
                               type="repassword"
                               id="form3Example4cd"
-                              className="form-control"
+                              className="form-control register-input-outline"
                             />
-                            <label
-                              className="form-label"
-                              htmlFor="form3Example4cd"
-                            >
+                            <label className="form-label" htmlFor="repassword">
                               Repeat your password
                             </label>
                           </div>
@@ -118,38 +105,32 @@ export default function Register() {
                             <input
                               type="date"
                               id="dob"
-                              className="form-control"
+                              className="form-control register-input-outline"
+                              max={getDate()}
                             />
-                            <label
-                              className="form-label"
-                              htmlFor="form3Example4cd"
-                            >
+                            <label className="form-label" htmlFor="dob">
                               Date of Birth
                             </label>
                           </div>
                         </div>
-                        
 
                         <div className="form-check d-flex justify-content-center mb-5">
                           <input
-                            className="form-check-input me-2"
+                            className="form-check-input me-2 register-input-outline"
                             type="checkbox"
-                            value=""
-                            id="form2Example3c"
+                            value="accepted"
+                            id="terms"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="form2Example3"
-                          >
+                          <label className="form-check-label" htmlFor="terms">
                             I agree all statements in{" "}
-                            <a href="#!">Terms of service</a>
+                            <a href="#!" className="text-danger">Terms of service</a>
                           </label>
                         </div>
 
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button
-                            type="button"
-                            className="btn btn-primary btn-lg"
+                            type="submit"
+                            className="btn btn-danger btn-lg"
                           >
                             Register
                           </button>
