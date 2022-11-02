@@ -1,13 +1,13 @@
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import {Footer} from "../../components/Footer";
+import React from "react";
+import { Footer } from "../../components/Footer";
 import NavBar from "../../components/NavBar";
+import { getNameList } from "country-list";
+import { InputLabel, NativeSelect, FormControl } from "@mui/material";
 
 export default function Register() {
-  
   return (
     <div>
-      <NavBar CollapseMenu = {false}/>
+      <NavBar CollapseMenu={false} />
       <section className="register-container p-5">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center">
@@ -26,11 +26,14 @@ export default function Register() {
                           <div className="form-outline flex-fill mb-0">
                             <input
                               type="text"
-                              id="form3Example1c"
+                              id="username"
                               className="form-control"
                             />
-                            <label className="form-label" htmlFor="form3Example1c">
-                              Your Name
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example1c"
+                            >
+                              User Name / Handler
                             </label>
                           </div>
                         </div>
@@ -40,13 +43,39 @@ export default function Register() {
                           <div className="form-outline flex-fill mb-0">
                             <input
                               type="email"
-                              id="form3Example3c"
+                              id="email"
                               className="form-control"
                             />
-                            <label className="form-label" htmlFor="form3Example3c">
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example3c"
+                            >
                               Your Email
                             </label>
                           </div>
+                        </div>
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <FormControl fullWidth>
+                            <InputLabel
+                              variant="standard"
+                              htmlFor="uncontrolled-native"
+                            >
+                              Select a Country
+                            </InputLabel>
+                            <NativeSelect
+                              variant="filled"
+                              inputProps={{
+                                name: "country",
+                                id: "uncontrolled-native",
+                              }}
+                            >
+                              {Object.keys(getNameList()).map((item, idx) => (
+                                <option key={idx} value={item}>
+                                  {item}
+                                </option>
+                              ))}
+                            </NativeSelect>
+                          </FormControl>
                         </div>
 
                         <div className="d-flex flex-row align-items-center mb-4">
@@ -57,7 +86,10 @@ export default function Register() {
                               id="form3Example4c"
                               className="form-control"
                             />
-                            <label className="form-label" htmlFor="form3Example4c">
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example4c"
+                            >
                               Password
                             </label>
                           </div>
@@ -67,15 +99,36 @@ export default function Register() {
                           <i className="fas fa-key fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
-                              type="password"
+                              type="repassword"
                               id="form3Example4cd"
                               className="form-control"
                             />
-                            <label className="form-label" htmlFor="form3Example4cd">
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example4cd"
+                            >
                               Repeat your password
                             </label>
                           </div>
                         </div>
+
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-key fa-lg me-3 fa-fw"></i>
+                          <div className="form-outline flex-fill mb-0">
+                            <input
+                              type="date"
+                              id="dob"
+                              className="form-control"
+                            />
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example4cd"
+                            >
+                              Date of Birth
+                            </label>
+                          </div>
+                        </div>
+                        
 
                         <div className="form-check d-flex justify-content-center mb-5">
                           <input
