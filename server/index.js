@@ -95,7 +95,7 @@ app.prepare().then(() => {
   // @Routes POST /api/userPicUpload
   // @desc uploads user avatar to mongo server
   server.post("/api/userPicUpload", userPic.single("userPicFile"), (req, res) => {
-    res.send("user Pic uploaded");
+    res.send(res.file);
   });
 
   // @Routes POST /api/albumPicUpload
