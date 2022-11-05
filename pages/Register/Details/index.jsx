@@ -95,7 +95,7 @@ export function Details(props) {
       </div>
 
       <div className="d-flex flex-row align-items-center mb-4">
-        <i class="fa-solid fa-cake-candles fa-lg me-3 fa-fw"></i>
+        <i className="fa-solid fa-cake-candles fa-lg me-3 fa-fw"></i>
         <div className="form-outline flex-fill mb-0">
           <input
             type="date"
@@ -132,10 +132,13 @@ export function Details(props) {
         <p className="text-light text-center">{props.error}</p>
       </div>
 
-      <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-        <button type="submit" className="btn btn-danger btn-lg">
+      <div className="d-flex mx-4 mb-3 mb-lg-4 justify-content-center">
+        <button type="submit" className="btn btn-danger mx-3 p-2">
           Register
         </button>
+        <a href="/" className="btn btn-danger mx-3 p-2">
+              Go Back &#9758;
+        </a>
       </div>
     </form>
   );

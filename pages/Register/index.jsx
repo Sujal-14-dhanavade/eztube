@@ -93,7 +93,7 @@ export default function Register() {
   return (
     <div>
       <NavBar CollapseMenu={false} />
-      <section className="register-container p-5">
+      <section className="register-container py-5">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center">
             <div className="col-lg-12 col-xl-11">

@@ -12,6 +12,7 @@ const cors = require("cors");
 const _ = require("lodash");
 const watchRoute = require("../routes/watch");
 const getPicRoute = require("../routes/getPic");
+const session = require("express-session");
 
 module.exports = {
   express,
@@ -28,4 +29,5 @@ module.exports = {
   _,
   watchRoute,
   getPicRoute,
+  session
 };

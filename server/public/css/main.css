@@ -202,3 +202,9 @@ button.create {
         text-align: center;
     }
 }
+
+@media screen and (max-width: 991px) {
+    .register{
+        background-image: -webkit-linear-gradient(50deg, #3f3f3f 40%, #000000 40%);
+    }
+}

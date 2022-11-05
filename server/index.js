@@ -15,7 +15,8 @@ const {
   _,
   watchRoute,
   getPicRoute,
-  bcrypt
+  bcrypt,
+  session
 } = require("./library");
 
 // importing GRID storages
@@ -26,6 +27,10 @@ const {
   userAvatarStorage,
   albumAvatarStorage,
 } = require("./models/GridStorages");
+
+// importing controllers for storages
+
+const registerUserPic = require("./controllers/api").registerUserPic;
 
 // MONGO CONNECTION AND GRID FS MODALS AUDIO, AND PLAYLIST, ALBUM, USER AND SONG PIC
 
@@ -76,6 +81,11 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   // express server
   const server = express();
+  server.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+  }))
   server.use(express.static(__dirname + "/public"));
   // initializing server
   server.use(bodyParser.urlencoded({extended: true}));
@@ -94,9 +104,7 @@ app.prepare().then(() => {
 
   // @Routes POST /api/userPicUpload
   // @desc uploads user avatar to mongo server
-  server.post("/api/userPicUpload", userPic.single("userPicFile"), (req, res) => {
-    res.send(res.file);
-  });
+  server.post("/api/userPicUpload", userPic.single("userPicFile"), registerUserPic);
 
   // @Routes POST /api/albumPicUpload
   // @desc uploads album avatar to mongo server
