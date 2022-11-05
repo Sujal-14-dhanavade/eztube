@@ -15,10 +15,6 @@ export default function Pic(props) {
       onChangeImg(reader.result);
     };
   }
-
-  function onSkip() {
-    router.push("/Dashboard");
-  }
   return (
     <div>
       <div className="d-flex justify-content-center mb-5">
@@ -56,9 +52,9 @@ export default function Pic(props) {
           >
             Submit
           </button>
-          <button className="btn btn-danger" value="skip" onClick={onSkip}>
+          <a className="btn btn-danger" value="skip" href="/Ezport">
             Skip &#9758;
-          </button>
+          </a>
         </div>
       </form>
     </div>

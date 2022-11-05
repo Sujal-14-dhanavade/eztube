@@ -1,6 +1,5 @@
 require("dotenv").config();
 const User = require("../../models/User/index");
-const Schema = require("mongoose").Schema;
 const bcrypt = require("bcrypt");
 
 const register = (req, res) => {

@@ -15,7 +15,6 @@ const {
   _,
   watchRoute,
   getPicRoute,
-  bcrypt,
   session
 } = require("./library");
 
@@ -131,6 +130,14 @@ app.prepare().then(() => {
   // @Routes POST /avatar/picType/id
   // @desc get pic from mongo server
   server.use("/avatar", getPicRoute);
+  
+  server.get("/Ezport", (req, res) => {
+    if(req.session.isAuth) {
+      return handle(req, res)
+    } else {
+      res.redirect("/");
+    }
+  })
 
   // @Routes rest are handled by next.js
   server.get("*", (req, res) => {
