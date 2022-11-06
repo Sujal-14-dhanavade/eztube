@@ -75,8 +75,8 @@ const getData = (req, res) => {
       follow: req.session.data.follow,
       followers: req.session.data.followers,
       verified: req.session.data.verified,
-      userPic: req.session.data.recent_played,
-      recent_played: req.session.userPic,
+      userPic: req.session.data.userPic,
+      recent_played: req.session.recent_played,
     })
   } else {
     res.status(200).json({
@@ -85,4 +85,9 @@ const getData = (req, res) => {
   }
   
 }
-module.exports = { register, registerUserPic, login, getData };
+
+const logout = (req, res) => {
+  req.session.destroy();
+  res.json({logout: 1});
+}
+module.exports = { register, registerUserPic, login, getData, logout };

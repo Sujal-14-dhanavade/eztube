@@ -1,12 +1,22 @@
 import React from "react";
-import { Fab } from "@mui/material";
+import { Fab, Avatar } from "@mui/material";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
+import PersonIcon from "@mui/icons-material/Person";
+import LogoutIcon from "@mui/icons-material/Logout";
+import SettingsIcon from "@mui/icons-material/Settings";
+import axios from "axios";
 
 export default function AppNavbar(props) {
+    function logout() {
+        axios.request({
+            method: "POST",
+            url: "/api/logout"
+        })
+    }
   return (
     <nav className="navbar navbar-expand-md shadow-5">
-      <div className="container">
-        <a className="navbar-brand" href="#">
+      <div className="container d-flex flex-row">
+        <a className="navbar-brand me-5" href="#">
           <img
             src="../images/wave.png"
             alt="waveCloud Logo"
@@ -16,16 +26,81 @@ export default function AppNavbar(props) {
             WaveCloud
           </h1>
         </a>
-        <Fab
-          className="text-light"
-          sx={{ backgroundColor: "#fa3434" }}
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasScrolling"
-          aria-controls="offcanvasScrolling"
-          size="small"
+        <button
+          class="navbar-toggler red-shade outline-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-          <AudiotrackIcon />
-        </Fab>
+          <span class="fa-solid fa-bars-staggered"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse toggle-list"
+          id="navbarNavDropdown"
+        >
+          <ul class="navbar-nav align-items-center">
+            <li class="nav-item dropdown me-lg-5 me-md-5">
+              <a
+                class="nav-link"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {props.data.userPic !== null ? (
+                  <Avatar
+                    src={`/avatar/userPic/${props.data.userPic}`}
+                    alt="user pic"
+                  />
+                ) : (
+                  <Avatar alt="user pic">
+                    <PersonIcon sx={{ fontSize: "50px" }} />
+                  </Avatar>
+                )}
+              </a>
+              <ul class="dropdown-menu bg-dark mt-3">
+                <li>
+                  <a class="dropdown-item text-light py-2" href="#">
+                    <PersonIcon /> Account
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-light py-2" href="#">
+                    <SettingsIcon /> Setting
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item me-5">
+              <Fab
+                className="text-light"
+                color="warning"
+                sx={{ backgroundColor: "#fa3434" }}
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasScrolling"
+                aria-controls="offcanvasScrolling"
+                size="small"
+              >
+                <AudiotrackIcon />
+              </Fab>
+            </li>
+            <li class="nav-item">
+              <Fab
+                className="text-light"
+                color="error"
+                sx={{ backgroundColor: "#000" }}
+                onClick={logout}
+                size="small"
+              >
+                <LogoutIcon />
+              </Fab>
+            </li>
+          </ul>
+          
+        </div>
       </div>
     </nav>
   );

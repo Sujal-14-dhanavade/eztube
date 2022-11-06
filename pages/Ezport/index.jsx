@@ -22,7 +22,6 @@ export default function Ezport() {
                     method: "POST",
                     url: "/api/getData"
                 }).then(res => {
-                    console.log(res.data);
                     changeData(res.data);
                 })
             }

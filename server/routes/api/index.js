@@ -3,6 +3,7 @@ const router = Router();
 const register = require("../../controllers/api").register;
 const login = require("../../controllers/api").login;
 const getData = require("../../controllers/api").getData;
+const logout = require("../../controllers/api").logout;
 
 router.route("/").get((req, res) => {
   res.status(200).json({started: true});
@@ -19,5 +20,6 @@ router.route("/isAuth").get((req, res) => {
 router.route("/login").post(login);
 router.route("/register").post(register);
 router.route("/getData").post(getData);
+router.route("/logout").post(logout);
 
 module.exports = router;

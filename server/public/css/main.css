@@ -200,6 +200,11 @@ button.create {
 .tab {
     min-height: 100vh;
 }
+
+
+.dropdown-menu > li > a:hover {
+    background-color: #fa3434;
+}
 @media screen and (max-width: 768px) {
     .feature-content{
         text-align: center;
