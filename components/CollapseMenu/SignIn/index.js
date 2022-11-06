@@ -1,17 +1,16 @@
-import React, {useState} from "react";
-import {TextField, Typography} from '@mui/material';
+import React, { useState } from "react";
+import { TextField, Typography } from "@mui/material";
 import { Router, useRouter } from "next/router";
 import axios from "axios";
-
+import $ from "jQuery";
 
 export default function SignIn() {
   const [data, changeData] = React.useState({
     username: "",
-    password: ""
+    password: "",
   });
 
   const router = useRouter();
-
 
   const [error, setError] = React.useState("");
   const isEmpty = () => {
@@ -45,9 +44,15 @@ export default function SignIn() {
           data: data,
         })
         .then((res) => {
-          if (res.data._id) {
+          if (res.data.isAuth) {
+            var body = $("body");
+            body.removeAttr("style");
+            body.removeAttr("class");
+            $(".modal-backdrop").remove()
             router.push("/Ezport");
-          } else {
+          } else if (!res.data.isAuth) {
+            setError("Username or Password wrong");
+          } else if (res.data.error) {
             setError("Server Error");
           }
         });
@@ -67,11 +72,43 @@ export default function SignIn() {
           </div>
           <div className="modal-body">
             <form className="text-center" onSubmit={onSubmit}>
-                <TextField onChange={onChange} value={data.username} className="mx-2" fullWidth variant="standard" type={"text"} label={<i className="fa-solid fa-user"></i>} required name="username" id="username"/>
-                <TextField onChange={onChange} value={data.password} className="mx-2 mt-4" fullWidth variant="standard" type={"password"} label={<i className="fa-solid fa-key"></i>} name="password" id="password" required/>
-                <button type="submit" className="my-5 btn btn-danger w-100">Continue</button>
-                <Typography variant="caption" className="d-block text-danger">{error}</Typography>
-                <Typography variant="caption" className="d-block">When registering, you agree that we may use your provided data for the registration and to send you notifications on our products and services. You can unsubscribe from notifications at any time in your settings. For additional info please refer to our Privacy Policy.</Typography>
+              <TextField
+                onChange={onChange}
+                value={data.username}
+                className="mx-2"
+                fullWidth
+                variant="standard"
+                type={"text"}
+                label={<i className="fa-solid fa-user"></i>}
+                required
+                name="username"
+                id="username"
+              />
+              <TextField
+                onChange={onChange}
+                value={data.password}
+                className="mx-2 mt-4"
+                fullWidth
+                variant="standard"
+                type={"password"}
+                label={<i className="fa-solid fa-key"></i>}
+                name="password"
+                id="password"
+                required
+              />
+              <button type="submit" className="my-5 btn btn-danger w-100">
+                Continue
+              </button>
+              <Typography variant="caption" className="d-block text-danger">
+                {error}
+              </Typography>
+              <Typography variant="caption" className="d-block">
+                When registering, you agree that we may use your provided data
+                for the registration and to send you notifications on our
+                products and services. You can unsubscribe from notifications at
+                any time in your settings. For additional info please refer to
+                our Privacy Policy.
+              </Typography>
             </form>
           </div>
         </div>

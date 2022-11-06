@@ -1,6 +1,7 @@
 const Router = require("express").Router;
 const router = Router();
 const register = require("../../controllers/api").register;
+const login = require("../../controllers/api").login;
 
 router.route("/").get((req, res) => {
   res.status(200).json({started: true});
@@ -14,6 +15,7 @@ router.route("/isAuth").get((req, res) => {
   }
 })
 
+router.route("/login").post(login);
 router.route("/register").post(register);
 
 module.exports = router;

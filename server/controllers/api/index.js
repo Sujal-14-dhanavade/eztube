@@ -37,4 +37,29 @@ const registerUserPic = (req, res) => {
       }
     })
 }
-module.exports = { register, registerUserPic };
+
+
+const login = (req, res) => {
+  
+  User.findOne({username: req.body.username}, (err, docs) => {
+    console.log(docs);
+    if(docs)  {
+      bcrypt.compare(req.body.password, docs.password, (err, result) => {
+        if(result === true) {
+          req.session.data = result;
+          req.session.isAuth = true;
+          return res.status(200).json({isAuth: 1});
+        } else {
+          return res.status(200).json({isAuth: 0});
+        }
+      })
+    } else {
+      if(docs === {}) {
+        return res.status(200).json({isAuth: 0});
+      } else {
+        return res.status(200).json({error: 1});
+      }
+    }
+  })
+}
+module.exports = { register, registerUserPic, login };

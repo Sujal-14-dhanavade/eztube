@@ -78,18 +78,22 @@ const handle = app.getRequestHandler();
 
 // preparing next app to connect to express server as backend
 app.prepare().then(() => {
+
   // express server
   const server = express();
+
+  // middlewares for server
   server.use(session({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false
   }))
   server.use(express.static(__dirname + "/public"));
-  // initializing server
   server.use(bodyParser.urlencoded({extended: true}));
   server.use(bodyParser.json());
   server.use(cors());
+
+
 
   // @Routes API
   // @desc CRUD operation with mongoDB
@@ -130,10 +134,24 @@ app.prepare().then(() => {
   // @Routes POST /avatar/picType/id
   // @desc get pic from mongo server
   server.use("/avatar", getPicRoute);
+
+  // @Handling next requests
+
+  // @Routes app Welcome page
+  // @desc if user already logged in redirect to main page or welcome page
+  server.get("/", (req, res) => {
+    if(req.session.isAuth) {
+      res.redirect("/Ezport");
+    } else {
+      return handle(req, res);
+    }
+  })
   
+  // @Routes app main page
+  // @desc if user already logged in redirect to main page or welcome page
   server.get("/Ezport", (req, res) => {
     if(req.session.isAuth) {
-      return handle(req, res)
+      return handle(req, res);
     } else {
       res.redirect("/");
     }
