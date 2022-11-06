@@ -93,7 +93,10 @@ app.prepare().then(() => {
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    store: sessionStorage
+    store: sessionStorage,
+    cookie: {
+      maxAge: 3600000 * 24 * 14
+    }
   }))
   server.use(express.static(__dirname + "/public"));
   server.use(bodyParser.urlencoded({extended: true}));

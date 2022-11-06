@@ -1,13 +1,13 @@
 import React from "react";
-import NavBar from "../../../components/NavBar";
-import Footer from "../../../components/Footer";
+import AppNavbar from "../../../components/AppNavbar";
+import Tabs from "../../../components/Tabs";
 
 export default function Dashboard(props) {
 
   return (
     <div className="dashboard">
-      <NavBar CollapseMenu = {false}/>
-      <Footer /> 
+      <AppNavbar data={props.data}/>
+      <Tabs id="offcanvasScrolling" />
     </div>
   );
 }

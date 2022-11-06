@@ -21,8 +21,8 @@ h1, h2, h3, h4, h5, h6{
 
 /* Class styling */
 
-.constellation {
-    background-image: url("../images/constellation.svg");
+.wavebg {
+    background-image: url("../images/Wave.svg");
 }
 
 .registerBack {
@@ -39,9 +39,8 @@ h1, h2, h3, h4, h5, h6{
 }
 .footer {
     background-color: #000000;
-    padding: 10px;
     font-weight: 900;
-    align-items: flex-end;
+    margin-top: auto;
 }
 
 .text-color:hover {
@@ -193,6 +192,12 @@ button.create {
 }
 
 .Ezport {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab {
     min-height: 100vh;
 }
 @media screen and (max-width: 768px) {

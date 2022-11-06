@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Dashboard from "./Dashboard";
+import Footer from "../../components/Footer";
 
 
 
@@ -29,8 +30,9 @@ export default function Ezport() {
     })
 
   return (
-    <div className="Ezport constellation">
+    <div className="Ezport wavebg">
         {(userData === null)? null: <Dashboard data = {userData}/> }
+        <Footer /> 
     </div>
   );
 }
