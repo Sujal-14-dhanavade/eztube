@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const { Server } = require("mongodb");
 /*
     REQUIRED MODULES
 */
@@ -15,7 +16,8 @@ const {
   _,
   watchRoute,
   getPicRoute,
-  session
+  session,
+  MongoDbSession
 } = require("./library");
 
 // importing GRID storages
@@ -33,7 +35,7 @@ const registerUserPic = require("./controllers/api").registerUserPic;
 
 // MONGO CONNECTION AND GRID FS MODALS AUDIO, AND PLAYLIST, ALBUM, USER AND SONG PIC
 
-let audio, userPic, albumPic, playlistPic, songPic;
+let audio, userPic, albumPic, playlistPic, songPic, sessionStorage;
 
 mongoose
   .connect(process.env.DATABASE)
@@ -48,6 +50,10 @@ mongoose
     const albumGrid = new GridFsStorage(albumAvatarStorage);
     const playlistGrid = new GridFsStorage(playlistAvatarStorage);
     const songGrid = new GridFsStorage(songAvatarStorage);
+    sessionStorage = new MongoDbSession({
+      uri: process.env.DATABASE,
+      collection: 'session'
+    })
     audio = multer({ storage: audioGrid });
     userPic = multer({storage: userGrid});
     songPic = multer({storage: songGrid});
@@ -55,7 +61,7 @@ mongoose
     albumPic = multer({storage: albumGrid});
   })
   .catch((err) => {
-    console.error("Database connection error:", error);
+    console.error("Database connection error:", err);
   });
 
 // create storage engine for audio
@@ -86,7 +92,8 @@ app.prepare().then(() => {
   server.use(session({
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: sessionStorage
   }))
   server.use(express.static(__dirname + "/public"));
   server.use(bodyParser.urlencoded({extended: true}));

@@ -42,11 +42,10 @@ const registerUserPic = (req, res) => {
 const login = (req, res) => {
   
   User.findOne({username: req.body.username}, (err, docs) => {
-    console.log(docs);
     if(docs)  {
       bcrypt.compare(req.body.password, docs.password, (err, result) => {
         if(result === true) {
-          req.session.data = result;
+          req.session.data = docs;
           req.session.isAuth = true;
           return res.status(200).json({isAuth: 1});
         } else {
@@ -62,4 +61,28 @@ const login = (req, res) => {
     }
   })
 }
-module.exports = { register, registerUserPic, login };
+
+const getData = (req, res) => {
+  if(req.session.isAuth) {
+    res.status(200).json({
+      _id: req.session.data._id,
+      username: req.session.data.username,
+      email: req.session.data.email,
+      dob: req.session.data.dob,
+      country: req.session.data.country,
+      liked_songs: req.session.data.liked_songs,
+      playlist: req.session.data.playlist,
+      follow: req.session.data.follow,
+      followers: req.session.data.followers,
+      verified: req.session.data.verified,
+      userPic: req.session.data.recent_played,
+      recent_played: req.session.userPic,
+    })
+  } else {
+    res.status(200).json({
+      _id: null
+    })
+  }
+  
+}
+module.exports = { register, registerUserPic, login, getData };
