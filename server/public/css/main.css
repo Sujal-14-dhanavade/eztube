@@ -4,7 +4,10 @@
 body {
     overflow-x: hidden;
     font-family: 'Open Sans', sans-serif;
-    color: #EEEEEE
+    color: #EEEEEE;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -38,6 +41,7 @@ h1, h2, h3, h4, h5, h6{
     background-color: #000000;
     padding: 10px;
     font-weight: 900;
+    align-items: flex-end;
 }
 
 .text-color:hover {
@@ -186,6 +190,10 @@ button.create {
 
 .register-input-outline:focus {
     box-shadow: #fa3434;
+}
+
+.Ezport {
+    min-height: 100vh;
 }
 @media screen and (max-width: 768px) {
     .feature-content{

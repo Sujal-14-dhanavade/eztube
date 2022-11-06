@@ -1,10 +1,13 @@
 import React from "react";
+import NavBar from "../../../components/NavBar";
+import Footer from "../../../components/Footer";
 
 export default function Dashboard(props) {
 
   return (
     <div className="dashboard">
-        <h1>{props.data.username}</h1>
+      <NavBar CollapseMenu = {false}/>
+      <Footer /> 
     </div>
   );
 }

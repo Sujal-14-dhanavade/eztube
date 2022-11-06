@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Dashboard from "./Dashboard";
 
 
+
 export default function Ezport() {
     const router = useRouter();
     const [userData, changeData] = React.useState(null);
@@ -28,9 +29,8 @@ export default function Ezport() {
     })
 
   return (
-    <div className="Ezport">
+    <div className="Ezport constellation">
         {(userData === null)? null: <Dashboard data = {userData}/> }
-        
     </div>
   );
 }
