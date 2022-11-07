@@ -5,7 +5,6 @@ const bcrypt = require("bcrypt");
 const register = (req, res) => {
   const data = req.body;
   bcrypt.hash(data.password, Number(process.env.ROUND)).then((hash) => {
-    
     const userData = new User({
       username: data.username,
       password: hash,
@@ -19,51 +18,52 @@ const register = (req, res) => {
       } else {
         req.session.data = result;
         req.session.isAuth = true;
-        return res.status(200).json({_id : result._id});
+        return res.status(200).json({ _id: result._id });
       }
-      
     });
   });
 };
 
 const registerUserPic = (req, res) => {
-    const fileid = req.file.id;
-    User.findOneAndUpdate({email: req.session.data.email}, {'$set': {userPic: fileid}}, (err, doc) => {
-      if(err) {
+  const fileid = req.file.id;
+  User.findOneAndUpdate(
+    { email: req.session.data.email },
+    { $set: { userPic: fileid } },
+    (err, doc) => {
+      if (err) {
         res.status(404).json(err);
       } else {
-        req.session.data = {...req.session.data, userPic: fileid};
+        req.session.data = { ...req.session.data, userPic: fileid };
         res.redirect("/Ezport");
       }
-    })
-}
-
+    }
+  );
+};
 
 const login = (req, res) => {
-  
-  User.findOne({username: req.body.username}, (err, docs) => {
-    if(docs)  {
+  User.findOne({ username: req.body.username }, (err, docs) => {
+    if (docs) {
       bcrypt.compare(req.body.password, docs.password, (err, result) => {
-        if(result === true) {
+        if (result === true) {
           req.session.data = docs;
           req.session.isAuth = true;
-          return res.status(200).json({isAuth: 1});
+          return res.status(200).json({ isAuth: 1 });
         } else {
-          return res.status(200).json({isAuth: 0});
+          return res.status(200).json({ isAuth: 0 });
         }
-      })
+      });
     } else {
-      if(docs === {}) {
-        return res.status(200).json({isAuth: 0});
+      if (docs === {}) {
+        return res.status(200).json({ isAuth: 0 });
       } else {
-        return res.status(200).json({error: 1});
+        return res.status(200).json({ error: 1 });
       }
     }
-  })
-}
+  });
+};
 
 const getData = (req, res) => {
-  if(req.session.isAuth) {
+  if (req.session.isAuth) {
     res.status(200).json({
       _id: req.session.data._id,
       username: req.session.data.username,
@@ -77,17 +77,39 @@ const getData = (req, res) => {
       verified: req.session.data.verified,
       userPic: req.session.data.userPic,
       recent_played: req.session.recent_played,
-    })
+    });
   } else {
     res.status(200).json({
-      _id: null
-    })
+      _id: null,
+    });
   }
-  
-}
+};
 
 const logout = (req, res) => {
   req.session.destroy();
-  res.json({logout: 1});
-}
-module.exports = { register, registerUserPic, login, getData, logout };
+  res.json({ logout: 1 });
+};
+
+const update = (req, res) => {
+  const data = req.body;
+  User.findByIdAndUpdate(
+    req.body._id,
+    {
+      $set: {
+        username: data.username,
+        email: data.email,
+        dob: data.dob,
+        country: data.country,
+      },
+    },
+    (err, result) => {
+      if (err) {
+        res.status(200).json(err);
+      } else {
+        req.session.data = req.body;
+        res.json({ update: 1 });
+      }
+    }
+  );
+};
+module.exports = { register, registerUserPic, login, getData, logout, update };

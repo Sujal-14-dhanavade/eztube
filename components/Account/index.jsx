@@ -28,7 +28,9 @@ export default function Account(props) {
                             <span className="me-3 label fw-bold">Origin</span>
                           </div>
                           <div className="response">
-                            <span className="me-3 label fw-bold">Followers</span>
+                            <span className="me-3 label fw-bold">
+                              Followers
+                            </span>
                           </div>
                           <div className="response">
                             <span className="me-3 label fw-bold">Verified</span>
@@ -48,9 +50,14 @@ export default function Account(props) {
                             <span>{props.data.followers}</span>
                           </div>
                           <div className="response">
-                            <span>{props.data.verified? "Yes": "No"}</span>
+                            <span>{props.data.verified ? "Yes" : "No"}</span>
                           </div>
                         </div>
+                      </div>
+                      <div className="mt-5">
+                        <a href="/Ezport" className="btn btn-danger mx-3 p-2">
+                          Go Back &#9758;
+                        </a>
                       </div>
                     </div>
                     <div className="col-md-10 col-lg-6 col-xl-7 d-flex justify-content-center order-1 order-lg-2">

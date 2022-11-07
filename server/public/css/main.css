@@ -25,6 +25,10 @@ h1, h2, h3, h4, h5, h6{
     background-color: #000000;
 }
 
+.settings {
+    background-image: url("../images/settings.svg");
+    min-height: 720px;
+}
 
 .wavebg {
     background-image: url("../images/Wave.svg");
@@ -238,6 +242,10 @@ button.create {
     padding: 10px 5px 10px 5px;
 }
 
+.update-input {
+    color: gray;
+    background-color: #cacaca;
+}
 @media screen and (max-width: 768px) {
     .feature-content{
         text-align: center;
