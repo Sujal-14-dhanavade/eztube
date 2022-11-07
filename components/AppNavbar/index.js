@@ -7,12 +7,12 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import axios from "axios";
 
 export default function AppNavbar(props) {
-    function logout() {
-        axios.request({
-            method: "POST",
-            url: "/api/logout"
-        })
-    }
+  function logout() {
+    axios.request({
+      method: "POST",
+      url: "/api/logout",
+    });
+  }
   return (
     <nav className="navbar navbar-expand-md shadow-5">
       <div className="container d-flex flex-row">
@@ -50,31 +50,36 @@ export default function AppNavbar(props) {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {props.data.userPic !== null ? (
+                {props.data.userPic ? (
                   <Avatar
+                    alt="userAvatar"
                     src={`/avatar/userPic/${props.data.userPic}`}
-                    alt="user pic"
                   />
                 ) : (
-                  <Avatar alt="user pic">
+                  <Avatar alt="userAvatar">
                     <PersonIcon sx={{ fontSize: "50px" }} />
                   </Avatar>
                 )}
               </a>
               <ul class="dropdown-menu bg-dark mt-3">
                 <li>
-                  <a class="dropdown-item text-light py-2" href="#">
+                  <a
+                    class="dropdown-item text-light py-2"
+                    onClick={() => {
+                      props.toAccount(true);
+                    }}
+                  >
                     <PersonIcon /> Account
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item text-light py-2" href="#">
+                  <a class="dropdown-item text-light py-2">
                     <SettingsIcon /> Setting
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="nav-item me-5">
+            <li class="nav-item me-lg-5 me-md-5">
               <Fab
                 className="text-light"
                 color="warning"
@@ -99,7 +104,6 @@ export default function AppNavbar(props) {
               </Fab>
             </li>
           </ul>
-          
         </div>
       </div>
     </nav>

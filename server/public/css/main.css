@@ -225,6 +225,19 @@ button.create {
 .search::placeholder {
     color: #fff;
 }
+
+.offcanvas-menu-link > a:hover {
+    background-color: #fa3434;
+}
+
+.response {
+    border: 1px solid #fa3434;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    padding: 10px 5px 10px 5px;
+}
+
 @media screen and (max-width: 768px) {
     .feature-content{
         text-align: center;
@@ -241,9 +254,7 @@ button.create {
     }
 }
 
-.offcanvas-menu-link > a:hover {
-    background-color: #fa3434;
-}
+
 @media screen and (max-width: 991px) {
     .register{
         background-image: -webkit-linear-gradient(50deg, #3f3f3f 40%, #000000 40%);
