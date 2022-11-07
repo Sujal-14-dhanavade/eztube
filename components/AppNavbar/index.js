@@ -16,7 +16,7 @@ export default function AppNavbar(props) {
   return (
     <nav className="navbar navbar-expand-md shadow-5">
       <div className="container d-flex flex-row">
-        <a className="navbar-brand me-5" href="#">
+        <a className="navbar-brand me-5" href="/Ezport">
           <img
             src="../images/wave.png"
             alt="waveCloud Logo"
@@ -65,15 +65,24 @@ export default function AppNavbar(props) {
                 <li>
                   <a
                     class="dropdown-item text-light py-2"
+                    style={{ cursor: "pointer" }}
                     onClick={() => {
                       props.toAccount(true);
+                      props.toSetting(false);
                     }}
                   >
                     <PersonIcon /> Account
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item text-light py-2">
+                  <a
+                    class="dropdown-item text-light py-2"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      props.toAccount(false);
+                      props.toSetting(true);
+                    }}
+                  >
                     <SettingsIcon /> Setting
                   </a>
                 </li>
