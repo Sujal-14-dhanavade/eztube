@@ -3,27 +3,67 @@ import React from "react";
 export default function Tabs(props) {
   return (
     <div
-      class="offcanvas offcanvas-start"
-      style={{backgroundColor: "#000"}}
+      className="offcanvas offcanvas-start"
+      style={{ backgroundColor: "#000" }}
       data-bs-scroll="true"
       data-bs-backdrop="false"
       tabindex="-1"
       id="offcanvasScrolling"
       aria-labelledby="offcanvasScrollingLabel"
     >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">
-          Offcanvas with body scrolling
-        </h5>
+      <div className="offcanvas-header">
+        <a className="navbar-brand me-5" href="#">
+          <img
+            src="../images/wave.png"
+            alt="waveCloud Logo"
+            className="brand-logo d-inline-block align-text-center"
+          />
+          <h1 className="brand-name d-inline-block align-text-top mx-3">
+            WaveCloud
+          </h1>
+        </a>
         <button
           type="button"
-          class="btn-close btn-close-white"
+          className="btn-close btn-close-white"
           data-bs-dismiss="offcanvas"
           aria-label="Close"
         ></button>
       </div>
-      <div class="offcanvas-body">
-        <p>Try scrolling the rest of the page to see this option in action.</p>
+      <div className="offcanvas-body">
+        <div className="input-group">
+          <input
+            type="search"
+            className="form-control bg-black search text-light search"
+            id="search"
+            name="search"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="search-addon"
+          />
+          <span
+            className="input-group-text border-0 bg-black px-2"
+            id="search-addon"
+          >
+            <i className="fas fa-search red-shade"></i>
+          </span>
+        </div>
+        <div className="d-flex flex-column mt-5 offcanvas-menu-link">
+          <a
+            className="text-light text-decoration-none fw-bold p-2"
+            href="/Ezport"
+          >
+            <i class="fa-solid fa-house pe-3"></i>Home
+          </a>
+          <a className="text-light text-decoration-none fw-bold p-2">
+            <i class="fa-solid fa-folder pe-3"></i>Your Library
+          </a>
+          <a className="text-light text-decoration-none fw-bold p-2">
+            <i class="fa-solid fa-headphones pe-3"></i>Playlists
+          </a>
+          <a className="text-light text-decoration-none fw-bold p-2">
+            <i class="fa-solid fa-thumbs-up pe-3"></i>Liked Songs
+          </a>
+        </div>
       </div>
     </div>
   );
