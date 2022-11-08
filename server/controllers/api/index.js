@@ -1,5 +1,7 @@
 require("dotenv").config();
 const User = require("../../models/User/index");
+const Album = require("../../models/Album");
+const Schema = require("mongoose").Schema;
 const bcrypt = require("bcrypt");
 
 const register = (req, res) => {
@@ -112,4 +114,40 @@ const update = (req, res) => {
     }
   );
 };
-module.exports = { register, registerUserPic, login, getData, logout, update };
+
+const getAlbum = (req, res) => {
+  const { _id } = req.session.data;
+  Album.find({ artist: _id }, { name: 1 }, (err, result) => {
+    if (err) {
+      res.status(200).json(err);
+    } else {
+      res.json(result);
+    }
+  });
+};
+
+
+const createAlbum = (req, res) => {
+  const data = new Album({
+    name: req.body.name,
+    artist: req.session.data._id,
+    albumPic: req.body.albumPic
+  });
+  data.save((err, result) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.status(200).json({ _id: result._id, name: result.name });
+    }
+  });
+}
+module.exports = {
+  register,
+  registerUserPic,
+  login,
+  getData,
+  logout,
+  update,
+  getAlbum,
+  createAlbum
+};

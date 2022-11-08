@@ -40,6 +40,7 @@ export default function Pic(props) {
             className="text-light"
             accept="image/png, image/jpeg"
             onChange={onFormChange}
+            required
           />
         </div>
 

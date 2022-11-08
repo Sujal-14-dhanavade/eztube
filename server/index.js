@@ -122,7 +122,7 @@ app.prepare().then(() => {
   // @Routes POST /api/albumPicUpload
   // @desc uploads album avatar to mongo server
   server.post("/api/albumPicUpload", albumPic.single("albumPicFile"), (req, res) => {
-    res.send("album Pic upload");
+    res.json({albumPicId: req.file.id});
   });
 
   // @Routes POST /api/playlistPicUpload
