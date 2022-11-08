@@ -67,8 +67,13 @@ export default function AppNavbar(props) {
                     class="dropdown-item text-light py-2"
                     style={{ cursor: "pointer" }}
                     onClick={() => {
-                      props.toAccount(true);
-                      props.toSetting(false);
+                      props.toPage({
+                        account: true,
+                        setting: false,
+                        studio: false,
+                        playlist: false,
+                        likedSong: false,
+                      });
                     }}
                   >
                     <PersonIcon /> Account
@@ -79,8 +84,13 @@ export default function AppNavbar(props) {
                     class="dropdown-item text-light py-2"
                     style={{ cursor: "pointer" }}
                     onClick={() => {
-                      props.toAccount(false);
-                      props.toSetting(true);
+                      props.toPage({
+                        account: false,
+                        setting: true,
+                        studio: false,
+                        playlist: false,
+                        likedSong: false,
+                      });
                     }}
                   >
                     <SettingsIcon /> Setting

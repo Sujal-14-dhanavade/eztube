@@ -54,13 +54,49 @@ export default function Tabs(props) {
           >
             <i class="fa-solid fa-house pe-3"></i>Home
           </a>
-          <a className="text-light text-decoration-none fw-bold p-2">
+          <a
+            className="text-light text-decoration-none fw-bold p-2"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              props.toPage({
+                account: false,
+                setting: false,
+                studio: true,
+                playlist: false,
+                likedSong: false,
+              });
+            }}
+          >
             <i class="fa-solid fa-folder pe-3"></i>Your Library
           </a>
-          <a className="text-light text-decoration-none fw-bold p-2">
+          <a
+            className="text-light text-decoration-none fw-bold p-2"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              props.toPage({
+                account: false,
+                setting: false,
+                studio: false,
+                playlist: true,
+                likedSong: false,
+              });
+            }}
+          >
             <i class="fa-solid fa-headphones pe-3"></i>Playlists
           </a>
-          <a className="text-light text-decoration-none fw-bold p-2">
+          <a
+            className="text-light text-decoration-none fw-bold p-2"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              props.toPage({
+                account: false,
+                setting: false,
+                studio: false,
+                playlist: false,
+                likedSong: true,
+              });
+            }}
+          >
             <i class="fa-solid fa-thumbs-up pe-3"></i>Liked Songs
           </a>
         </div>

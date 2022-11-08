@@ -3,20 +3,34 @@ import AppNavbar from "../AppNavbar";
 import Tabs from "../Tabs";
 import Account from "../Account";
 import Settings from "../Settings";
+import Studio from "../Studio";
+import Playlist from "../Playlist";
+import Liked from "../Liked";
 
-export default function Dashboard(props) {
-  const [account, isAccount] = React.useState(false);
-  const [setting, isSetting] = React.useState(false);
+export default function studio(props) {
+  const [page, changePage] = React.useState({
+    account: false,
+    setting: false,
+    studio: false,
+    playlist: false,
+    likedSong: false,
+  });
 
   return (
     <div className="dashboard">
-      <AppNavbar data={props.data} toAccount={isAccount} toSetting={isSetting}/>
-      {account ? (
+      <AppNavbar data={props.data} toPage={changePage}/>
+      {page.account ? (
         <Account data={props.data} />
-      ) : setting ? (
+      ) : page.setting ? (
         <Settings data={props.data} />
+      ) : page.studio ? (
+        <Studio data={props.data} />
+      ) : page.playlist ? (
+        <Playlist data={props.data} />
+      ) : page.likedSong ? (
+        <Liked data={props.data} />
       ) : null}
-      <Tabs id="offcanvasScrolling" />
+      <Tabs id="offcanvasScrolling" toPage={changePage}/>
     </div>
   );
 }
