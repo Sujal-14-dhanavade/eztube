@@ -3,6 +3,7 @@ import { getNameList } from "country-list";
 import IsEmail from "isemail";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { Alert } from "@mui/material";
 
 export default function Settings(props) {
   const router = useRouter();
@@ -56,23 +57,25 @@ export default function Settings(props) {
     } else if (isDataSame()) {
       setError("No Changes made");
     } else {
-        axios.request({
+      axios
+        .request({
           method: "POST",
           url: "/api/updateInfo",
-          data: data
-        }).then(res => {
+          data: data,
+        })
+        .then((res) => {
           if (res.data.keyValue) {
             if (res.data.keyValue.username) {
               setError("Username already exists!!!");
             } else if (res.data.keyValue.email) {
               setError("Email already exists!!!");
             }
-          } else if(res.data.update) {
+          } else if (res.data.update) {
             setError("Updated");
           } else {
             setError("Server Error");
           }
-        })
+        });
     }
   };
   return (
@@ -164,7 +167,19 @@ export default function Settings(props) {
                         </div>
 
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                          <p className="text-light text-center">{error}</p>
+                          {error ? (
+                            <Alert
+                              severity={
+                                error === "No Changes made"
+                                  ? "info"
+                                  : error === "Updated"
+                                  ? "success"
+                                  : "error"
+                              }
+                            >
+                              {error}
+                            </Alert>
+                          ) : null}
                         </div>
 
                         <div className="d-flex mx-4 mb-3 mb-lg-4 justify-content-center">

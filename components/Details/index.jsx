@@ -1,5 +1,6 @@
 import React from "react";
 import { getNameList } from "country-list";
+import { Alert } from "@mui/material";
 
 export function Details(props) {
   return (
@@ -128,8 +129,8 @@ export function Details(props) {
         </label>
       </div>
 
-      <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-        <p className="text-light text-center">{props.error}</p>
+      <div className="d-flex justify-content-center mb-3 mb-lg-4">
+        {props.error? <Alert severity="error">{props.error}</Alert>: null}
       </div>
 
       <div className="d-flex mx-4 mb-3 mb-lg-4 justify-content-center">

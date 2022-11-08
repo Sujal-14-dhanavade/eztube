@@ -3,8 +3,8 @@ import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import IsEmail from "isemail";
 import axios from "axios";
-import { Details } from "./Details";
-import Pic from "./Pic";
+import { Details } from "../../components/Details";
+import Pic from "../../components/Pic";
 
 export default function Register() {
   const [data, changeData] = React.useState({
