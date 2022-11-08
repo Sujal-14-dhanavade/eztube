@@ -27,13 +27,18 @@ h1, h2, h3, h4, h5, h6{
 
 .settings {
     background-image: url("../images/settings.svg");
-    min-height: 720px;
+    background-size: cover;
 }
 
 .wavebg {
     background-image: url("../images/Wave.svg");
+    background-size: cover;
 }
 
+.studio {
+    background-image: url("../images/studio.svg");
+    background-size: cover;
+}
 .registerBack {
     background-image: url("../images/registerBack.jpg");
     background-position: center;
@@ -245,6 +250,20 @@ button.create {
 .update-input {
     color: gray;
     background-color: #cacaca;
+}
+
+.navTab {
+    background-color: #000000;
+}
+
+
+.navTab-link {
+    color: #EEEEEE;
+}
+
+.navTab-link:hover {
+    background-color: #fa3434;
+    color: #EEEEEE;
 }
 @media screen and (max-width: 768px) {
     .feature-content{

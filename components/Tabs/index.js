@@ -52,7 +52,7 @@ export default function Tabs(props) {
             className="text-light text-decoration-none fw-bold p-2"
             href="/Ezport"
           >
-            <i class="fa-solid fa-house pe-3"></i>Home
+            <i className="fa-solid fa-house pe-3"></i>Home
           </a>
           <a
             className="text-light text-decoration-none fw-bold p-2"
@@ -67,7 +67,7 @@ export default function Tabs(props) {
               });
             }}
           >
-            <i class="fa-solid fa-folder pe-3"></i>Your Library
+            <i className="fa-solid fa-folder pe-3"></i>Your Library
           </a>
           <a
             className="text-light text-decoration-none fw-bold p-2"
@@ -82,7 +82,7 @@ export default function Tabs(props) {
               });
             }}
           >
-            <i class="fa-solid fa-headphones pe-3"></i>Playlists
+            <i className="fa-solid fa-headphones pe-3"></i>Playlists
           </a>
           <a
             className="text-light text-decoration-none fw-bold p-2"
@@ -97,7 +97,7 @@ export default function Tabs(props) {
               });
             }}
           >
-            <i class="fa-solid fa-thumbs-up pe-3"></i>Liked Songs
+            <i className="fa-solid fa-thumbs-up pe-3"></i>Liked Songs
           </a>
         </div>
       </div>

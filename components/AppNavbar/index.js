@@ -27,7 +27,7 @@ export default function AppNavbar(props) {
           </h1>
         </a>
         <button
-          class="navbar-toggler red-shade outline-none"
+          className="navbar-toggler red-shade outline-none"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNavDropdown"
@@ -35,16 +35,16 @@ export default function AppNavbar(props) {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="fa-solid fa-bars-staggered"></span>
+          <span className="fa-solid fa-bars-staggered"></span>
         </button>
         <div
-          class="collapse navbar-collapse toggle-list"
+          className="collapse navbar-collapse toggle-list"
           id="navbarNavDropdown"
         >
-          <ul class="navbar-nav align-items-center">
-            <li class="nav-item dropdown me-lg-5 me-md-5">
+          <ul className="navbar-nav align-items-center">
+            <li className="nav-item dropdown me-lg-5 me-md-5">
               <a
-                class="nav-link"
+                className="nav-link"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -61,10 +61,10 @@ export default function AppNavbar(props) {
                   </Avatar>
                 )}
               </a>
-              <ul class="dropdown-menu bg-dark mt-3">
+              <ul className="dropdown-menu bg-dark mt-3">
                 <li>
                   <a
-                    class="dropdown-item text-light py-2"
+                    className="dropdown-item text-light py-2"
                     style={{ cursor: "pointer" }}
                     onClick={() => {
                       props.toPage({
@@ -81,7 +81,7 @@ export default function AppNavbar(props) {
                 </li>
                 <li>
                   <a
-                    class="dropdown-item text-light py-2"
+                    className="dropdown-item text-light py-2"
                     style={{ cursor: "pointer" }}
                     onClick={() => {
                       props.toPage({
@@ -98,7 +98,7 @@ export default function AppNavbar(props) {
                 </li>
               </ul>
             </li>
-            <li class="nav-item me-lg-5 me-md-5">
+            <li className="nav-item me-lg-5 me-md-5">
               <Fab
                 className="text-light"
                 color="warning"
@@ -111,7 +111,7 @@ export default function AppNavbar(props) {
                 <AudiotrackIcon />
               </Fab>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Fab
                 className="text-light"
                 color="error"
