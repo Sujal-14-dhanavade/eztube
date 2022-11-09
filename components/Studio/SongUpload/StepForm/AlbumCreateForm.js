@@ -57,15 +57,15 @@ export default function AlbumCreateForm(props) {
         })
         .then((res) => {
           if (res.data.keyValue) {
-            if (res.data.keyValue.username) {
-              setError("Username already exists!!!");
+            if (res.data.keyValue.name) {
+              setError("Album already exists!!!");
             }
           } else {
             props.album({
               id: res.data.id,
               album: res.data.name,
             });
-            setError("Submitted");
+            props.next();
           }
         });
     }
@@ -75,14 +75,14 @@ export default function AlbumCreateForm(props) {
       {albumData.albumPic ? (
         <form className="mt-5 text-center" onSubmit={createAlbum}>
           <input
-            className="bg-light rounded register-input-outline w-50 m-auto d-block"
+            className="bg-light rounded register-input-outline w-50 m-auto p-2 text-center d-block"
             placeholder="Album Name"
             name="name"
             id="name"
             value={albumData.name}
             onChange={onChange}
           />
-          <div className="d-flex justify-content-center mt-3 mb-3 mb-lg-4">
+          <div className="d-flex justify-content-center mt-5 mb-3 mb-lg-4">
             {error ? <Alert severity="error">{error}</Alert> : null}
           </div>
           <button type="submit" className="btn btn-danger mt-5 mx-2">
@@ -95,7 +95,7 @@ export default function AlbumCreateForm(props) {
             {image !== null ? (
               <Avatar
                 src={image}
-                alt="user pic"
+                alt="album pic"
                 sx={{ width: 100, height: 100 }}
               />
             ) : (
@@ -108,7 +108,7 @@ export default function AlbumCreateForm(props) {
             <input
               type="file"
               name="albumPicFile"
-              className="bg-light rounded register-input-outline w-50 m-auto d-block"
+              className="bg-light text-dark rounded register-input-outline w-50 m-auto d-block"
               accept="image/png, image/jpeg"
               onChange={onFormChange}
               required

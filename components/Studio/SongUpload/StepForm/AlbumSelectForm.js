@@ -1,19 +1,45 @@
 import React from "react";
+import { Alert } from "@mui/material";
 
 export default function AlbumSelectForm(props) {
+
+  const [index, onIndexChange] = React.useState(-1);
+  const [error, setError] = React.useState(null);
+
+  function onSubmit() {
+    if (index === -1) {
+      setError("Please Select a Album");
+    } else {
+      const { _id, name } = props.userAlbums[index];
+      props.album({
+        id: _id,
+        album: name,
+      });
+      props.next();
+    }
+  }
   return (
-    <form className="mt-5 text-center">
+    <div className="mt-5 text-center">
       <select
         className="form-select register-input-outline w-50 m-auto"
         id="album"
         name="album"
+        value={index}
+        onChange={(e) => {
+          onIndexChange(e.target.value);
+        }}
       >
-        <option defaultValue={""}></option>
+        <option defaultValue={-1}>Select a option</option>
         {props.userAlbums.map((item, idx) => (
-          <option value={item._id}>{item.name}</option>
+          <option key={idx} value={idx}>
+            {item.name}
+          </option>
         ))}
       </select>
-      <button type="submit" className="btn btn-danger mt-5 mx-2">
+      <div className="d-flex justify-content-center mt-5 mb-3 mb-lg-4">
+        {error ? <Alert severity="error">{error}</Alert> : null}
+      </div>
+      <button onClick={onSubmit} className="btn btn-danger mt-5 mx-2">
         Select Album
       </button>
       <a
@@ -25,6 +51,6 @@ export default function AlbumSelectForm(props) {
       >
         Create a Album
       </a>
-    </form>
+    </div>
   );
 }

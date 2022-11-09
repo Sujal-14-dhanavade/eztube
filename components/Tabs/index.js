@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../Footer";
 
 export default function Tabs(props) {
   return (
@@ -101,6 +102,7 @@ export default function Tabs(props) {
           </a>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

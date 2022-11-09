@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import AlbumSelectForm from "./albumSelectForm";
 import AlbumCreateForm from "./AlbumCreateForm";
+import SongUploadForm from "./SongUploadForm";
 
 const steps = ["Set a Album", "Upload Song"];
 
@@ -47,13 +48,34 @@ export default function StepForm(props) {
       </Stepper>
       <div className="container-fluid">
         <Typography variant="h6" className="p-3 text-center">
-          <i class="fa-solid fa-record-vinyl me-3"></i>Select a Album
+          {activeStep === 0 ? (
+            <span>
+              <i class="fa-solid fa-record-vinyl me-3"></i>Select a Album
+            </span>
+          ) : (
+            <span>
+              <i class="fa-solid fa-guitar me-3"></i>Unleash Your Creation
+            </span>
+          )}
         </Typography>
       </div>
-      {albumSelect ? (
-        <AlbumSelectForm userAlbums={userAlbums} toChange={changeSelect} album={setAlbum}/>
+      {activeStep === 0 ? (
+        albumSelect ? (
+          <AlbumSelectForm
+            userAlbums={userAlbums}
+            toChange={changeSelect}
+            album={setAlbum}
+            next={handleNext}
+          />
+        ) : (
+          <AlbumCreateForm
+            toChange={changeSelect}
+            album={setAlbum}
+            next={handleNext}
+          />
+        )
       ) : (
-        <AlbumCreateForm toChange={changeSelect} album={setAlbum}/>
+        <SongUploadForm album={albumId} />
       )}
     </Box>
   );

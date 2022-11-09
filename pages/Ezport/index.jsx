@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Dashboard from "../../components/Dashboard";
-import Footer from "../../components/Footer";
 
 export default function Ezport() {
   const router = useRouter();
@@ -33,7 +32,6 @@ export default function Ezport() {
   return (
       <div className="Ezport wavebg">
         {userData === null ? null : <Dashboard data={userData} />}
-        <Footer />
       </div>
   );
 }
