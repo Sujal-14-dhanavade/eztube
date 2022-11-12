@@ -56,6 +56,10 @@ h1, h2, h3, h4, h5, h6{
     margin-top: auto;
 }
 
+.audio::-webkit-media-controls-panel {
+    background-color: #000000;
+}
+
 .text-color:hover {
     color: #00ADB5
 }

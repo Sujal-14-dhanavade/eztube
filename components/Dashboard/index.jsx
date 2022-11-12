@@ -6,6 +6,7 @@ import Settings from "../Settings";
 import Studio from "../Studio";
 import Playlist from "../Playlist";
 import Liked from "../Liked";
+import AudioPlayer from "../AudioPlayer";
 
 export default function studio(props) {
   const [page, changePage] = React.useState({
@@ -17,7 +18,7 @@ export default function studio(props) {
   });
 
   return (
-    <div className="dashboard">
+    <div className="d-flex flex-column justify-content-between vh-100">
       <AppNavbar data={props.data} toPage={changePage}/>
       {page.account ? (
         <Account data={props.data} />
@@ -31,6 +32,7 @@ export default function studio(props) {
         <Liked data={props.data} />
       ) : null}
       <Tabs id="offcanvasScrolling" toPage={changePage}/>
+      <AudioPlayer />
     </div>
   );
 }
