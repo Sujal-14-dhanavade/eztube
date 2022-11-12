@@ -111,7 +111,7 @@ app.prepare().then(() => {
   // @Routes POST /api/audioUpload
   // @desc uploads audios to mongo server
   server.post("/api/audioUpload", audio.single("audioFile"), (req, res) => {
-    res.json({file: req.file});
+    res.json({file: req.file.id});
   });
 
   // @Routes POST /api/userPicUpload
@@ -127,13 +127,13 @@ app.prepare().then(() => {
   // @Routes POST /api/playlistPicUpload
   // @desc uploads playlist avatar to mongo server
   server.post("/api/playlistPicUpload", playlistPic.single("playlistPicFile"), (req, res) => {
-    res.send("playlist Pic upload");
+    res.json({file: req.file.id});
   });
 
   // @Routes POST /api/songPicUpload
   // @desc uploads audios to mongo server
   server.post("/api/songPicUpload", songPic.single("songPicFile"), (req, res) => {
-    res.send("song Pic upload");
+    res.json({file: req.file.id});
   });
 
   // @Routes POST /watch/audioTitle

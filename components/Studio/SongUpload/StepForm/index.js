@@ -9,6 +9,7 @@ import AlbumSelectForm from "./albumSelectForm";
 import AlbumCreateForm from "./AlbumCreateForm";
 import SongUploadForm from "./SongUploadForm";
 
+
 const steps = ["Set a Album", "Upload Song"];
 
 export default function StepForm(props) {
