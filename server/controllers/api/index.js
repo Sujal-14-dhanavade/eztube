@@ -1,6 +1,7 @@
 require("dotenv").config();
 const User = require("../../models/User/index");
 const Album = require("../../models/Album");
+const Song = require("../../models/Song");
 const Schema = require("mongoose").Schema;
 const bcrypt = require("bcrypt");
 
@@ -141,6 +142,28 @@ const createAlbum = (req, res) => {
     }
   });
 }
+
+const registerSong = (req, res) => {
+  const songData = new Song({
+    name: req.body.name,
+    song: req.body.song,
+    songPic: req.body.songPic,
+    owner: req.session.data._id,
+    album: req.body.album,
+    genre: req.body.genre,
+    language: req.body.language,
+    artist: req.body.artist,
+    producer: req.body.producer,
+    writer: req.body.writer
+  });
+  songData.save((err, result) => {
+    if(err) {
+      res.json(err);
+    } else {
+      res.json({_id: result._id});
+    }
+  })
+}
 module.exports = {
   register,
   registerUserPic,
@@ -149,5 +172,6 @@ module.exports = {
   logout,
   update,
   getAlbum,
-  createAlbum
+  createAlbum,
+  registerSong
 };

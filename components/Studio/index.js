@@ -33,9 +33,9 @@ export default function Studio(props) {
                 </a>
               </div>
               {page ? (
-                <SongUpload data={props.data} />
+                <SongUpload data={props.data} toPage={props.toPage}/>
               ) : (
-                <SongList data={props.data} />
+                <SongList data={props.data} toPage={props.toPage}/>
               )}
             </div>
           </div>

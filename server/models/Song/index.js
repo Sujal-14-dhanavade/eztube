@@ -7,7 +7,8 @@ const songSchema = new Schema({
         required: true,
         unique: true
     },
-    songPic: {type: Schema.Types.ObjectId},
+    song: {type: Schema.Types.ObjectId, required: true},
+    songPic: {type: Schema.Types.ObjectId, required: true},
     owner: {type: Schema.Types.ObjectId, required: true},
     album: {type: Schema.Types.ObjectId, required: true},
     date_created: {

@@ -41,6 +41,7 @@ export default function AlbumCreateForm(props) {
       })
       .then((res) => {
         changeData({ ...albumData, albumPic: res.data.albumPicId });
+        
       });
   }
 
@@ -52,7 +53,7 @@ export default function AlbumCreateForm(props) {
     e.preventDefault();
     if (albumData.name === "") {
       setError("Empty Fields");
-    } else if (albumData.name < 7) {
+    } else if (albumData.name.length < 7) {
       setError("Album name should contain more than 7 characters");
     } else {
       axios
@@ -68,7 +69,7 @@ export default function AlbumCreateForm(props) {
             }
           } else {
             props.album({
-              id: res.data.id,
+              id: res.data._id,
               album: res.data.name,
             });
             props.next();

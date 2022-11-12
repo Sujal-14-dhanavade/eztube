@@ -7,6 +7,7 @@ const logout = require("../../controllers/api").logout;
 const update = require("../../controllers/api").update;
 const getAlbum = require("../../controllers/api").getAlbum;
 const createAlbum = require("../../controllers/api").createAlbum;
+const registerSong = require("../../controllers/api").registerSong;
 
 router.route("/").get((req, res) => {
   res.status(200).json({started: true});
@@ -27,4 +28,5 @@ router.route("/logout").post(logout);
 router.route("/updateInfo").post(update);
 router.route("/getAlbums").post(getAlbum);
 router.route("/createAlbum").post(createAlbum);
+router.route("/addSong").post(registerSong);
 module.exports = router;

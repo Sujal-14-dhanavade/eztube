@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Alert, Typography, Container, Grid } from "@mui/material";
+import { Avatar, Alert, Typography, Container, Button } from "@mui/material";
 import axios from "axios";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 const languages = require("language-list")();
@@ -26,18 +26,37 @@ export default function SongUploadForm(props) {
   const [errorFile, setErrorFile] = React.useState(false);
   const [songData, changeData] = React.useState({
     name: "",
-    album: props.album,
+    song: null,
+    songPic: null,
+    album: props.album.id,
     genre: "",
     language: "",
     artist: [],
     producer: [],
     writer: [],
   });
-  const [artist, changeArt] = React.useState({ value: "", error: false });
-  const [producer, changePro] = React.useState({ value: "", error: false });
-  const [writer, changeWri] = React.useState({ value: "", error: false });
+  const [artist, changeArt] = React.useState("");
+  const [producer, changePro] = React.useState("");
+  const [writer, changeWri] = React.useState("");
   const [error, setError] = React.useState(null);
 
+  function IsEmpty() {
+    if (
+      songData.name === "" ||
+      songData.genre === "" ||
+      songData.language === ""
+    ) {
+      return true;
+    } else if (
+      songData.artist.length === 0 ||
+      songData.producer.length === 0 ||
+      songData.writer.length === 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   function onPicFormChange(e) {
     var file = e.target.files[0];
     if (file.type === "image/jpeg" || file.type === "image/png") {
@@ -66,6 +85,7 @@ export default function SongUploadForm(props) {
       })
       .then((res) => {
         changePicId(res.data.file);
+        changeData({ ...songData, songPic: res.data.file });
       });
   }
 
@@ -92,6 +112,7 @@ export default function SongUploadForm(props) {
       })
       .then((res) => {
         changeAudioId(res.data.file);
+        changeData({ ...songData, song: res.data.file });
       });
   }
 
@@ -101,35 +122,94 @@ export default function SongUploadForm(props) {
 
   function createSong(e) {
     e.preventDefault();
-    if (songData.name === "") {
+    if (IsEmpty()) {
       setError("Empty Fields");
-    } else if (songData.name < 7) {
-      setError("Song name should contain more than 7 characters");
+    } else if (songData.name.length < 7) {
+      setError("Song name should contain more than 6 characters");
     } else {
-      setError("Working");
+      axios
+        .request({
+          method: "POST",
+          url: "/api/addSong",
+          data: songData,
+        })
+        .then((res) => {
+          if (res.data.keyValue) {
+            if (res.data.keyValue.name) {
+              setError("Song Name already used!!!");
+            }
+          } else if (res.data._id) {
+            props.toPage({
+              account: false,
+              setting: false,
+              studio: false,
+              playlist: false,
+              likedSong: false,
+            });
+          } else {
+            setError("Server Error");
+          }
+        });
     }
   }
 
   const handleClick = (e) => {
-    changeData({...songData, [e.target.id]: [...songData[e.target.id], artist]});
-    if(e.target.id === "artist") changeArt("");
-    else if(e.target.id === "producer") changePro("");
-    else if(e.target.id === "writer") changeWri("");
+    if (e.target.id === "artist") {
+      if (artist === "") setError("Empty Field for artist");
+      else {
+        changeData({
+          ...songData,
+          artist: [...songData.artist, artist],
+        });
+        changeArt("");
+        setError("");
+      }
+    } else if (e.target.id === "producer") {
+      if (producer === "") setError("Empty Field for producer");
+      else {
+        changeData({
+          ...songData,
+          producer: [...songData.producer, producer],
+        });
+        changePro("");
+        setError("");
+      }
+    } else if (e.target.id === "writer") {
+      if (writer === "") setError("Empty Field for writer");
+      else {
+        changeData({
+          ...songData,
+          writer: [...songData.writer, writer],
+        });
+        changeWri("");
+        setError("");
+      }
+    }
+  };
+
+  const onChangeArt_Pro_Wri = (e) => {
+    if (e.target.id === "artist") {
+      changeArt(e.target.value);
+    } else if (e.target.id === "producer") {
+      changePro(e.target.value);
+    } else if (e.target.id === "writer") {
+      changeWri(e.target.value);
+    }
   };
   const deleteArt = (e) => {
     var arr = [...songData.artist];
     arr.splice(e.target.value, 1);
-    changeData({...songData, artist: [...arr]});
+    changeData({ ...songData, artist: [...arr] });
   };
   const deletePro = (e) => {
     var arr = [...songData.producer];
     arr.splice(e.target.value, 1);
-    changeData({...songData, producer: [...arr]});
+    changeData({ ...songData, producer: [...arr] });
   };
   const deleteWri = (e) => {
     var arr = [...songData.writer];
     arr.splice(e.target.value, 1);
-    changeData({...songData, writer: [...arr]});
+    changeData({ ...songData, writer: [...arr] });
   };
   return (
     <div>
@@ -158,7 +238,7 @@ export default function SongUploadForm(props) {
             <input
               type="file"
               name="songPicFile"
-              className="bg-light text-dark rounded register-input-outline w-50 m-auto d-block"
+              className="bg-light text-dark rounded register-input-outline w-75 m-auto d-block"
               accept="image/png, image/jpeg"
               onChange={onPicFormChange}
               required
@@ -166,7 +246,6 @@ export default function SongUploadForm(props) {
 
             <button
               className="btn btn-danger mt-5 mx-2"
-              name="submit"
               type={"submit"}
               disabled={errorFile}
             >
@@ -191,7 +270,7 @@ export default function SongUploadForm(props) {
             <input
               type="file"
               name="audioFile"
-              className="bg-light text-dark rounded register-input-outline w-50 m-auto d-block"
+              className="bg-light text-dark rounded register-input-outline w-75 m-auto d-block"
               accept="audio/mpeg"
               onChange={onAudioFormChange}
               required
@@ -199,7 +278,6 @@ export default function SongUploadForm(props) {
 
             <button
               className="btn btn-danger mt-5"
-              name="submit"
               type={"submit"}
               disabled={errorFile}
             >
@@ -217,18 +295,26 @@ export default function SongUploadForm(props) {
           <div className="d-flex justify-content-center mb-5">
             <Typography variant="h5">Details Regarding Song</Typography>
           </div>
-          <form className="mt-5 text-center" onSubmit={createSong}>
-            <input
-              className="bg-light rounded register-input-outline w-50 m-auto p-2 text-center d-block"
-              placeholder="Song Name"
-              name="name"
-              id="name"
-              value={songData.name}
-              onChange={onChange}
-            />
-            <div className="form-outline flex-fill mb-0">
+          <form
+            className="mt-5 text-center d-flex flex-column"
+            onSubmit={createSong}
+          >
+            <div className="form-outline flex-fill my-4">
+              <input
+                className="bg-light rounded register-input-outline w-75 m-auto p-2 text-center d-block"
+                placeholder="Song Name"
+                name="name"
+                id="name"
+                value={songData.name}
+                onChange={onChange}
+              />
+              <label className="form-label" htmlFor="name">
+                Song Name
+              </label>
+            </div>
+            <div className="form-outline flex-fill my-4">
               <select
-                className="form-select register-input-outline"
+                className="form-select register-input-outline w-75 m-auto text-center"
                 id="genre"
                 name="genre"
                 value={songData.genre}
@@ -245,9 +331,9 @@ export default function SongUploadForm(props) {
                 Genre
               </label>
             </div>
-            <div className="form-outline flex-fill mb-0">
+            <div className="form-outline flex-fill my-4">
               <select
-                className="form-select register-input-outline"
+                className="form-select register-input-outline w-75 m-auto text-center"
                 id="language"
                 name="language"
                 value={songData.language}
@@ -264,106 +350,137 @@ export default function SongUploadForm(props) {
                 Language
               </label>
             </div>
-            <div className="form-outline flex-fill mb-0">
-              <Container sx={{ marginBottom: "10px", backgroundColor: "gray" }}>
+            <div className="form-outline flex-fill my-4">
+              <Container
+                className="w-75 mx-auto my-3 rounded"
+                sx={{ marginBottom: "10px", backgroundColor: "gray" }}
+              >
                 {songData.artist.map((artist, id) => (
                   <Typography
                     variant="h6"
+                    className="rounded text-center p-1 fw-bold"
                     sx={{
                       fontSize: "0.8rem",
                       display: "inline-block",
                       margin: "5px",
+                      color: "white",
+                      backgroundColor: "#FF0000",
                     }}
                   >
                     {artist}
-                    <Button value={id} onClick={deleteArt}>
+                    <Button
+                      className="p-0 text-light"
+                      value={id}
+                      onClick={deleteArt}
+                    >
                       x
                     </Button>
                   </Typography>
                 ))}
               </Container>
-              <Grid>
+              <div className="d-flex flex-row justify-content-center">
                 <input
-                  className="bg-light rounded register-input-outline w-50 m-auto p-2 text-center d-block"
+                  className="bg-light rounded register-input-outline w-75 p-2 text-center d-block"
                   placeholder="Artist..."
                   name="artist"
                   id="artist"
+                  value={artist}
+                  onChange={onChangeArt_Pro_Wri}
                 />
-                <button
+                <a className="btn btn-danger" id="artist" onClick={handleClick}>
+                  Add Artist
+                </a>
+              </div>
+            </div>
+            <div className="form-outline flex-fill my-4">
+              <Container
+                className="w-75 mx-auto my-3 rounded"
+                sx={{ margin: "10px", backgroundColor: "gray" }}
+              >
+                {songData.producer.map((producer, id) => (
+                  <Typography
+                    variant="h6"
+                    className="rounded text-center p-1 fw-bold shadow"
+                    sx={{
+                      fontSize: "0.8rem",
+                      display: "inline-block",
+                      margin: "5px",
+                      color: "white",
+                      backgroundColor: "#FF0000",
+                    }}
+                  >
+                    {producer}
+                    <Button
+                      className="p-0 text-light"
+                      value={id}
+                      onClick={deletePro}
+                    >
+                      x
+                    </Button>
+                  </Typography>
+                ))}
+              </Container>
+              <div className="d-flex flex-row justify-content-center">
+                <input
+                  className="bg-light rounded register-input-outline w-75 p-2 text-center d-block"
+                  placeholder="Producer..."
+                  name="producer"
+                  id="producer"
+                  value={producer}
+                  onChange={onChangeArt_Pro_Wri}
+                />
+                <a
                   className="btn btn-danger"
-                  id="artist"
+                  id="producer"
                   onClick={handleClick}
                 >
-                  Add Artist
-                </button>
-              </Grid>
+                  Add Producer
+                </a>
+              </div>
             </div>
-            <div className="form-outline flex-fill mb-0">
-              <Container sx={{ marginBottom: "10px", backgroundColor: "gray" }}>
-                {songData.artist.map((artist, id) => (
+            <div className="form-outline flex-fill my-4">
+              <Container
+                className="w-75 mx-auto my-3 rounded"
+                sx={{ marginBottom: "10px", backgroundColor: "gray" }}
+              >
+                {songData.writer.map((writer, id) => (
                   <Typography
                     variant="h6"
+                    className="rounded text-center p-1 fw-bold shadow"
                     sx={{
                       fontSize: "0.8rem",
                       display: "inline-block",
                       margin: "5px",
+                      color: "white",
+                      backgroundColor: "#FF0000",
                     }}
                   >
-                    {artist}
-                    <Button value={id} onClick={deleteArt}>
+                    {writer}
+                    <Button
+                      className="p-0 text-light"
+                      value={id}
+                      onClick={deleteWri}
+                    >
                       x
                     </Button>
                   </Typography>
                 ))}
               </Container>
-              <Grid>
+              <div className="d-flex flex-row justify-content-center">
                 <input
-                  className="bg-light rounded register-input-outline w-50 m-auto p-2 text-center d-block"
-                  placeholder="Artist..."
-                  name="artist"
-                  id="artist"
+                  className="bg-light rounded register-input-outline w-75 p-2 text-center d-block"
+                  placeholder="Writer..."
+                  name="writer"
+                  id="writer"
+                  value={writer}
+                  onChange={onChangeArt_Pro_Wri}
                 />
-                <button className="btn btn-danger" onClick={onAddArtist}>
-                  Add Artist
-                </button>
-              </Grid>
+                <a className="btn btn-danger" id="writer" onClick={handleClick}>
+                  Add Writer
+                </a>
+              </div>
             </div>
-            <div className="form-outline flex-fill mb-0">
-              <Container sx={{ marginBottom: "10px", backgroundColor: "gray" }}>
-                {songData.artist.map((artist, id) => (
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontSize: "0.8rem",
-                      display: "inline-block",
-                      margin: "5px",
-                    }}
-                  >
-                    {artist}
-                    <Button value={id} onClick={deleteArt}>
-                      x
-                    </Button>
-                  </Typography>
-                ))}
-              </Container>
-              <Grid>
-                <input
-                  className="bg-light rounded register-input-outline w-50 m-auto p-2 text-center d-block"
-                  placeholder="Artist..."
-                  name="artist"
-                  id="artist"
-                />
-                <button className="btn btn-danger" onClick={onAddArtist}>
-                  Add Artist
-                </button>
-              </Grid>
-            </div>
-            <button
-              className="btn btn-danger mt-5"
-              name="submit"
-              type={"submit"}
-              disabled={errorFile}
-            >
+            <button className="btn btn-danger mt-5 w-50 m-auto" type={"submit"}>
               Create Song
             </button>
             {error ? (

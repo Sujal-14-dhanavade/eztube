@@ -9,7 +9,7 @@ export default function SongUpload(props) {
         <img src="../images/studioLogo.png" height={100} width={100}></img>
         Studio
       </p>
-      <StepForm />
+      <StepForm toPage={props.toPage}/>
     </div>
   );
 }

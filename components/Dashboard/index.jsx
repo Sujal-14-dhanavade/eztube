@@ -24,7 +24,7 @@ export default function studio(props) {
       ) : page.setting ? (
         <Settings data={props.data} />
       ) : page.studio ? (
-        <Studio data={props.data} />
+        <Studio data={props.data} toPage={changePage}/>
       ) : page.playlist ? (
         <Playlist data={props.data} />
       ) : page.likedSong ? (

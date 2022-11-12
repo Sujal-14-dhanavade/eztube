@@ -76,7 +76,7 @@ export default function StepForm(props) {
           />
         )
       ) : (
-        <SongUploadForm album={albumId} />
+        <SongUploadForm album={albumId} toPage={props.toPage}/>
       )}
     </Box>
   );
