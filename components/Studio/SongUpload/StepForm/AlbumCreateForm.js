@@ -6,6 +6,7 @@ import axios from "axios";
 export default function AlbumCreateForm(props) {
   const [image, onChangeImg] = React.useState(null);
   const [imgfile, changeFile] = React.useState(null);
+  const [errorFile, setErrorFile] = React.useState(false); 
   const [albumData, changeData] = React.useState({
     albumPic: null,
     name: "",
@@ -14,12 +15,17 @@ export default function AlbumCreateForm(props) {
   const [error, setError] = React.useState(null);
   function onFormChange(e) {
     var file = e.target.files[0];
-    changeFile(file);
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      onChangeImg(reader.result);
-    };
+    if (file.type === "image/jpeg" || file.type === "image/png") {
+      setErrorFile(false);
+      changeFile(file);
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        onChangeImg(reader.result);
+      };
+    } else {
+      setErrorFile(true);
+    }
   }
 
   function onSubmit(e) {
@@ -118,6 +124,7 @@ export default function AlbumCreateForm(props) {
               className="btn btn-danger mt-5 mx-2"
               name="submit"
               type={"submit"}
+              disabled= {errorFile}
             >
               Next Step
             </button>
@@ -130,6 +137,7 @@ export default function AlbumCreateForm(props) {
             >
               Choose already created album
             </a>
+            {(errorFile) ? <Alert className="m-auto text-center mt-3" severity="error">Please Upload jpeg/ png file types for Avatar</Alert>: null}
           </form>
         </>
       )}

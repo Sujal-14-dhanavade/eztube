@@ -13,7 +13,6 @@ const {
   multer,
   cors,
   GridFsStorage,
-  _,
   watchRoute,
   getPicRoute,
   session,

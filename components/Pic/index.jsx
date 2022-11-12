@@ -1,19 +1,23 @@
-import { Avatar } from "@mui/material";
+import { Avatar, Alert } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import React from "react";
-import { useRouter } from "next/router";
 
 export default function Pic(props) {
   const [image, onChangeImg] = React.useState(null);
-  const router = useRouter();
+  const [errorFile, setErrorFile] = React.useState(false); 
   function onFormChange(e) {
     var file = e.target.files[0];
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      onChangeImg(reader.result);
-    };
+    if (file.type === "image/jpeg" || file.type === "image/png") {
+      setErrorFile(false);
+      
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        onChangeImg(reader.result);
+      };
+    } else {
+      setErrorFile(true);
+    }
   }
   return (
     <div>
@@ -50,6 +54,7 @@ export default function Pic(props) {
             name="submit"
             type={"submit"}
             value={props.data}
+            disabled = {errorFile}
           >
             Submit
           </button>
@@ -57,6 +62,7 @@ export default function Pic(props) {
             Skip &#9758;
           </a>
         </div>
+        {(errorFile) ? <Alert className="text-center mt-3" severity="error">Please Upload jpeg/ png file types for Avatar</Alert>: null}
       </form>
     </div>
   );

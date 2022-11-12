@@ -9,7 +9,6 @@ const bcrypt = require("bcrypt");
 const path = require("path");
 const crypto = require("crypto");
 const cors = require("cors");
-const _ = require("lodash");
 const watchRoute = require("../routes/watch");
 const getPicRoute = require("../routes/getPic");
 const session = require("express-session");
@@ -27,7 +26,6 @@ module.exports = {
   path,
   crypto,
   cors,
-  _,
   watchRoute,
   getPicRoute,
   session,

@@ -45,8 +45,8 @@ export default function Register() {
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (isEmpty()) {
       setError("Empty Fields!! Please fill the form");
-    } else if (data.username.length < 7) {
-      setError("Username should be contain more than 6 characters");
+    } else if (data.username.length < 8) {
+      setError("Username should be contain more than 7 characters");
     } else if (!IsEmail.validate(data.email, false)) {
       setError("Please enter valid email");
     } else if (!data.password.match(regPass)) {

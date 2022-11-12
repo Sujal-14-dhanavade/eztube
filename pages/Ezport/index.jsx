@@ -30,8 +30,8 @@ export default function Ezport() {
   });
 
   return (
-      <div className="Ezport wavebg">
-        {userData === null ? null : <Dashboard data={userData} />}
-      </div>
+    <div className="Ezport wavebg">
+      {userData === null ? null : <Dashboard data={userData} />}
+    </div>
   );
 }

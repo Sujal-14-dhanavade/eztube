@@ -1,6 +1,5 @@
 import React from "react";
 import { Avatar, Alert } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
 import axios from "axios";
 
 export default function SongUploadForm(props) {
@@ -55,7 +54,7 @@ export default function SongUploadForm(props) {
   }
   return (
 
-        <form className="mt-5 text-center" onSubmit={createSong}>
+        <form className="mt-5" onSubmit={createSong}>
           <input
             className="bg-light rounded register-input-outline w-50 m-auto p-2 text-center d-block"
             placeholder="Song Name"
