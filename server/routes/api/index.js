@@ -9,7 +9,9 @@ const {
   getAlbum,
   createAlbum,
   registerSong,
-  getSongs
+  getSongs,
+  createPlaylist,
+  getPlaylist
 } = require("../../controllers/api");
 
 router.route("/").get((req, res) => {
@@ -33,4 +35,6 @@ router.route("/getAlbums").post(getAlbum);
 router.route("/createAlbum").post(createAlbum);
 router.route("/addSong").post(registerSong);
 router.route("/getSongs").get(getSongs);
+router.route("/createPlaylist").post(createPlaylist);
+router.route("/getPlaylist").get(getPlaylist);
 module.exports = router;

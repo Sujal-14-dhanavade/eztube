@@ -7,10 +7,6 @@ const playlistSchema = new Schema({
     required: true,
   },
   owner: { type: Schema.Types.ObjectId, required: true },
-  public: {
-    type: Boolean,
-    default: true,
-  },
   date_created: {
     type: Date,
     default: Date.now,

@@ -2,6 +2,7 @@ require("dotenv").config();
 const User = require("../../models/User/index");
 const Album = require("../../models/Album");
 const Song = require("../../models/Song");
+const Playlist = require("../../models/Playlist");
 const Schema = require("mongoose").Schema;
 const bcrypt = require("bcrypt");
 
@@ -175,6 +176,34 @@ const getSongs = (req, res) => {
     }
   })
 }
+
+const createPlaylist = (req, res) => {
+  const data = new Playlist({
+    playlistName: req.body.playListName,
+    owner: req.session.data._id,
+    playlistPic: req.body.playlistPic
+  }); 
+  
+  data.save((err, result) => {
+    if(err) {
+      res.json(err);
+    } else {
+      res.json({error: false});
+    }
+  })
+};
+
+const getPlaylist = (req, res) => {
+  const owner = req.session.data._id;
+  Playlist.find({owner: owner}, (err, result) => {
+    if(err) {
+      res.status(200).json(err);
+    } else {
+      res.json(result);
+    }
+  })
+}
+
 module.exports = {
   register,
   registerUserPic,
@@ -185,5 +214,7 @@ module.exports = {
   getAlbum,
   createAlbum,
   registerSong,
-  getSongs
+  getSongs,
+  createPlaylist,
+  getPlaylist
 };
