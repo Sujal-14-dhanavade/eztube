@@ -291,6 +291,12 @@ button.create {
     }
 }
 
+
+.playButton:hover {
+    background-color: #fa3434;
+    border-radius: 50%;
+}
+
 @media screen and (max-width: 767px) {
     .navTab {
         background-color: #000000;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import AppNavbar from "../AppNavbar";
 import Tabs from "../Tabs";
 import Account from "../Account";
@@ -17,22 +17,29 @@ export default function studio(props) {
     likedSong: false,
   });
 
+  const [src, changeSrc] = React.useState(null);
+  const audioRef = useRef();
   return (
     <div className="d-flex flex-column justify-content-between dashboard">
-      <AppNavbar data={props.data} toPage={changePage}/>
+      <AppNavbar data={props.data} toPage={changePage} />
       {page.account ? (
         <Account data={props.data} />
       ) : page.setting ? (
         <Settings data={props.data} />
       ) : page.studio ? (
-        <Studio data={props.data} toPage={changePage}/>
+        <Studio
+          data={props.data}
+          toPage={changePage}
+          changeSrc={changeSrc}
+          audioRef={audioRef}
+        />
       ) : page.playlist ? (
-        <Playlist data={props.data} />
+        <Playlist data={props.data} changeSrc={src} />
       ) : page.likedSong ? (
-        <Liked data={props.data} />
+        <Liked data={props.data} changeSrc={src} />
       ) : null}
-      <Tabs id="offcanvasScrolling" toPage={changePage}/>
-      <AudioPlayer />
+      <Tabs id="offcanvasScrolling" toPage={changePage} />
+      <AudioPlayer src={src} audioRef={audioRef} />
     </div>
   );
 }
