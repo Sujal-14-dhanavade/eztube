@@ -18,7 +18,7 @@ export default function studio(props) {
   });
 
   return (
-    <div className="d-flex flex-column justify-content-between vh-100">
+    <div className="d-flex flex-column justify-content-between dashboard">
       <AppNavbar data={props.data} toPage={changePage}/>
       {page.account ? (
         <Account data={props.data} />

@@ -164,6 +164,17 @@ const registerSong = (req, res) => {
     }
   })
 }
+
+const getSongs = (req, res) => {
+  const owner = req.session.data._id;
+  Song.find({owner: owner}, (err, result) => {
+    if(err) {
+      res.status(200).json(err);
+    } else {
+      res.json(result);
+    }
+  })
+}
 module.exports = {
   register,
   registerUserPic,
@@ -173,5 +184,6 @@ module.exports = {
   update,
   getAlbum,
   createAlbum,
-  registerSong
+  registerSong,
+  getSongs
 };
