@@ -42,23 +42,34 @@ export default function Playlistform(props) {
           data: fd,
         })
         .then((res) => {
-            axios.request({
-                method: "POST",
-                url: "/api/createPlaylist",
-                data: {
-                    playListName: playListName,
-                    playlistPic: res.data.file
-                }
-            }).then(res => {
-                if(!res.data.error) {
-                    onChangeImg(null);
-                    changeFile(null);
-                    setName("");
-                    $("#file").val("");
-                } else {
-                    setError("Server Error");
-                }
+          axios
+            .request({
+              method: "POST",
+              url: "/api/createPlaylist",
+              data: {
+                playListName: playListName,
+                playlistPic: res.data.file,
+              },
             })
+            .then((res) => {
+              if (!res.data.error) {
+                onChangeImg(null);
+                changeFile(null);
+                setName("");
+                $("#file").val("");
+                setError("");
+                axios
+                  .request({
+                    method: "GET",
+                    url: "/api/getPlaylist",
+                  })
+                  .then((res) => {
+                    props.changeData(res.data);
+                  });
+              } else {
+                setError("Server Error");
+              }
+            });
         });
     }
   }
