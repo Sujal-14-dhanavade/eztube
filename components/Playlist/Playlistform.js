@@ -4,7 +4,7 @@ import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 import { Container } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
-import $ from "jquery";
+import $ from "jQuery";
 
 export default function Playlistform(props) {
   const [image, onChangeImg] = React.useState(null);

@@ -128,12 +128,11 @@ const getAlbum = (req, res) => {
   });
 };
 
-
 const createAlbum = (req, res) => {
   const data = new Album({
     name: req.body.name,
     artist: req.session.data._id,
-    albumPic: req.body.albumPic
+    albumPic: req.body.albumPic,
   });
   data.save((err, result) => {
     if (err) {
@@ -142,7 +141,7 @@ const createAlbum = (req, res) => {
       return res.status(200).json({ _id: result._id, name: result.name });
     }
   });
-}
+};
 
 const registerSong = (req, res) => {
   const songData = new Song({
@@ -155,54 +154,79 @@ const registerSong = (req, res) => {
     language: req.body.language,
     artist: req.body.artist,
     producer: req.body.producer,
-    writer: req.body.writer
+    writer: req.body.writer,
   });
   songData.save((err, result) => {
-    if(err) {
+    if (err) {
       res.json(err);
     } else {
-      res.json({_id: result._id});
+      res.json({ _id: result._id });
     }
-  })
-}
+  });
+};
 
 const getSongs = (req, res) => {
   const owner = req.session.data._id;
-  Song.find({owner: owner}, (err, result) => {
-    if(err) {
+  Song.find({ owner: owner }, (err, result) => {
+    if (err) {
       res.status(200).json(err);
     } else {
       res.json(result);
     }
-  })
-}
+  });
+};
 
 const createPlaylist = (req, res) => {
   const data = new Playlist({
     playlistName: req.body.playListName,
     owner: req.session.data._id,
-    playlistPic: req.body.playlistPic
-  }); 
-  
+    playlistPic: req.body.playlistPic,
+  });
+
   data.save((err, result) => {
-    if(err) {
+    if (err) {
       res.json(err);
     } else {
-      res.json({error: false});
+      res.json({ error: false });
     }
-  })
+  });
 };
 
 const getPlaylist = (req, res) => {
   const owner = req.session.data._id;
-  Playlist.find({owner: owner}, (err, result) => {
-    if(err) {
+  Playlist.find({ owner: owner }, (err, result) => {
+    if (err) {
       res.status(200).json(err);
     } else {
       res.json(result);
     }
-  })
-}
+  });
+};
+
+const addSongPlaylist = (req, res) => {
+  Playlist.findById(req.body.id, (err, result) => {
+    if (err) {
+      res.json({ error: true });
+    } else {
+      if (!result.songs.includes(req.body.songid)) {
+        const songs = [...result.songs, req.body.songid];
+        Playlist.findByIdAndUpdate(
+          req.body.id,
+          { songs: songs },
+          (err, result) => {
+            if (err) {
+              res.json({ error: true });
+            } else {
+              res.json({ error: false });
+            }
+          }
+        );
+      } else {
+        res.json({ error: "included" });
+      }
+    }
+  });
+};
 
 module.exports = {
   register,
@@ -216,5 +240,6 @@ module.exports = {
   registerSong,
   getSongs,
   createPlaylist,
-  getPlaylist
+  getPlaylist,
+  addSongPlaylist,
 };

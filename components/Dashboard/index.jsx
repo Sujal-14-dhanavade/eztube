@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import AppNavbar from "../AppNavbar";
 import Tabs from "../Tabs";
 import Account from "../Account";
@@ -7,8 +7,10 @@ import Studio from "../Studio";
 import Playlist from "../Playlist";
 import Liked from "../Liked";
 import AudioPlayer from "../AudioPlayer";
+import axios from "axios";
 
 export default function studio(props) {
+  const [playlistData, changeData] = React.useState(null);
   const [page, changePage] = React.useState({
     account: false,
     setting: false,
@@ -16,6 +18,17 @@ export default function studio(props) {
     playlist: false,
     likedSong: false,
   });
+
+  useEffect(() => {
+    axios
+      .request({
+        method: "GET",
+        url: "/api/getPlaylist",
+      })
+      .then((res) => {
+        changeData(res.data);
+      });
+  }, []);
 
   const [src, changeSrc] = React.useState(null);
   const audioRef = useRef();
@@ -32,9 +45,11 @@ export default function studio(props) {
           toPage={changePage}
           changeSrc={changeSrc}
           audioRef={audioRef}
+          playlistData= {playlistData}
+          changeData = {changeData}
         />
       ) : page.playlist ? (
-        <Playlist data={props.data} changeSrc={src} />
+        <Playlist data={props.data} changeSrc={src} playlistData= {playlistData} changeData = {changeData}/>
       ) : page.likedSong ? (
         <Liked data={props.data} changeSrc={src} />
       ) : null}

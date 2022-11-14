@@ -12,15 +12,41 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Chip, IconButton } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import axios from "axios";
 
 export default function List(props) {
+  function onClick(id, songid) {
+    axios
+      .request({
+        method: "POST",
+        url: "/api/addSongPlaylist",
+        data: { id: id, songid: songid },
+      })
+      .then((res) => {
+        if (res.data.error === true) {
+          console.log(res.data.error);
+        } else if (res.data.error === false) {
+          axios
+            .request({
+              method: "GET",
+              url: "/api/getPlaylist",
+            })
+            .then((res) => {
+              props.changeData(res.data);
+            });
+        }
+      });
+  }
   return (
     <Box
       sx={{ width: "100%" }}
       className="bg-dark p-lg-5 p-md-5 p-1 rounded shadow-lg"
     >
       {props.songListData.length === 0 ? (
-        <Typography variant="h5" className="text-center">No Releases Yet!!</Typography>
+        <Typography variant="h5" className="text-center">
+          No Releases Yet!!
+        </Typography>
       ) : (
         <React.Fragment>
           {props.songListData.map((item, idx) => (
@@ -80,6 +106,38 @@ export default function List(props) {
                     <PlayArrowIcon className="text-light fs-1 playButton" />
                   </IconButton>
                 </CardContent>
+                <CardContent className="w-100 d-flex justify-content-end">
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-secondary rounded-circle"
+                      type="button"
+                      id={`dropdownMenuButton${idx}`}
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      style={{ backgroundColor: "#000", border: "none" }}
+                    >
+                      <MoreVertIcon />
+                    </button>
+                    <ul
+                      class="dropdown-menu bg-dark"
+                      aria-labelledby={`dropdownMenuButton${idx}`}
+                    >
+                      {props.playlistData.map((playlist, idx) => (
+                        <li key={idx}>
+                          <a
+                            class="dropdown-item text-light"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => {
+                              onClick(playlist._id, item._id);
+                            }}
+                          >
+                            {playlist.playlistName}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </CardContent>
               </CardContent>
               <Accordion
                 sx={{ backgroundColor: "#000" }}
@@ -135,9 +193,4 @@ export default function List(props) {
       )}
     </Box>
   );
-}
-{
-  /* <Box sx={{ display: "flex", flexDirection: "column" }}>
-            
-          </Box> */
 }
