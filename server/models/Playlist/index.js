@@ -11,10 +11,6 @@ const playlistSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  likes: {
-    type: Number,
-    default: 0,
-  },
   playlistPic: { type: Schema.Types.ObjectId },
   songs: [{ type: Schema.Types.ObjectId }],
 });

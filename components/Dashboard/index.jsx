@@ -49,9 +49,9 @@ export default function studio(props) {
           changeData = {changeData}
         />
       ) : page.playlist ? (
-        <Playlist data={props.data} changeSrc={src} playlistData= {playlistData} changeData = {changeData}/>
+        <Playlist data={props.data} changeSrc={changeSrc} audioRef={audioRef} playlistData= {playlistData} changeData = {changeData}/>
       ) : page.likedSong ? (
-        <Liked data={props.data} changeSrc={src} />
+        <Liked data={props.data} changeSrc={changeSrc} />
       ) : null}
       <Tabs id="offcanvasScrolling" toPage={changePage} />
       <AudioPlayer src={src} audioRef={audioRef} />

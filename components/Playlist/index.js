@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import React from "react";
 import Playlistform from "./Playlistform";
 import List from "./List";
+import PlayListSongs from "./PlayListSongs";
 
 export default function Playlist(props) {
   const [list, changePage] = React.useState(true);
@@ -15,9 +16,9 @@ export default function Playlist(props) {
             <i class="fa-brands fa-napster me-3"></i>Playlist
           </Typography>
           <Playlistform changeData = {props.changeData}/>
-          {props.playlistData ? <List playlistData={props.playlistData}/>: null}
+          {props.playlistData ? <List playlistData={props.playlistData} changePage={changePage} changePlaylist={changePlaylist}/>: null}
         </div>
-      ) : null}
+      ) : <PlayListSongs audioRef={props.audioRef} changeSrc={props.changeSrc} playlist={whichPlaylist} changePage={changePage} changePlaylist={changePlaylist}/>}
     </>
   );
 }

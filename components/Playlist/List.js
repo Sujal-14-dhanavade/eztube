@@ -4,8 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 
 export default function List(props) {
   return (
@@ -23,7 +22,10 @@ export default function List(props) {
         <React.Fragment>
           {props.playlistData.map((item, idx) => (
             <Grid item lg={4} md={6} xs={12} key={idx}>
-              <CardActionArea>
+              <CardActionArea onClick={() => {
+                props.changePlaylist(item);
+                props.changePage(false);
+              }}>
                 <Card sx={{ backgroundColor: "#000" }} className="shadow-lg">
                   <CardMedia
                     component="img"
@@ -44,8 +46,8 @@ export default function List(props) {
                       color="text.secondary"
                       className="text-light"
                     >
-                      <FavoriteIcon className="text-danger me-3" />
-                      {item.likes}
+                      <LibraryMusicIcon className="text-danger me-3" />
+                      {item.songs.length} Songs
                     </Typography>
                   </CardContent>
                 </Card>

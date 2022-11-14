@@ -228,6 +228,20 @@ const addSongPlaylist = (req, res) => {
   });
 };
 
+const getSongPlaylist = async (req, res) => {
+  if(req.body.songs.length === 0) {
+    res.json({songs: false});
+  } else {
+    const songs = [];
+    for(var i of req.body.songs) {
+      let result = await Song.findById(i);
+      songs.push(result);
+    };
+    res.json({songs: songs});
+  }
+
+}
+
 module.exports = {
   register,
   registerUserPic,
@@ -242,4 +256,5 @@ module.exports = {
   createPlaylist,
   getPlaylist,
   addSongPlaylist,
+  getSongPlaylist
 };
