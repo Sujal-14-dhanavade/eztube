@@ -8,7 +8,7 @@ const getAudio = async (id) => {
   return file[0];
 };
 
-const playAudio = (req, res) => {
+const playAudio = async(req, res) => {
   let gfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
     bucketName: "audios",
   });

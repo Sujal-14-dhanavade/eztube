@@ -1,311 +1,305 @@
 /* Tag styling */
 
-
 body {
-    font-family: 'Open Sans', sans-serif;
-    color: #EEEEEE;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    background-color: #000000;
+  font-family: "Open Sans", sans-serif;
+  color: #eeeeee;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background-color: #000000;
 }
 
-h1, h2, h3, h4, h5, h6{
-    font-family: 'Playfair Display', serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display", serif;
 }
-
-
-
-
 /* Class styling */
 .bg-black {
-    background-color: #000000;
+  background-color: #000000;
 }
 
 .settings {
-    background-image: url("../images/settings.svg");
-    background-size: cover;
+  background-image: url("../images/settings.svg");
+  background-size: cover;
 }
 
 .dashboard {
-    min-height: 768px;
+  min-height: 768px;
 }
 .wavebg {
-    background-image: url("../images/Wave.svg");
-    background-size: cover;
-    background-attachment: fixed;
+  background-image: url("../images/Wave.svg");
+  background-size: cover;
+  background-attachment: fixed;
 }
-
 
 .studio {
-    background-image: url("../images/studio.svg");
-    background-size: cover;
+  background-image: url("../images/studio.svg");
+  background-size: cover;
 }
 .registerBack {
-    background-image: url("../images/registerBack.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url("../images/registerBack.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .navbar {
-    border-top: solid;
-    border-top-width: 4px;
-    border-color: #FF0000;
-    background-color: #000000;
+  border-top: solid;
+  border-top-width: 4px;
+  border-color: #ff0000;
+  background-color: #000000;
 }
 .footer {
-    background-color: #000000;
-    font-weight: 900;
-    margin-top: auto;
+  background-color: #000000;
+  font-weight: 900;
+  margin-top: auto;
 }
 
 .audio {
-    position: sticky;
-    bottom: 0;
+  position: sticky;
+  bottom: 0;
 }
 
 .text-color:hover {
-    color: #00ADB5
+  color: #00adb5;
 }
 
 .brand-logo {
-    width:50px;
-    height:38px;
+  width: 50px;
+  height: 38px;
 }
 
 .brand-name {
-    color: #EEEEEE;
-    font-size: 1.6rem;
-    font-weight: 900;
+  color: #eeeeee;
+  font-size: 1.6rem;
+  font-weight: 900;
 }
 
 .red-shade {
-    color: #FF0000
+  color: #ff0000;
 }
 
 .toggler {
-    background-color: #000000;
-    border: 0;
-    outline: 0;
+  background-color: #000000;
+  border: 0;
+  outline: 0;
 }
 
 button.signIn {
-    padding: 3px 10px;
-    color: #e0dbdb;
-    background-color: rgb(0, 0, 0);
-    border: solid;
-    border-width: 0.1rem;
+  padding: 3px 10px;
+  color: #e0dbdb;
+  background-color: rgb(0, 0, 0);
+  border: solid;
+  border-width: 0.1rem;
 }
 
 .signIn:hover {
-    color: #fff;
+  color: #fff;
 }
 
 button.create {
-    padding: 3px 10px;
-    color: #e0dbdb;
-    background-color: #FF0000;
-    border: solid;
-    border-color: #FF0000;
-    border-width: 0.1rem;
-    font-weight: 600;
+  padding: 3px 10px;
+  color: #e0dbdb;
+  background-color: #ff0000;
+  border: solid;
+  border-color: #ff0000;
+  border-width: 0.1rem;
+  font-weight: 600;
 }
 
 .create:hover {
-    color: #fff;
-    background-color: #fa3434;
+  color: #fff;
+  background-color: #fa3434;
 }
 .toggle-list {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .homeBody {
-   
-    min-height: 600px;
-    
+  min-height: 600px;
 }
 
 .wave-img {
-    background-image: url("../images/waveBackGround.jpg");
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-}   
+  background-image: url("../images/waveBackGround.jpg");
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 
 .intro-heading {
-    letter-spacing: 2px;
+  letter-spacing: 2px;
 }
 .intro-body {
-    font-size: large;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    letter-spacing: 1px;
-    width: 50%;
+  font-size: large;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  letter-spacing: 1px;
+  width: 50%;
 }
 
 .feature {
-    color: black;
-    padding: 7% 15%;
-    letter-spacing: 1px;
+  color: black;
+  padding: 7% 15%;
+  letter-spacing: 1px;
 }
 .feature-divider {
-    width: 25%;
-    margin: auto 0 30px auto;
-    background: linear-gradient(90deg, red 40%,rgb(3, 3, 56) );
-    padding: 2px;
-    font-weight: 900;
+  width: 25%;
+  margin: auto 0 30px auto;
+  background: linear-gradient(90deg, red 40%, rgb(3, 3, 56));
+  padding: 2px;
+  font-weight: 900;
 }
 .feature-img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 .feature-content {
-    text-align: end;
+  text-align: end;
 }
 
 .feature-heading {
-    font-size: 2.5rem;
-    font-weight: 600;
+  font-size: 2.5rem;
+  font-weight: 600;
 }
 
 .feature-body {
-    width: 50%;
-    margin-left: auto;
-    margin-right: 0;
+  width: 50%;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .calling-img {
-    width: 100%;
-    height: 110%;
-    border-radius: 10%;
+  width: 100%;
+  height: 110%;
+  border-radius: 10%;
 }
 
 .bg-black {
-    background-color: #000000;
+  background-color: #000000;
 }
 
 .bg-stair {
-    background-image: url("../images/cornered-stairs.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+  background-image: url("../images/cornered-stairs.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .formButton {
-    background-color: #FF0000;
+  background-color: #ff0000;
 }
 
 .register-container {
-    background-color: #000000;
+  background-color: #000000;
 }
 .register {
-    color: #fff;
-    background-image: -webkit-linear-gradient(15deg, #3f3f3f 40%, #000000 40%);
-    box-shadow: rgba(255, 255, 255, 1) 0px 3px 8px;
+  color: #fff;
+  background-image: -webkit-linear-gradient(15deg, #3f3f3f 40%, #000000 40%);
+  box-shadow: rgba(255, 255, 255, 1) 0px 3px 8px;
 }
 
 .register-input-outline:focus {
-    box-shadow: #fa3434;
+  box-shadow: #fa3434;
 }
 
 .Ezport {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .tab {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 .dropdown-menu > li > a:hover {
-    background-color: #fa3434;
+  background-color: #fa3434;
 }
 
 .search {
-    border: none;
+  border: none;
 }
 
 .search:focus {
-    outline: none;
-    box-shadow: none;
-    border: 1px solid #fa3434;
-    border-top: none;
-    border-right: none;
-    border-left: none;
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #fa3434;
+  border-top: none;
+  border-right: none;
+  border-left: none;
 }
 .search::placeholder {
-    color: #fff;
+  color: #fff;
 }
 
 .offcanvas-menu-link > a:hover {
-    background-color: #fa3434;
+  background-color: #fa3434;
 }
 
 .response {
-    border: 1px solid #fa3434;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    padding: 10px 5px 10px 5px;
+  border: 1px solid #fa3434;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  padding: 10px 5px 10px 5px;
 }
 
 .update-input {
-    color: gray;
-    background-color: #cacaca;
+  color: gray;
+  background-color: #cacaca;
 }
 
 .navTab {
-    background-color: #000000;
-    min-height: 768px;
+  background-color: #000000;
+  min-height: 768px;
 }
 
-
 .navTab-link {
-    color: #EEEEEE;
+  color: #eeeeee;
 }
 
 .navTab-link:hover {
-    background-color: #fa3434;
-    color: #EEEEEE;
+  background-color: #fa3434;
+  color: #eeeeee;
 }
 @media screen and (max-width: 768px) {
-    .feature-content{
-        text-align: center;
-        margin-top: 5%;
-    }
-    .feature-body {
-        margin: auto;
-    }
-    .feature-divider {
-        margin: auto auto 30px auto;
-    }
-    .bg-stair {
-        text-align: center;
-    }
+  .feature-content {
+    text-align: center;
+    margin-top: 5%;
+  }
+  .feature-body {
+    margin: auto;
+  }
+  .feature-divider {
+    margin: auto auto 30px auto;
+  }
+  .bg-stair {
+    text-align: center;
+  }
 }
 
-
 .playButton:hover {
-    background-color: #fa3434;
-    border-radius: 50%;
+  background-color: #fa3434;
+  border-radius: 50%;
 }
 
 @media screen and (max-width: 767px) {
-    .navTab {
-        background-color: #000000;
-        min-height: auto;
-    }
+  .navTab {
+    background-color: #000000;
+    min-height: auto;
+  }
 }
 
-
 @media screen and (max-width: 991px) {
-    .register{
-        background-image: -webkit-linear-gradient(50deg, #3f3f3f 40%, #000000 40%);
-    }
+  .register {
+    background-image: -webkit-linear-gradient(50deg, #3f3f3f 40%, #000000 40%);
+  }
 }

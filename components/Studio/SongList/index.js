@@ -18,7 +18,7 @@ export default function SongList(props) {
         <img src="../images/studioLogo.png" height={100} width={100}></img>
         Releases
       </h1>
-      {songListData ? <List data={props.data} changeData = {props.changeData} playlistData= {props.playlistData} songListData = {songListData} changeSrc={props.changeSrc} audioRef={props.audioRef}/>: null}
+      {songListData ? <List data={props.data} queue={props.queue} changeQueue={props.changeQueue} changeData = {props.changeData} playlistData= {props.playlistData} songListData = {songListData} changeSrc={props.changeSrc} audioRef={props.audioRef}/>: null}
     </div>
   );
 }

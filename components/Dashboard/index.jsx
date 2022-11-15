@@ -18,6 +18,7 @@ export default function studio(props) {
     playlist: false,
     likedSong: false,
   });
+  const [queue, changeQueue] = React.useState([]);
 
   useEffect(() => {
     axios
@@ -45,16 +46,36 @@ export default function studio(props) {
           toPage={changePage}
           changeSrc={changeSrc}
           audioRef={audioRef}
-          playlistData= {playlistData}
-          changeData = {changeData}
+          playlistData={playlistData}
+          changeData={changeData}
+          queue={queue}
+          changeQueue={changeQueue}
         />
       ) : page.playlist ? (
-        <Playlist data={props.data} changeSrc={changeSrc} audioRef={audioRef} playlistData= {playlistData} changeData = {changeData}/>
+        <Playlist
+          data={props.data}
+          queue={queue}
+          changeQueue={changeQueue}
+          changeSrc={changeSrc}
+          audioRef={audioRef}
+          playlistData={playlistData}
+          changeData={changeData}
+        />
       ) : page.likedSong ? (
-        <Liked data={props.data} changeSrc={changeSrc} />
+        <Liked
+          data={props.data}
+          queue={queue}
+          changeQueue={changeQueue}
+          changeSrc={changeSrc}
+        />
       ) : null}
       <Tabs id="offcanvasScrolling" toPage={changePage} />
-      <AudioPlayer src={src} audioRef={audioRef} />
+      <AudioPlayer
+        src={src}
+        queue={queue}
+        changeQueue={changeQueue}
+        audioRef={audioRef}
+      />
     </div>
   );
 }

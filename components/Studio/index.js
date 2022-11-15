@@ -35,7 +35,7 @@ export default function Studio(props) {
               {page ? (
                 <SongUpload data={props.data} toPage={props.toPage}/>
               ) : (
-                <SongList changeData = {props.changeData} playlistData= {props.playlistData} data={props.data} toPage={props.toPage} changeSrc= {props.changeSrc} audioRef={props.audioRef}/>
+                <SongList queue={props.queue} changeQueue={props.changeQueue} changeData = {props.changeData} playlistData= {props.playlistData} data={props.data} toPage={props.toPage} changeSrc= {props.changeSrc} audioRef={props.audioRef}/>
               )}
             </div>
           </div>

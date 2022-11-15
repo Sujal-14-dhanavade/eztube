@@ -20,6 +20,7 @@ import axios from "axios";
 export default function playListSongs(props) {
   const [songData, changeSongData] = React.useState(null);
   useEffect(() => {
+    console.log(props.queue);
     axios
       .request({
         method: "POST",
@@ -28,7 +29,6 @@ export default function playListSongs(props) {
       })
       .then((res) => {
         if (res.data.songs) {
-          console.log(res.data.songs);
           changeSongData(res.data.songs);
         }
       });
@@ -69,7 +69,16 @@ export default function playListSongs(props) {
             <CreateIcon className="text-warning me-3" />
             {props.playlist.date_created.split("T")[0]}
           </Typography>
-          <IconButton className="text-light" size="small">
+          <IconButton
+            className="text-light"
+            size="small"
+            onClick={async() => {
+              props.changeQueue(songData);
+              await props.audioRef.current.pause();
+              await props.audioRef.current.load();
+              await props.audioRef.current.play();
+            }}
+          >
             <PlayArrowIcon className="text-light fs-1 playButton" />
           </IconButton>
         </CardContent>
@@ -129,12 +138,12 @@ export default function playListSongs(props) {
                     <IconButton
                       className="text-light"
                       size="small"
-                      onClick={() => {
+                      onClick={async() => {
                         props.changeSrc(item.song);
                         if (props.audioRef.current) {
-                          props.audioRef.current.pause();
-                          props.audioRef.current.load();
-                          props.audioRef.current.play();
+                          await props.audioRef.current.pause();
+                          await props.audioRef.current.load();
+                          await props.audioRef.current.play();
                         }
                       }}
                     >
