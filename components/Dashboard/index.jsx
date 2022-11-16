@@ -67,6 +67,7 @@ export default function studio(props) {
           queue={queue}
           changeQueue={changeQueue}
           playlistData={playlistData}
+          changeData={changeData}
         />
       ) : (
         <Home
@@ -74,6 +75,8 @@ export default function studio(props) {
           LikedData={props.data.liked_songs}
           queue={queue}
           changeQueue={changeQueue}
+          playlistData={playlistData}
+          changeData={changeData}
         />
       )}
       <Tabs id="offcanvasScrolling" toPage={changePage} />

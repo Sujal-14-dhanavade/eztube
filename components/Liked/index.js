@@ -92,9 +92,6 @@ export default function Liked(props) {
                     <Typography component="div" variant="h5">
                       {item.name}
                     </Typography>
-                    <Typography component="div" variant="h6">
-                      {props.data.username}
-                    </Typography>
                     <Typography
                       variant="subtitle1"
                       color="text.secondary"

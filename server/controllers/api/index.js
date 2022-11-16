@@ -339,6 +339,12 @@ const recentSong = (req, res) => {
     );
   }
 };
+
+
+const topChart = async(req, res) => {
+  const songData = await Song.find().sort({views: -1}).limit(5);
+  res.json(songData);
+}
 module.exports = {
   register,
   registerUserPic,
@@ -357,4 +363,5 @@ module.exports = {
   likeSong,
   viewSong,
   recentSong,
+  topChart
 };

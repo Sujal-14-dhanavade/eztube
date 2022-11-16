@@ -5,6 +5,7 @@ import RecentPlayed from "./RecentPlayed";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import EmojiFoodBeverageIcon from "@mui/icons-material/EmojiFoodBeverage";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import TopCharts from "./TopCharts";
 
 export default function Home(props) {
   const getGreeting = () => {
@@ -46,6 +47,13 @@ export default function Home(props) {
         changeQueue={props.changeQueue}
         data={props.data.recent_Played}
         LikedData={props.data.liked_songs}
+      />
+      <TopCharts
+        queue={props.queue}
+        changeQueue={props.changeQueue}
+        LikedData={props.data.liked_songs}
+        playlistData={props.playlistData}
+        changeData={props.changeData}
       />
     </Container>
   );
