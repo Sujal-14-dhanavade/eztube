@@ -254,13 +254,17 @@ const likeSong = (req, res) => {
           res.json(err);
         } else {
           req.session.data = await User.findById(req.session.data._id);
-          Song.findByIdAndUpdate(songId, {$inc: {likes: 1}}, (err, result) => {
-            if (err) {
-              res.json(err);
-            } else {
-              res.json({liked: 1});
+          Song.findByIdAndUpdate(
+            songId,
+            { $inc: { likes: 1 } },
+            (err, result) => {
+              if (err) {
+                res.json(err);
+              } else {
+                res.json({ liked: 1 });
+              }
             }
-          });
+          );
         }
       }
     );
@@ -275,17 +279,32 @@ const likeSong = (req, res) => {
           res.json(err);
         } else {
           req.session.data = await User.findById(req.session.data._id);
-          Song.findByIdAndUpdate(songId, {$inc: {likes: -1}}, (err, result) => {
-            if (err) {
-              res.json(err);
-            } else {
-              res.json({liked: 0});
+          Song.findByIdAndUpdate(
+            songId,
+            { $inc: { likes: -1 } },
+            (err, result) => {
+              if (err) {
+                res.json(err);
+              } else {
+                res.json({ liked: 0 });
+              }
             }
-          });
+          );
         }
       }
     );
   }
+};
+
+const viewSong = (req, res) => {
+  const songId = req.body.songId;
+  Song.findByIdAndUpdate(songId, { $inc: { views: 1 } }, (err, result) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json({ view: 1 });
+    }
+  });
 };
 
 module.exports = {
@@ -304,4 +323,5 @@ module.exports = {
   addSongPlaylist,
   getSongPlaylist,
   likeSong,
+  viewSong
 };

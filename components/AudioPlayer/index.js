@@ -6,7 +6,6 @@ import {
   CardContent,
   IconButton,
   Chip,
-  Icon,
 } from "@mui/material";
 import {
   Accordion,
@@ -15,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import axios from "axios";
 
 export default function AudioPlayer(props) {
   const [turn, changeTurn] = React.useState(0);
@@ -25,13 +25,7 @@ export default function AudioPlayer(props) {
         changeTurn(0);
         changeSrc(props.queue.queue[0].song);
         props.changeQueue({ ...props.queue, isChange: false });
-        var promise = props.audioRef.current.pause();
         props.audioRef.current.load();
-        if (promise !== undefined) {
-          promise.then(() => {
-            props.audioRef.current.play();
-          });
-        }
       } else if (
         props.audioRef.current.currentTime >=
           props.audioRef.current.duration - 2 &&
@@ -40,15 +34,21 @@ export default function AudioPlayer(props) {
         if (turn === props.queue.queue.length - 1) {
           changeTurn(0);
           changeSrc(props.queue.queue[0].song);
-          props.audioRef.current.pause();
+          axios.request({
+            method: "post",
+            url: "/api/viewSong",
+            data: {songId: props.queue.queue[turn]._id}
+          })
           props.audioRef.current.load();
-          props.audioRef.current.play();
         } else {
           changeTurn(turn + 1);
           changeSrc(props.queue.queue[turn + 1].song);
-          props.audioRef.current.pause();
+          axios.request({
+            method: "post",
+            url: "/api/viewSong",
+            data: {songId: props.queue.queue[turn]._id}
+          })
           props.audioRef.current.load();
-          props.audioRef.current.play();
         }
       }
     }, 1000);
@@ -127,7 +127,7 @@ export default function AudioPlayer(props) {
         </React.Fragment>
       ) : null}
       <div className="px-5 d-flex flex-row justify-content-between">
-        <audio className="w-75" ref={props.audioRef} controls autoPlay>
+        <audio className="w-75" ref={props.audioRef} controls autoPlay={true}>
           <source src={src ? `/watch/${src}` : ""} type="audio/mpeg" />
         </audio>
         <IconButton
