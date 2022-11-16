@@ -13,7 +13,7 @@ export default function Playlist(props) {
       {list ? (
         <div className="mt-3">
           <Typography className="text-center" variant="h4">
-            <i class="fa-brands fa-napster me-3"></i>Playlist
+            <i className="fa-brands fa-napster me-3"></i>Playlist
           </Typography>
           <Playlistform changeData = {props.changeData}/>
           {props.playlistData ? <List playlistData={props.playlistData} changePage={changePage} changePlaylist={changePlaylist}/>: null}

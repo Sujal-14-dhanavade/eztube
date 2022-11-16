@@ -51,11 +51,11 @@ export default function StepForm(props) {
         <Typography variant="h6" className="p-3 text-center">
           {activeStep === 0 ? (
             <span>
-              <i class="fa-solid fa-record-vinyl me-3"></i>Select a Album
+              <i className="fa-solid fa-record-vinyl me-3"></i>Select a Album
             </span>
           ) : (
             <span>
-              <i class="fa-solid fa-guitar me-3"></i>Unleash Your Creation
+              <i className="fa-solid fa-guitar me-3"></i>Unleash Your Creation
             </span>
           )}
         </Typography>

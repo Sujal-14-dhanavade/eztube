@@ -263,7 +263,7 @@ export default function SongUploadForm(props) {
               Next Step
             </button>
             <a className="btn btn-danger mt-5 mx-2" href="/Ezport">
-              Cancel <i class="fa-solid fa-xmark"></i>
+              Cancel <i className="fa-solid fa-xmark"></i>
             </a>
             {errorFile ? (
               <Alert className="m-auto text-center mt-3" severity="error">

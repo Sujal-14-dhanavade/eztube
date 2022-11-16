@@ -145,7 +145,7 @@ export default function AudioPlayer(props) {
             props.audioRef.current.load();
           }}
         >
-          <i class="fa-solid fa-folder-minus text-light me-3" />
+          <i className="fa-solid fa-folder-minus text-light me-3" />
           <Typography variant="body1">Clear Queue</Typography>
         </IconButton>
         <IconButton href="#">

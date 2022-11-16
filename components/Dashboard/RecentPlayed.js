@@ -38,7 +38,7 @@ export default function RecentPlayed(props) {
         sx={{ textAlign: match ? "center" : "left" }}
         className="mx-3 my-4"
       >
-        <i class="fa-solid fa-rotate-right me-3"></i>Recent Played
+        <i className="fa-solid fa-rotate-right me-3"></i>Recent Played
       </Typography>
       <div>
         <Container className="d-flex  flex-lg-row flex-md-row flex-column justify-content-between">

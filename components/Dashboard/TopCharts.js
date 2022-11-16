@@ -75,10 +75,10 @@ export default function TopCharts(props) {
       {recentData !== null && recentData.length !== 0 ? (
         <div
           id="carouselExampleControls"
-          class="carousel slide mt-5"
+          className="carousel slide mt-5"
           data-bs-ride="carousel"
         >
-          <div class="carousel-inner">
+          <div className="carousel-inner">
             {recentData.map((item, idx) => (
               <div
                 className={"carousel-item" + (idx === 0 ? " active" : "")}
@@ -152,9 +152,9 @@ export default function TopCharts(props) {
                       ) : null}
                     </CardContent>
                     <CardContent className="w-100 d-flex justify-content-end">
-                      <div class="dropdown">
+                      <div className="dropdown">
                         <button
-                          class="btn btn-secondary rounded-circle"
+                          className="btn btn-secondary rounded-circle"
                           type="button"
                           id={`dropdownMenuButton${idx}`}
                           data-bs-toggle="dropdown"
@@ -164,12 +164,12 @@ export default function TopCharts(props) {
                           <MoreVertIcon />
                         </button>
                         <ul
-                          class="dropdown-menu bg-dark"
+                          className="dropdown-menu bg-dark"
                           aria-labelledby={`dropdownMenuButton${idx}`}
                         >
                           <li>
                             <a
-                              class="dropdown-item text-light"
+                              className="dropdown-item text-light"
                               style={{ cursor: "pointer" }}
                               onClick={() => {
                                 props.changeQueue({
@@ -182,11 +182,11 @@ export default function TopCharts(props) {
                             </a>
                           </li>
                           <li>
-                            <hr class="dropdown-divider text-light" />
+                            <hr className="dropdown-divider text-light" />
                           </li>
                           <li>
                             <div
-                              class="dropdown-item text-light nohover"
+                              className="dropdown-item text-light nohover"
                               style={{ cursor: "default" }}
                             >
                               <PlaylistAddIcon className="text-light" /> Add to
@@ -197,7 +197,7 @@ export default function TopCharts(props) {
                             ? props.playlistData.map((playlist, idx) => (
                                 <li key={idx}>
                                   <a
-                                    class="dropdown-item text-light"
+                                    className="dropdown-item text-light"
                                     style={{ cursor: "pointer" }}
                                     onClick={() => {
                                       onClick(playlist._id, item._id);
@@ -270,24 +270,24 @@ export default function TopCharts(props) {
             ))}
           </div>
           <button
-            class="carousel-control-prev"
+            className="carousel-control-prev"
             style={{ display: match ? "none" : "block" }}
             type="button"
             data-bs-target="#carouselExampleControls"
             data-bs-slide="prev"
           >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Previous</span>
           </button>
           <button
-            class="carousel-control-next"
+            className="carousel-control-next"
             style={{ display: match ? "none" : "block" }}
             type="button"
             data-bs-target="#carouselExampleControls"
             data-bs-slide="next"
           >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Next</span>
           </button>
         </div>
       ) : (

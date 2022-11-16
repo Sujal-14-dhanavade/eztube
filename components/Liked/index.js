@@ -130,9 +130,9 @@ export default function Liked(props) {
                     ) : null}
                   </CardContent>
                   <CardContent className="w-100 d-flex justify-content-end">
-                    <div class="dropdown">
+                    <div className="dropdown">
                       <button
-                        class="btn btn-secondary rounded-circle"
+                        className="btn btn-secondary rounded-circle"
                         type="button"
                         id={`dropdownMenuButton${idx}`}
                         data-bs-toggle="dropdown"
@@ -142,12 +142,12 @@ export default function Liked(props) {
                         <MoreVertIcon />
                       </button>
                       <ul
-                        class="dropdown-menu bg-dark"
+                        className="dropdown-menu bg-dark"
                         aria-labelledby={`dropdownMenuButton${idx}`}
                       >
                         <li>
                           <a
-                            class="dropdown-item text-light"
+                            className="dropdown-item text-light"
                             style={{ cursor: "pointer" }}
                             onClick={() => {
                               props.changeQueue({
@@ -160,11 +160,11 @@ export default function Liked(props) {
                           </a>
                         </li>
                         <li>
-                          <hr class="dropdown-divider text-light" />
+                          <hr className="dropdown-divider text-light" />
                         </li>
                         <li>
                           <div
-                            class="dropdown-item text-light nohover"
+                            className="dropdown-item text-light nohover"
                             style={{ cursor: "default" }}
                           >
                             <PlaylistAddIcon className="text-light" /> Add to
@@ -174,7 +174,7 @@ export default function Liked(props) {
                         {props.playlistData.map((playlist, idx) => (
                           <li key={idx}>
                             <a
-                              class="dropdown-item text-light"
+                              className="dropdown-item text-light"
                               style={{ cursor: "pointer" }}
                               onClick={() => {
                                 onClick(playlist._id, item._id);
