@@ -33,8 +33,6 @@ export default function studio(props) {
         changeData(res.data);
       });
   }, []);
-
-  const [src, changeSrc] = React.useState(null);
   const audioRef = useRef();
   return (
     <div className="dashboard">
@@ -47,7 +45,6 @@ export default function studio(props) {
         <Studio
           data={props.data}
           toPage={changePage}
-          changeSrc={changeSrc}
           audioRef={audioRef}
           playlistData={playlistData}
           changeData={changeData}
@@ -59,7 +56,6 @@ export default function studio(props) {
           data={props.data}
           queue={queue}
           changeQueue={changeQueue}
-          changeSrc={changeSrc}
           audioRef={audioRef}
           playlistData={playlistData}
           changeData={changeData}
@@ -69,12 +65,11 @@ export default function studio(props) {
           data={props.data.liked_songs}
           queue={queue}
           changeQueue={changeQueue}
-          changeSrc={changeSrc}
+          playlistData={playlistData}
         />
       ) : null}
       <Tabs id="offcanvasScrolling" toPage={changePage} />
       <AudioPlayer
-        src={src}
         queue={queue}
         changeQueue={changeQueue}
         audioRef={audioRef}

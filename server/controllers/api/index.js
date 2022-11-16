@@ -3,7 +3,6 @@ const User = require("../../models/User/index");
 const Album = require("../../models/Album");
 const Song = require("../../models/Song");
 const Playlist = require("../../models/Playlist");
-const Schema = require("mongoose").Schema;
 const bcrypt = require("bcrypt");
 
 const register = (req, res) => {

@@ -1,12 +1,6 @@
 import React, { useEffect } from "react";
 import NavigationIcon from "@mui/icons-material/Navigation";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  IconButton,
-  Chip,
-} from "@mui/material";
+import { Card, CardMedia, CardContent, IconButton, Chip } from "@mui/material";
 import {
   Accordion,
   AccordionDetails,
@@ -26,29 +20,31 @@ export default function AudioPlayer(props) {
         changeSrc(props.queue.queue[0].song);
         props.changeQueue({ ...props.queue, isChange: false });
         props.audioRef.current.load();
-      } else if (
-        props.audioRef.current.currentTime >=
-          props.audioRef.current.duration - 2 &&
-        props.queue.queue.length !== 0
-      ) {
-        if (turn === props.queue.queue.length - 1) {
-          changeTurn(0);
-          changeSrc(props.queue.queue[0].song);
-          axios.request({
-            method: "post",
-            url: "/api/viewSong",
-            data: {songId: props.queue.queue[turn]._id}
-          })
-          props.audioRef.current.load();
-        } else {
-          changeTurn(turn + 1);
-          changeSrc(props.queue.queue[turn + 1].song);
-          axios.request({
-            method: "post",
-            url: "/api/viewSong",
-            data: {songId: props.queue.queue[turn]._id}
-          })
-          props.audioRef.current.load();
+      } else if (props.audioRef.current) {
+        if (
+          props.audioRef.current.currentTime >=
+            props.audioRef.current.duration - 2 &&
+          props.queue.queue.length !== 0
+        ) {
+          if (turn === props.queue.queue.length - 1) {
+            changeTurn(0);
+            changeSrc(props.queue.queue[0].song);
+            axios.request({
+              method: "post",
+              url: "/api/viewSong",
+              data: { songId: props.queue.queue[turn]._id },
+            });
+            props.audioRef.current.load();
+          } else {
+            changeTurn(turn + 1);
+            changeSrc(props.queue.queue[turn + 1].song);
+            axios.request({
+              method: "post",
+              url: "/api/viewSong",
+              data: { songId: props.queue.queue[turn]._id },
+            });
+            props.audioRef.current.load();
+          }
         }
       }
     }, 1000);

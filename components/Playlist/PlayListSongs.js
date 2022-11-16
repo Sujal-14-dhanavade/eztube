@@ -147,9 +147,12 @@ export default function playListSongs(props) {
                     >
                       <PlayArrowIcon className="text-light fs-1 playButton" />
                     </IconButton>
-                  </CardContent>
-                  <CardContent>
-                    <LikeButton songId = {item._id} set = {props.LikedData.includes(item._id)}/>
+                    {props.LikedData ? (
+                      <LikeButton
+                        songId={item._id}
+                        set={props.LikedData.includes(item._id)}
+                      />
+                    ) : null}
                   </CardContent>
                 </CardContent>
                 <Accordion
