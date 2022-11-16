@@ -37,6 +37,9 @@ const playAudio = async(req, res) => {
         });
         return res.end();
       }
+      if(start === end) {
+        return res.send();
+      }
       res.writeHead(206, {
         "Content-Range": `bytes ${start}-${end}/${size}`,
         "Accept-Ranges": "bytes",

@@ -1,6 +1,13 @@
 import React, { useEffect } from "react";
 import NavigationIcon from "@mui/icons-material/Navigation";
-import { Card, CardMedia, CardContent, IconButton, Chip, Icon } from "@mui/material";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  IconButton,
+  Chip,
+  Icon,
+} from "@mui/material";
 import {
   Accordion,
   AccordionDetails,
@@ -8,7 +15,6 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
 
 export default function AudioPlayer(props) {
   const [turn, changeTurn] = React.useState(0);
@@ -120,16 +126,19 @@ export default function AudioPlayer(props) {
           </Accordion>
         </React.Fragment>
       ) : null}
-      <div className="px-5 d-flex flex-row justify-content-center">
-        <audio className="w-50 m-auto" ref={props.audioRef} controls autoPlay>
+      <div className="px-5 d-flex flex-row justify-content-between">
+        <audio className="w-75" ref={props.audioRef} controls autoPlay>
           <source src={src ? `/watch/${src}` : ""} type="audio/mpeg" />
         </audio>
-        <IconButton className="text-light" onClick={() => {
-          props.changeQueue({isChange: false, queue: []})
-          changeSrc(null);
-          changeTurn(0);
-          props.audioRef.current.load();
-        }}>
+        <IconButton
+          className="text-light"
+          onClick={() => {
+            props.changeQueue({ isChange: false, queue: [] });
+            changeSrc(null);
+            changeTurn(0);
+            props.audioRef.current.load();
+          }}
+        >
           <i class="fa-solid fa-folder-minus text-light me-3" />
           <Typography variant="body1">Clear Queue</Typography>
         </IconButton>

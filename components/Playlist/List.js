@@ -12,7 +12,6 @@ export default function List(props) {
       container
       sx={{ width: "100%" }}
       className="bg-dark w-75 m-auto mt-3 p-lg-5 p-md-5 p-1 rounded shadow-lg"
-      spacing={2}
     >
       {props.playlistData.length === 0 ? (
         <Typography variant="h5" className="text-center">
@@ -21,7 +20,7 @@ export default function List(props) {
       ) : (
         <React.Fragment>
           {props.playlistData.map((item, idx) => (
-            <Grid item lg={4} md={6} xs={12} key={idx}>
+            <Grid item lg={4} md={6} xs={12} key={idx} className="m-1">
               <CardActionArea onClick={() => {
                 props.changePlaylist(item);
                 props.changePage(false);
