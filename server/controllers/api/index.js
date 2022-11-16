@@ -80,7 +80,7 @@ const getData = (req, res) => {
       followers: req.session.data.followers,
       verified: req.session.data.verified,
       userPic: req.session.data.userPic,
-      recent_played: req.session.recent_played,
+      recent_Played: req.session.data.recent_Played,
     });
   } else {
     res.status(200).json({

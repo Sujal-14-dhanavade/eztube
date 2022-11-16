@@ -21,7 +21,7 @@ export default function studio(props) {
   });
   const [queue, changeQueue] = React.useState({
     isChange: false,
-    queue: []
+    queue: [],
   });
 
   useEffect(() => {
@@ -68,7 +68,14 @@ export default function studio(props) {
           changeQueue={changeQueue}
           playlistData={playlistData}
         />
-      ) : <Home />}
+      ) : (
+        <Home
+          data={props.data}
+          LikedData={props.data.liked_songs}
+          queue={queue}
+          changeQueue={changeQueue}
+        />
+      )}
       <Tabs id="offcanvasScrolling" toPage={changePage} />
       <AudioPlayer
         queue={queue}
