@@ -21,7 +21,6 @@ import LikeButton from "../LikeButton";
 export default function playListSongs(props) {
   const [songData, changeSongData] = React.useState(null);
   useEffect(() => {
-    console.log(props.LikedData);
     axios
       .request({
         method: "POST",

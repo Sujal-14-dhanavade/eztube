@@ -37,7 +37,7 @@ export default function studio(props) {
   const [src, changeSrc] = React.useState(null);
   const audioRef = useRef();
   return (
-    <div className="d-flex flex-column justify-content-between dashboard">
+    <div className="dashboard">
       <AppNavbar data={props.data} toPage={changePage} />
       {page.account ? (
         <Account data={props.data} />
@@ -66,7 +66,7 @@ export default function studio(props) {
         />
       ) : page.likedSong ? (
         <Liked
-          data={props.data}
+          data={props.data.liked_songs}
           queue={queue}
           changeQueue={changeQueue}
           changeSrc={changeSrc}

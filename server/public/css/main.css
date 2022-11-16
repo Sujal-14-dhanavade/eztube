@@ -26,6 +26,7 @@ h6 {
 .audio {
   position: "fixed";
   background-color: #000000;
+  width: 100%;
   bottom: 0;
 }
 
@@ -35,6 +36,7 @@ h6 {
 }
 
 .dashboard {
+  position: relative;
   min-height: 768px;
 }
 .wavebg {
@@ -66,7 +68,7 @@ h6 {
 }
 
 .audio {
-  position: sticky;
+  position: fixed;
   bottom: 0;
 }
 
