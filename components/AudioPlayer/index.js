@@ -34,6 +34,11 @@ export default function AudioPlayer(props) {
               url: "/api/viewSong",
               data: { songId: props.queue.queue[turn]._id },
             });
+            axios.request({
+              method: "post",
+              url: "/api/recentSong",
+              data: { songId: props.queue.queue[turn]._id },
+            });
             props.audioRef.current.load();
           } else {
             changeTurn(turn + 1);
@@ -41,6 +46,11 @@ export default function AudioPlayer(props) {
             axios.request({
               method: "post",
               url: "/api/viewSong",
+              data: { songId: props.queue.queue[turn]._id },
+            });
+            axios.request({
+              method: "post",
+              url: "/api/recentSong",
               data: { songId: props.queue.queue[turn]._id },
             });
             props.audioRef.current.load();

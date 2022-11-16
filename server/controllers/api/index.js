@@ -2,6 +2,7 @@ require("dotenv").config();
 const User = require("../../models/User/index");
 const Album = require("../../models/Album");
 const Song = require("../../models/Song");
+const Schema = require("mongoose").Schema;
 const Playlist = require("../../models/Playlist");
 const bcrypt = require("bcrypt");
 
@@ -306,6 +307,38 @@ const viewSong = (req, res) => {
   });
 };
 
+const recentSong = (req, res) => {
+  const songId = req.body.songId;
+  const song = {
+    song_id: songId,
+    date: Date.now(),
+  };
+  const recentSong = req.session.data.recent_Played;
+  recentSong.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    if (dateA <= dateB) return false;
+    else return true;
+  });
+  if (recentSong.findIndex((ele) => ele.song_id == songId) !== -1) {
+    res.json({ success: 0 });
+  } else {
+    if (recentSong.length === 5) recentSong.splice(0, 1);
+    const changedData = [...recentSong, song];
+    User.findByIdAndUpdate(
+      req.session.data._id,
+      { $set: { recent_Played: changedData } },
+      async (err, result) => {
+        if (err) {
+          res.json(err);
+        } else {
+          req.session.data = await User.findById(req.session.data._id);
+          res.json({ success: 1 });
+        }
+      }
+    );
+  }
+};
 module.exports = {
   register,
   registerUserPic,
@@ -322,5 +355,6 @@ module.exports = {
   addSongPlaylist,
   getSongPlaylist,
   likeSong,
-  viewSong
+  viewSong,
+  recentSong,
 };
