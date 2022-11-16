@@ -42,7 +42,7 @@ export default function RecentPlayed(props) {
       </Typography>
       <div>
         <Container className="d-flex  flex-lg-row flex-md-row flex-column justify-content-between">
-          {props.data.length !== 0 && recentData !== null ? (
+          {props.data && props.data.length !== 0 && recentData !== null ? (
             <React.Fragment>
               {recentData.map((item, idx) => (
                 <Card className="bg-dark mx-1 mb-3" elevation={5} key={idx}>

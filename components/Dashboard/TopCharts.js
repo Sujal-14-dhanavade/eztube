@@ -23,7 +23,7 @@ import TimelineIcon from "@mui/icons-material/Timeline";
 
 export default function TopCharts(props) {
   const match = useMediaQuery("(max-width: 768px)");
-  const ipad = useMediaQuery("(max-width: 1024px) and (min-width: 768px)");
+  const ipad = useMediaQuery("(max-width: 1024px)");
   const [recentData, setData] = React.useState(null);
   function onClick(id, songid) {
     axios
@@ -62,12 +62,12 @@ export default function TopCharts(props) {
   return (
     <Container
       className="p-1 my-5 rounded shadow-lg"
-      sx={{ backgroundColor: "#343a40", minHeight: "400px" }}
+      sx={{ backgroundColor: "#343a40", minHeight: "500px"}}
     >
       <Typography
         variant="h5"
         sx={{ textAlign: match ? "center" : "left" }}
-        className="mx-3 my-4"
+        className="mx-3 my-5"
       >
         <TimelineIcon className="me-3" />
         Top Chart
@@ -75,7 +75,7 @@ export default function TopCharts(props) {
       {recentData !== null && recentData.length !== 0 ? (
         <div
           id="carouselExampleControls"
-          class="carousel slide"
+          class="carousel slide mt-5"
           data-bs-ride="carousel"
         >
           <div class="carousel-inner">
@@ -89,8 +89,8 @@ export default function TopCharts(props) {
                   elevation={14}
                   sx={{
                     display: "flex",
-                    marginLeft: "15%",
-                    marginRight: "15%",
+                    marginLeft: ipad ? "0%" : "15%",
+                    marginRight: ipad ? "0%" : "15%",
                     flexDirection: "column",
                     backgroundColor: "#000",
                   }}
@@ -104,15 +104,20 @@ export default function TopCharts(props) {
                       alt="song Pic"
                     />
                     <CardContent className="text-light mx-4 w-100">
-                      <Typography component="div" variant="h5" sx={{ fontSize: ipad ? "0.8rem" : "1.25rem" }}>
+                      <Typography
+                        component="div"
+                        variant="h5"
+                        className="mb-2"
+                        sx={{ fontSize: match ? "1rem" : "1.25rem" }}
+                      >
                         {item.name}
                       </Typography>
                       <Typography
                         variant="subtitle1"
                         color="text.secondary"
                         component="div"
-                        className="text-light"
-                        sx={{ fontSize: ipad ? "0.5rem" : "1rem" }}
+                        className="text-light mb-2" 
+                        sx={{ fontSize: match ? "0.5rem" : "1rem" }}
                       >
                         <VisibilityIcon className="me-3" />
                         {item.views}
@@ -121,8 +126,8 @@ export default function TopCharts(props) {
                         variant="subtitle1"
                         color="text.secondary"
                         component="div"
-                        className="text-light"
-                        sx={{ fontSize: ipad ? "0.5rem" : "1rem" }}
+                        className="text-light mb-2"
+                        sx={{ fontSize: match ? "0.5rem" : "1rem" }}
                       >
                         <ThumbUpIcon className="me-3 text-danger" />
                         {item.likes}
@@ -188,23 +193,25 @@ export default function TopCharts(props) {
                               Playlist
                             </div>
                           </li>
-                          {props.playlistData.map((playlist, idx) => (
-                            <li key={idx}>
-                              <a
-                                class="dropdown-item text-light"
-                                style={{ cursor: "pointer" }}
-                                onClick={() => {
-                                  onClick(playlist._id, item._id);
-                                }}
-                              >
-                                <QueueMusicIcon
-                                  className="me-3"
-                                  style={{ color: "gray" }}
-                                />
-                                {playlist.playlistName}
-                              </a>
-                            </li>
-                          ))}
+                          {props.playlistData
+                            ? props.playlistData.map((playlist, idx) => (
+                                <li key={idx}>
+                                  <a
+                                    class="dropdown-item text-light"
+                                    style={{ cursor: "pointer" }}
+                                    onClick={() => {
+                                      onClick(playlist._id, item._id);
+                                    }}
+                                  >
+                                    <QueueMusicIcon
+                                      className="me-3"
+                                      style={{ color: "gray" }}
+                                    />
+                                    {playlist.playlistName}
+                                  </a>
+                                </li>
+                              ))
+                            : null}
                           ))
                         </ul>
                       </div>
@@ -264,6 +271,7 @@ export default function TopCharts(props) {
           </div>
           <button
             class="carousel-control-prev"
+            style={{ display: match ? "none" : "block" }}
             type="button"
             data-bs-target="#carouselExampleControls"
             data-bs-slide="prev"
@@ -273,6 +281,7 @@ export default function TopCharts(props) {
           </button>
           <button
             class="carousel-control-next"
+            style={{ display: match ? "none" : "block" }}
             type="button"
             data-bs-target="#carouselExampleControls"
             data-bs-slide="next"

@@ -58,7 +58,7 @@ export default function Liked(props) {
       });
   }
   return (
-    <div className="d-flex flex-column p-5">
+    <div className="d-flex flex-column p-lg-5 p-md-5 p-1">
       <Box className="mb-5">
         <Typography variant="h4" className="text-center">
           <ThumbUpIcon className="me-3" />
@@ -69,7 +69,7 @@ export default function Liked(props) {
         sx={{ width: "100%" }}
         className="bg-dark p-lg-5 p-md-5 p-1 rounded shadow-lg"
       >
-        {props.data.length !== 0 && songData !== null ? (
+        {props.data && props.data.length !== 0 && songData !== null ? (
           <React.Fragment>
             {songData.map((item, idx) => (
               <Card
