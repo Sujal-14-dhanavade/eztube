@@ -95,12 +95,10 @@ export default function List(props) {
                     className="text-light"
                     size="small"
                     onClick={() => {
-                      props.changeSrc(item.song);
-                      if (props.audioRef.current) {
-                        props.audioRef.current.pause();
-                        props.audioRef.current.load();
-                        props.audioRef.current.play();
-                      }
+                      props.changeQueue({
+                        isChange: true,
+                        queue: [item, ...props.queue.queue],
+                      });
                     }}
                   >
                     <PlayArrowIcon className="text-light fs-1 playButton" />
