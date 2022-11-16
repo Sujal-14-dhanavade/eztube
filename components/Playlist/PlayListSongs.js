@@ -72,11 +72,8 @@ export default function playListSongs(props) {
           <IconButton
             className="text-light"
             size="small"
-            onClick={async() => {
+            onClick={async () => {
               props.changeQueue(songData);
-              await props.audioRef.current.pause();
-              await props.audioRef.current.load();
-              await props.audioRef.current.play();
             }}
           >
             <PlayArrowIcon className="text-light fs-1 playButton" />
@@ -138,7 +135,7 @@ export default function playListSongs(props) {
                     <IconButton
                       className="text-light"
                       size="small"
-                      onClick={async() => {
+                      onClick={async () => {
                         props.changeSrc(item.song);
                         if (props.audioRef.current) {
                           await props.audioRef.current.pause();

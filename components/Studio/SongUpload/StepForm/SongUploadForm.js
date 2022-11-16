@@ -74,7 +74,8 @@ export default function SongUploadForm(props) {
 
   function onSubmitPic(e) {
     e.preventDefault();
-    const fd = new FormData();
+    if(imgfile) {
+      const fd = new FormData();
     fd.append("songPicFile", imgfile, imgfile.name);
 
     axios
@@ -85,8 +86,13 @@ export default function SongUploadForm(props) {
       })
       .then((res) => {
         changePicId(res.data.file);
+        setErrorFile(false);
         changeData({ ...songData, songPic: res.data.file });
       });
+    }else {
+      setErrorFile(true);
+    }
+    
   }
 
   function onAudioFormChange(e) {
@@ -101,19 +107,24 @@ export default function SongUploadForm(props) {
 
   function onSubmitAudio(e) {
     e.preventDefault();
-    const fd = new FormData();
-    fd.append("audioFile", audioFile, audioFile.name);
+    if (audioFile !== null) {
+      const fd = new FormData();
+      fd.append("audioFile", audioFile, audioFile.name);
 
-    axios
-      .request({
-        method: "POST",
-        url: "/api/audioUpload",
-        data: fd,
-      })
-      .then((res) => {
-        changeAudioId(res.data.file);
-        changeData({ ...songData, song: res.data.file });
-      });
+      axios
+        .request({
+          method: "POST",
+          url: "/api/audioUpload",
+          data: fd,
+        })
+        .then((res) => {
+          changeAudioId(res.data.file);
+          setErrorFile(false);
+          changeData({ ...songData, song: res.data.file });
+        });
+    } else {
+      setErrorFile(true);
+    }
   }
 
   function onChange(e) {
