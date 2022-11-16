@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -13,7 +13,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Chip, IconButton } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import QueueIcon from "@mui/icons-material/Queue";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import axios from "axios";
+import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 
 export default function List(props) {
   function onClick(id, songid) {
@@ -88,7 +91,7 @@ export default function List(props) {
                     component="div"
                     className="text-light"
                   >
-                    <FavoriteIcon className="me-3 text-danger" />
+                    <ThumbUpIcon className="me-3 text-danger" />
                     {item.likes}
                   </Typography>
                   <IconButton
@@ -120,6 +123,32 @@ export default function List(props) {
                       class="dropdown-menu bg-dark"
                       aria-labelledby={`dropdownMenuButton${idx}`}
                     >
+                      <li>
+                        <a
+                          class="dropdown-item text-light"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => {
+                            props.changeQueue({
+                              isChange: false,
+                              queue: [...props.queue.queue, item],
+                            });
+                          }}
+                        >
+                          <QueueIcon className="text-light" /> Add to Queue
+                        </a>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider text-light" />
+                      </li>
+                      <li>
+                        <div
+                          class="dropdown-item text-light nohover"
+                          style={{ cursor: "default" }}
+                        >
+                          <PlaylistAddIcon className="text-light" /> Add to
+                          Playlist
+                        </div>
+                      </li>
                       {props.playlistData.map((playlist, idx) => (
                         <li key={idx}>
                           <a
@@ -129,10 +158,15 @@ export default function List(props) {
                               onClick(playlist._id, item._id);
                             }}
                           >
+                            <QueueMusicIcon
+                              className="me-3"
+                              style={{ color: "gray" }}
+                            />
                             {playlist.playlistName}
                           </a>
                         </li>
                       ))}
+                      ))
                     </ul>
                   </div>
                 </CardContent>

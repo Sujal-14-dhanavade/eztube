@@ -229,18 +229,64 @@ const addSongPlaylist = (req, res) => {
 };
 
 const getSongPlaylist = async (req, res) => {
-  if(req.body.songs.length === 0) {
-    res.json({songs: false});
+  if (req.body.songs.length === 0) {
+    res.json({ songs: false });
   } else {
     const songs = [];
-    for(var i of req.body.songs) {
+    for (var i of req.body.songs) {
       let result = await Song.findById(i);
       songs.push(result);
-    };
-    res.json({songs: songs});
+    }
+    res.json({ songs: songs });
   }
+};
 
-}
+const likeSong = (req, res) => {
+  const like_songs = req.session.data.liked_songs;
+  const songId = req.body.songId;
+  const method = req.params.method;
+  if (method === "add") {
+    User.findByIdAndUpdate(
+      req.session.data._id,
+      { liked_songs: [...like_songs, songId] },
+      async (err, result) => {
+        if (err) {
+          res.json(err);
+        } else {
+          req.session.data = await User.findById(req.session.data._id);
+          Song.findByIdAndUpdate(songId, {$inc: {likes: 1}}, (err, result) => {
+            if (err) {
+              res.json(err);
+            } else {
+              res.json({liked: 1});
+            }
+          });
+        }
+      }
+    );
+  } else if (method === "remove") {
+    const idx = like_songs.findIndex((ele) => ele === songId);
+    like_songs.splice(idx, 1);
+    User.findByIdAndUpdate(
+      req.session.data._id,
+      { liked_songs: like_songs },
+      async (err, result) => {
+        if (err) {
+          res.json(err);
+        } else {
+          req.session.data = await User.findById(req.session.data._id);
+          Song.findByIdAndUpdate(songId, {$inc: {likes: -1}}, (err, result) => {
+            if (err) {
+              res.json(err);
+            } else {
+              res.json({liked: 0});
+            }
+          });
+        }
+      }
+    );
+  }
+};
 
 module.exports = {
   register,
@@ -256,5 +302,6 @@ module.exports = {
   createPlaylist,
   getPlaylist,
   addSongPlaylist,
-  getSongPlaylist
+  getSongPlaylist,
+  likeSong,
 };

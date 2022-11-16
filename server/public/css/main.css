@@ -24,7 +24,7 @@ h6 {
 }
 
 .audio {
-  position: 'fixed';
+  position: "fixed";
   background-color: #000000;
   bottom: 0;
 }
@@ -275,6 +275,10 @@ button.create {
 .navTab-link:hover {
   background-color: #fa3434;
   color: #eeeeee;
+}
+
+.nohover:hover {
+  background-color: #232425;
 }
 @media screen and (max-width: 768px) {
   .feature-content {

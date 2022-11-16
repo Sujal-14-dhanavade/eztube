@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -16,11 +16,12 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import CreateIcon from "@mui/icons-material/Create";
 import axios from "axios";
+import LikeButton from "../LikeButton";
 
 export default function playListSongs(props) {
   const [songData, changeSongData] = React.useState(null);
   useEffect(() => {
-    console.log(props.queue);
+    console.log(props.LikedData);
     axios
       .request({
         method: "POST",
@@ -125,7 +126,7 @@ export default function playListSongs(props) {
                       component="div"
                       className="text-light"
                     >
-                      <FavoriteIcon className="me-3 text-danger" />
+                      <ThumbUpIcon className="me-3 text-danger" />
                       {item.likes}
                     </Typography>
                     <Typography
@@ -141,12 +142,15 @@ export default function playListSongs(props) {
                       onClick={async () => {
                         props.changeQueue({
                           isChange: true,
-                          queue: [ item, ...props.queue.queue ],
+                          queue: [item, ...props.queue.queue],
                         });
                       }}
                     >
                       <PlayArrowIcon className="text-light fs-1 playButton" />
                     </IconButton>
+                  </CardContent>
+                  <CardContent>
+                    <LikeButton songId = {item._id} set = {props.LikedData.includes(item._id)}/>
                   </CardContent>
                 </CardContent>
                 <Accordion
