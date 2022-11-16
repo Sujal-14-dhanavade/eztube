@@ -16,7 +16,19 @@ export default function AppNavbar(props) {
   return (
     <nav id="#" className="navbar navbar-expand-md shadow-5">
       <div className="container d-flex flex-row">
-        <a className="navbar-brand me-5" href="/Ezport">
+        <a
+          className="navbar-brand me-5"
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            props.toPage({
+              account: false,
+              setting: false,
+              studio: false,
+              playlist: false,
+              likedSong: false,
+            });
+          }}
+        >
           <img
             src="../images/wave.png"
             alt="waveCloud Logo"

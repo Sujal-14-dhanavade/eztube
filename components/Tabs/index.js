@@ -13,7 +13,19 @@ export default function Tabs(props) {
       aria-labelledby="offcanvasScrollingLabel"
     >
       <div className="offcanvas-header">
-        <a className="navbar-brand me-5" href="#">
+        <a
+          className="navbar-brand me-5"
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            props.toPage({
+              account: false,
+              setting: false,
+              studio: false,
+              playlist: false,
+              likedSong: false,
+            });
+          }}
+        >
           <img
             src="../images/wave.png"
             alt="waveCloud Logo"
@@ -51,7 +63,16 @@ export default function Tabs(props) {
         <div className="d-flex flex-column mt-5 offcanvas-menu-link">
           <a
             className="text-light text-decoration-none fw-bold p-2"
-            href="/Ezport"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              props.toPage({
+                account: false,
+                setting: false,
+                studio: false,
+                playlist: false,
+                likedSong: false,
+              });
+            }}
           >
             <i className="fa-solid fa-house pe-3"></i>Home
           </a>

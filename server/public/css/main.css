@@ -23,6 +23,12 @@ h6 {
   background-color: #000000;
 }
 
+.audio {
+  position: 'fixed';
+  background-color: #000000;
+  bottom: 0;
+}
+
 .settings {
   background-image: url("../images/settings.svg");
   background-size: cover;
