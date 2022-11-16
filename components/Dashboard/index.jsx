@@ -8,6 +8,7 @@ import Playlist from "../Playlist";
 import Liked from "../Liked";
 import AudioPlayer from "../AudioPlayer";
 import axios from "axios";
+import Home from "./Home";
 
 export default function studio(props) {
   const [playlistData, changeData] = React.useState(null);
@@ -67,7 +68,7 @@ export default function studio(props) {
           changeQueue={changeQueue}
           playlistData={playlistData}
         />
-      ) : null}
+      ) : <Home />}
       <Tabs id="offcanvasScrolling" toPage={changePage} />
       <AudioPlayer
         queue={queue}
