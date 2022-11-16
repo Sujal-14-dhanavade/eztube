@@ -18,7 +18,10 @@ export default function studio(props) {
     playlist: false,
     likedSong: false,
   });
-  const [queue, changeQueue] = React.useState([]);
+  const [queue, changeQueue] = React.useState({
+    isChange: false,
+    queue: []
+  });
 
   useEffect(() => {
     axios

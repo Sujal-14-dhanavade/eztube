@@ -73,7 +73,10 @@ export default function playListSongs(props) {
             className="text-light"
             size="small"
             onClick={async () => {
-              props.changeQueue(songData);
+              props.changeQueue({
+                isChange: true,
+                queue: songData,
+              });
             }}
           >
             <PlayArrowIcon className="text-light fs-1 playButton" />
@@ -136,12 +139,10 @@ export default function playListSongs(props) {
                       className="text-light"
                       size="small"
                       onClick={async () => {
-                        props.changeSrc(item.song);
-                        if (props.audioRef.current) {
-                          await props.audioRef.current.pause();
-                          await props.audioRef.current.load();
-                          await props.audioRef.current.play();
-                        }
+                        props.changeQueue({
+                          isChange: true,
+                          queue: [ item, ...props.queue.queue ],
+                        });
                       }}
                     >
                       <PlayArrowIcon className="text-light fs-1 playButton" />
