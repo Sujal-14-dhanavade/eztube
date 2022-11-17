@@ -26,8 +26,8 @@ export default function AppNavbar(props) {
               studio: false,
               playlist: false,
               likedSong: false,
+              follow: false
             });
-            props.setHomePage(true);
           }}
         >
           <img
@@ -86,6 +86,7 @@ export default function AppNavbar(props) {
                         studio: false,
                         playlist: false,
                         likedSong: false,
+                        follow: false
                       });
                     }}
                   >
@@ -103,6 +104,7 @@ export default function AppNavbar(props) {
                         studio: false,
                         playlist: false,
                         likedSong: false,
+                        follow: false
                       });
                     }}
                   >

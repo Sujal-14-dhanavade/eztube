@@ -1,4 +1,10 @@
-import { Typography, useMediaQuery, Grid, CardActionArea } from "@mui/material";
+import {
+  Typography,
+  useMediaQuery,
+  Grid,
+  CardActionArea,
+  CardActions,
+} from "@mui/material";
 import { Container } from "@mui/system";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -29,9 +35,7 @@ export default function RecentPlayed(props) {
       });
   }, []);
   return (
-    <Container
-      className="p-lg-2 p-md-2 p-1 bg-transparent rounded shadow-lg"
-    >
+    <Container className="p-lg-2 p-md-2 p-1 bg-transparent rounded shadow-lg">
       <Typography
         variant="h5"
         sx={{ textAlign: match ? "center" : "left" }}
@@ -44,7 +48,7 @@ export default function RecentPlayed(props) {
           {props.data && props.data.length !== 0 && recentData !== null ? (
             <React.Fragment>
               {recentData.map((item, idx) => (
-                <Card className="bg-dark mx-1 mb-3" elevation={5} key={idx}>
+                <Card className="bg-dark mx-1 mb-3" sx={{width: match? "100%": "75%"}} elevation={5} key={idx}>
                   <CardActionArea
                     onClick={async () => {
                       props.changeQueue({
@@ -94,14 +98,16 @@ export default function RecentPlayed(props) {
                         <CreateIcon className="text-warning me-3" />
                         {item.date_created.split("T")[0]}
                       </Typography>
-                      {props.LikedData ? (
-                        <LikeButton
-                          songId={item._id}
-                          set={props.LikedData.includes(item._id)}
-                        />
-                      ) : null}
                     </CardContent>
                   </CardActionArea>
+                  <CardActions>
+                    {props.LikedData ? (
+                      <LikeButton
+                        songId={item._id}
+                        set={props.LikedData.includes(item._id)}
+                      />
+                    ) : null}
+                  </CardActions>
                 </Card>
               ))}
             </React.Fragment>

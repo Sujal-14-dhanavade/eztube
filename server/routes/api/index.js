@@ -18,7 +18,9 @@ const {
   viewSong,
   recentSong,
   topChart,
-  topUser
+  topUser,
+  followUser,
+  getUserSongs
 } = require("../../controllers/api");
 
 router.route("/").get((req, res) => {
@@ -51,4 +53,6 @@ router.route("/viewSong").post(viewSong);
 router.route("/recentSong").post(recentSong);
 router.route("/topChart").get(topChart);
 router.route("/topUser").get(topUser);
+router.route("/follow/:method").post(followUser);
+router.route("/getUserSongs").post(getUserSongs);
 module.exports = router;

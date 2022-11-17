@@ -18,7 +18,7 @@ export default function Playlist(props) {
           <Playlistform changeData = {props.changeData}/>
           {props.playlistData ? <List playlistData={props.playlistData} changePage={changePage} changePlaylist={changePlaylist}/>: null}
         </div>
-      ) : <PlayListSongs LikedData={props.data.liked_songs} queue={props.queue} changeQueue={props.changeQueue} audioRef={props.audioRef} changeSrc={props.changeSrc} playlist={whichPlaylist} changePage={changePage} changePlaylist={changePlaylist}/>}
+      ) : <PlayListSongs LikedData={props.data.liked_songs} queue={props.queue} changeQueue={props.changeQueue} audioRef={props.audioRef} changeSrc={props.changeSrc} changeTurn={props.changeTurn} playlist={whichPlaylist} changePage={changePage} changePlaylist={changePlaylist}/>}
     </>
   );
 }

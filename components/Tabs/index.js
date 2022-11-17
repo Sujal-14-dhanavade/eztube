@@ -72,8 +72,8 @@ export default function Tabs(props) {
                 studio: false,
                 playlist: false,
                 likedSong: false,
+                follow: false
               });
-              props.setHomePage(true);
             }}
           >
             <i className="fa-solid fa-house pe-3"></i>Home
@@ -88,6 +88,7 @@ export default function Tabs(props) {
                 studio: true,
                 playlist: false,
                 likedSong: false,
+                follow: false
               });
             }}
           >
@@ -103,6 +104,7 @@ export default function Tabs(props) {
                 studio: false,
                 playlist: true,
                 likedSong: false,
+                follow: false
               });
             }}
           >
@@ -118,10 +120,27 @@ export default function Tabs(props) {
                 studio: false,
                 playlist: false,
                 likedSong: true,
+                follow: false
               });
             }}
           >
             <i className="fa-solid fa-thumbs-up pe-3"></i>Liked Songs
+          </a>
+          <a
+            className="text-light text-decoration-none fw-bold p-2"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              props.toPage({
+                account: false,
+                setting: false,
+                studio: false,
+                playlist: false,
+                likedSong: false,
+                follow: true
+              });
+            }}
+          >
+            <i class="fa-solid fa-fire-flame-curved pe-3"></i>Follow
           </a>
         </div>
       </div>

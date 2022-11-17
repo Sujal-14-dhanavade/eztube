@@ -88,7 +88,7 @@ export default function Liked(props) {
                     src={`/avatar/songPic/${item.songPic}`}
                     alt="song Pic"
                   />
-                  <CardContent className="text-light mx-4">
+                  <CardContent className="text-light mx-4 w-100">
                     <Typography component="div" variant="h5">
                       {item.name}
                     </Typography>

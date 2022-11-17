@@ -350,6 +350,74 @@ const topUser = async(req, res) => {
   const userData = await User.find({},{username: 1, country: 1, userPic: 1, verified: 1, followers: 1}).sort({followers: -1}).limit(4);
   res.json(userData);
 }
+
+
+const followUser = (req, res) => {
+  const follow = req.session.data.follow;
+  const userId = req.body.userId;
+  const method = req.params.method;
+  if (method === "add") {
+    User.findByIdAndUpdate(
+      req.session.data._id,
+      { follow: [...follow, userId] },
+      async (err, result) => {
+        if (err) {
+          res.json(err);
+        } else {
+          req.session.data = await User.findById(req.session.data._id);
+          User.findByIdAndUpdate(
+            userId,
+            { $inc: { followers: 1 } },
+            (err, result) => {
+              if (err) {
+                res.json(err);
+              } else {
+                res.json({ follow: 1 });
+              }
+            }
+          );
+        }
+      }
+    );
+  } else if (method === "remove") {
+    const idx = follow.findIndex((ele) => ele === userId);
+    follow.splice(idx, 1);
+    User.findByIdAndUpdate(
+      req.session.data._id,
+      { follow: follow },
+      async (err, result) => {
+        if (err) {
+          res.json(err);
+        } else {
+          req.session.data = await User.findById(req.session.data._id);
+          User.findByIdAndUpdate(
+            userId,
+            { $inc: { followers: -1 } },
+            (err, result) => {
+              if (err) {
+                res.json(err);
+              } else {
+                res.json({ follow: 0 });
+              }
+            }
+          );
+        }
+      }
+    );
+  }
+};
+
+
+const getUserSongs = (req, res) => {
+  const userId= req.body.userId;
+  Song.find({owner: userId},(err, result) => {
+    if(err) {
+      res.json(err);
+    } else {
+      res.json(result);
+    }
+  })
+}
 module.exports = {
   register,
   registerUserPic,
@@ -369,5 +437,7 @@ module.exports = {
   viewSong,
   recentSong,
   topChart,
-  topUser
+  topUser,
+  followUser,
+  getUserSongs
 };

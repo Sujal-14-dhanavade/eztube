@@ -18,16 +18,6 @@ export default function LikeButton(props) {
           {
             props.setDependent ? props.setDependent(!props.dependent) : null;
           }
-          {
-            props.callback
-              ? props.callback(
-                  props.dependent,
-                  props.setDependent,
-                  props.changeSongData,
-                  props.data
-                )
-              : null;
-          }
           changeSet(!isSet);
         });
     } else {

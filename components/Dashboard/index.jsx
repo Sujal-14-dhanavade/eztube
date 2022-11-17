@@ -9,6 +9,7 @@ import Liked from "../Liked";
 import AudioPlayer from "../AudioPlayer";
 import axios from "axios";
 import Home from "./Home";
+import Follow from "../Follow";
 
 export default function studio(props) {
   const [playlistData, changeData] = React.useState(null);
@@ -18,14 +19,14 @@ export default function studio(props) {
     studio: false,
     playlist: false,
     likedSong: false,
+    follow: false,
   });
   const [queue, changeQueue] = React.useState({
     isChange: false,
     queue: [],
   });
-
-  const [homePage, toWhichPage] = React.useState(true);
-
+  const [turn, changeTurn] = React.useState(0);
+  const [src, changeSrc] = React.useState(null);
   useEffect(() => {
     axios
       .request({
@@ -39,7 +40,7 @@ export default function studio(props) {
   const audioRef = useRef();
   return (
     <div className="dashboard">
-      <AppNavbar data={props.data} toPage={changePage} setHomePage={toWhichPage}/>
+      <AppNavbar data={props.data} toPage={changePage} />
       {page.account ? (
         <Account data={props.data} />
       ) : page.setting ? (
@@ -62,6 +63,8 @@ export default function studio(props) {
           audioRef={audioRef}
           playlistData={playlistData}
           changeData={changeData}
+          changeTurn={changeTurn}
+          changeSrc={changeSrc}
         />
       ) : page.likedSong ? (
         <Liked
@@ -71,6 +74,8 @@ export default function studio(props) {
           playlistData={playlistData}
           changeData={changeData}
         />
+      ) : page.follow ? (
+        <Follow />
       ) : (
         <Home
           data={props.data}
@@ -79,15 +84,21 @@ export default function studio(props) {
           changeQueue={changeQueue}
           playlistData={playlistData}
           changeData={changeData}
-          whichPage = {homePage}
-          setPage = {toWhichPage}
+          followData={props.data.follow}
+          changeTurn={changeTurn}
+          changeSrc={changeSrc}
+          audioRef={audioRef}
         />
       )}
-      <Tabs id="offcanvasScrolling" toPage={changePage} setHomePage={toWhichPage}/>
+      <Tabs id="offcanvasScrolling" toPage={changePage} />
       <AudioPlayer
         queue={queue}
         changeQueue={changeQueue}
         audioRef={audioRef}
+        turn={turn}
+        changeTurn={changeTurn}
+        src={src}
+        changeSrc={changeSrc}
       />
     </div>
   );

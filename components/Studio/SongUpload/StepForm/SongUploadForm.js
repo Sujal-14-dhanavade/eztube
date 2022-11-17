@@ -156,6 +156,7 @@ export default function SongUploadForm(props) {
               studio: false,
               playlist: false,
               likedSong: false,
+              follow: false
             });
           } else {
             setError("Server Error");

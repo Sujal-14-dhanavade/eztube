@@ -6,7 +6,6 @@ import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
 import { Container } from "@mui/system";
 import { useMediaQuery } from "@mui/material";
 import axios from "axios";
@@ -15,10 +14,29 @@ import PersonIcon from "@mui/icons-material/Person";
 import Avatar from "@mui/material/Avatar";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import FollowButton from "../FollowButton";
 
 export default function TopUser(props) {
   const match = useMediaQuery("(max-width: 768px)");
   const [topUserData, setData] = React.useState(null);
+  const toggleClick = (id) => {
+    axios
+      .request({
+        method: "POST",
+        url: "/api/getUserSongs",
+        data: { userId: id },
+      })
+      .then((res) => {
+        if (res.data.length === 0) {
+          props.changeQueue({ isChange: false, queue: [] });
+          props.changeSrc(null);
+          props.changeTurn(0);
+          props.audioRef.current.load();
+        } else {
+          props.changeQueue({ isChange: true, queue: [...res.data] });
+        }
+      });
+  };
   useEffect(() => {
     axios
       .request({
@@ -27,7 +45,6 @@ export default function TopUser(props) {
       })
       .then((res) => {
         if (res.data) {
-          console.log(res.data);
           setData(res.data);
         }
       });
@@ -49,9 +66,13 @@ export default function TopUser(props) {
       {topUserData !== null && topUserData.length !== 0 ? (
         <Grid container spacing={3}>
           {topUserData.map((item, idx) => (
-            <Grid item lg={3} xs={12}>
+            <Grid item lg={3} xs={12} key={idx}>
               <Card className="bg-dark rounded m-auto" elevation={10}>
-                <CardActionArea>
+                <CardActionArea
+                  onClick={() => {
+                    toggleClick(item._id);
+                  }}
+                >
                   {item.userPic ? (
                     <CardMedia
                       component="img"
@@ -86,9 +107,12 @@ export default function TopUser(props) {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary">
-                    Follow
-                  </Button>
+                  {props.followData ? (
+                    <FollowButton
+                      userId={item._id}
+                      set={props.followData.includes(item._id)}
+                    />
+                  ) : null}
                 </CardActions>
               </Card>
             </Grid>
