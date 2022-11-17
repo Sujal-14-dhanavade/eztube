@@ -1,11 +1,13 @@
 import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import React from "react";
+import React, { useEffect } from "react";
 import RecentPlayed from "./RecentPlayed";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import EmojiFoodBeverageIcon from "@mui/icons-material/EmojiFoodBeverage";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import TopCharts from "./TopCharts";
+import UserDetail from "./UserDetail";
+import TopUser from "./TopUser";
 
 export default function Home(props) {
   const getGreeting = () => {
@@ -33,28 +35,37 @@ export default function Home(props) {
         </>
       );
   };
+
   return (
-    <Container className="p-lg-5 p-md-5 p-0 mt-5">
-      <Typography
-        variant="h4"
-        className="text-center fw-bolder mb-4"
-        sx={{ letterSpacing: "5px" }}
-      >
-        {getGreeting()}
-      </Typography>
-      <RecentPlayed
-        queue={props.queue}
-        changeQueue={props.changeQueue}
-        data={props.data.recent_Played}
-        LikedData={props.data.liked_songs}
-      />
-      <TopCharts
-        queue={props.queue}
-        changeQueue={props.changeQueue}
-        LikedData={props.data.liked_songs}
-        playlistData={props.playlistData}
-        changeData={props.changeData}
-      />
-    </Container>
+    <div>
+      {props.whichPage ? (
+        <Container className="p-lg-5 p-md-5 p-0 mt-5">
+          <Typography
+            variant="h4"
+            className="text-center fw-bolder mb-4"
+            sx={{ letterSpacing: "5px" }}
+          >
+            {getGreeting()}
+          </Typography>
+          <RecentPlayed
+            queue={props.queue}
+            changeQueue={props.changeQueue}
+            data={props.data.recent_Played}
+            LikedData={props.data.liked_songs}
+          />
+          <TopCharts
+            queue={props.queue}
+            changeQueue={props.changeQueue}
+            LikedData={props.data.liked_songs}
+            playlistData={props.playlistData}
+            changeData={props.changeData}
+          />
+          <TopUser setPage={props.setPage}/>
+        </Container>
+      ) : (
+
+        <UserDetail />
+      )}
+    </div>
   );
 }

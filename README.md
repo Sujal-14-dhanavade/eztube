@@ -4,5 +4,5 @@
 A simple and easy to use music streaming web app developed using MERN stack.
 
 
-search facility and top artist
+search facility and top artist, followers facility
 

@@ -24,6 +24,7 @@ export default function Tabs(props) {
               playlist: false,
               likedSong: false,
             });
+            props.setHomePage(false);
           }}
         >
           <img
@@ -72,6 +73,7 @@ export default function Tabs(props) {
                 playlist: false,
                 likedSong: false,
               });
+              props.setHomePage(true);
             }}
           >
             <i className="fa-solid fa-house pe-3"></i>Home

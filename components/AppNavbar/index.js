@@ -27,6 +27,7 @@ export default function AppNavbar(props) {
               playlist: false,
               likedSong: false,
             });
+            props.setHomePage(true);
           }}
         >
           <img

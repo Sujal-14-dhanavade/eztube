@@ -24,6 +24,8 @@ export default function studio(props) {
     queue: [],
   });
 
+  const [homePage, toWhichPage] = React.useState(true);
+
   useEffect(() => {
     axios
       .request({
@@ -37,7 +39,7 @@ export default function studio(props) {
   const audioRef = useRef();
   return (
     <div className="dashboard">
-      <AppNavbar data={props.data} toPage={changePage} />
+      <AppNavbar data={props.data} toPage={changePage} setHomePage={toWhichPage}/>
       {page.account ? (
         <Account data={props.data} />
       ) : page.setting ? (
@@ -77,9 +79,11 @@ export default function studio(props) {
           changeQueue={changeQueue}
           playlistData={playlistData}
           changeData={changeData}
+          whichPage = {homePage}
+          setPage = {toWhichPage}
         />
       )}
-      <Tabs id="offcanvasScrolling" toPage={changePage} />
+      <Tabs id="offcanvasScrolling" toPage={changePage} setHomePage={toWhichPage}/>
       <AudioPlayer
         queue={queue}
         changeQueue={changeQueue}

@@ -30,8 +30,7 @@ export default function RecentPlayed(props) {
   }, []);
   return (
     <Container
-      className="p-lg-2 p-md-2 p-1 rounded shadow-lg"
-      sx={{ backgroundColor: "#343a40" }}
+      className="p-lg-2 p-md-2 p-1 bg-transparent rounded shadow-lg"
     >
       <Typography
         variant="h5"

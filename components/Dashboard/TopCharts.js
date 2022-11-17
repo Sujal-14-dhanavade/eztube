@@ -61,8 +61,8 @@ export default function TopCharts(props) {
   }, []);
   return (
     <Container
-      className="p-1 my-5 rounded shadow-lg"
-      sx={{ backgroundColor: "#343a40", minHeight: "500px"}}
+      className="p-1 my-5 rounded bg-transparent shadow-lg"
+      sx={{ minHeight: "500px"}}
     >
       <Typography
         variant="h5"
