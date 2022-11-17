@@ -98,6 +98,7 @@ export default function studio(props) {
       )}
       <Tabs id="offcanvasScrolling" toPage={changePage} />
       <AudioPlayer
+        LikedData={props.data.liked_songs}
         queue={queue}
         changeQueue={changeQueue}
         audioRef={audioRef}
