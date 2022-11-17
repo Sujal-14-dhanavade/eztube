@@ -75,7 +75,13 @@ export default function studio(props) {
           changeData={changeData}
         />
       ) : page.follow ? (
-        <Follow />
+        <Follow
+          follow={props.data.follow}
+          changeTurn={changeTurn}
+          changeSrc={changeSrc}
+          audioRef={audioRef}
+          changeQueue={changeQueue}
+        />
       ) : (
         <Home
           data={props.data}

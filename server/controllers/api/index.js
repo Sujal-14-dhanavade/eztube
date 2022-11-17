@@ -340,17 +340,20 @@ const recentSong = (req, res) => {
   }
 };
 
-
-const topChart = async(req, res) => {
-  const songData = await Song.find().sort({views: -1}).limit(5);
+const topChart = async (req, res) => {
+  const songData = await Song.find().sort({ views: -1 }).limit(5);
   res.json(songData);
-}
+};
 
-const topUser = async(req, res) => {
-  const userData = await User.find({},{username: 1, country: 1, userPic: 1, verified: 1, followers: 1}).sort({followers: -1}).limit(4);
+const topUser = async (req, res) => {
+  const userData = await User.find(
+    {},
+    { username: 1, country: 1, userPic: 1, verified: 1, followers: 1 }
+  )
+    .sort({ followers: -1 })
+    .limit(4);
   res.json(userData);
-}
-
+};
 
 const followUser = (req, res) => {
   const follow = req.session.data.follow;
@@ -407,17 +410,36 @@ const followUser = (req, res) => {
   }
 };
 
-
 const getUserSongs = (req, res) => {
-  const userId= req.body.userId;
-  Song.find({owner: userId},(err, result) => {
-    if(err) {
+  const userId = req.body.userId;
+  Song.find({ owner: userId }, (err, result) => {
+    if (err) {
       res.json(err);
     } else {
       res.json(result);
     }
-  })
-}
+  });
+};
+
+const getFollow = async(req, res) => {
+  const follow = req.session.data.follow;
+  if (follow.length === 0) {
+    res.json({ user: false });
+  } else {
+    const users = [];
+    for (var i of follow) {
+      let result = await User.findById(i, {
+        username: 1,
+        country: 1,
+        userPic: 1,
+        verified: 1,
+        followers: 1,
+      });
+      users.push(result);
+    }
+    res.json({ user: users });
+  }
+};
 module.exports = {
   register,
   registerUserPic,
@@ -439,5 +461,6 @@ module.exports = {
   topChart,
   topUser,
   followUser,
-  getUserSongs
+  getUserSongs,
+  getFollow
 };

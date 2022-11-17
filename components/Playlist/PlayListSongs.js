@@ -55,7 +55,7 @@ export default function playListSongs(props) {
           component="img"
           className="w-50 mx-lg-0 mx-md-0 mx-auto rounded"
           image={`/avatar/playlistPic/${props.playlist.playlistPic}`}
-          alt="Paella dish"
+          alt="playlist Pic"
         />
         <CardContent>
           <Typography className="text-light" variant="h5">
