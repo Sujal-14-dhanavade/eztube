@@ -10,26 +10,26 @@ export default function Studio(props) {
         <div className="container-fluid h-100 bg-transparent p-0">
           <div className="justify-content-center p-0">
             <div className="row">
-              <div class="navTab col-lg-2 col-md-2 col-12 d-flex flex-lg-column flex-md-column flex-row p-0">
+              <div className="navTab col-lg-2 col-md-2 col-12 d-flex flex-lg-column flex-md-column flex-row p-0">
                 <a
-                  class="nav-link navTab-link p-4"
+                  className="nav-link navTab-link p-4"
                   aria-current="page"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     toPage(true);
                   }}
                 >
-                  <i class="fa-solid fa-microphone-lines me-3"></i>
+                  <i className="fa-solid fa-microphone-lines me-3"></i>
                   Studio
                 </a>
                 <a
-                  class="nav-link navTab-link p-4"
+                  className="nav-link navTab-link p-4"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     toPage(false);
                   }}
                 >
-                  <i class="fa-solid fa-music me-3"></i>Your Releases
+                  <i className="fa-solid fa-music me-3"></i>Your Releases
                 </a>
               </div>
               {page ? (

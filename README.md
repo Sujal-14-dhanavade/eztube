@@ -4,5 +4,5 @@
 A simple and easy to use music streaming web app developed using MERN stack.
 
 
-search facility and like button in audio player
+search facility almost ready just need to send results from backend and create a next and prev button in audio
 

@@ -10,6 +10,7 @@ import AudioPlayer from "../AudioPlayer";
 import axios from "axios";
 import Home from "./Home";
 import Follow from "../Follow";
+import SearchResult from "../SearchResult";
 
 export default function studio(props) {
   const [playlistData, changeData] = React.useState(null);
@@ -20,6 +21,7 @@ export default function studio(props) {
     playlist: false,
     likedSong: false,
     follow: false,
+    search: false,
   });
   const [queue, changeQueue] = React.useState({
     isChange: false,
@@ -27,6 +29,8 @@ export default function studio(props) {
   });
   const [turn, changeTurn] = React.useState(0);
   const [src, changeSrc] = React.useState(null);
+  const [searchContent, changeContent] = React.useState(null);
+  const [query, changeQuery] = React.useState("");
   useEffect(() => {
     axios
       .request({
@@ -40,7 +44,7 @@ export default function studio(props) {
   const audioRef = useRef();
   return (
     <div className="dashboard">
-      <AppNavbar data={props.data} toPage={changePage} />
+      <AppNavbar data={props.data} toPage={changePage} changeQuery={changeQuery}/>
       {page.account ? (
         <Account data={props.data} />
       ) : page.setting ? (
@@ -82,6 +86,23 @@ export default function studio(props) {
           audioRef={audioRef}
           changeQueue={changeQueue}
         />
+      ) : page.search ? (
+        <SearchResult
+          changeContent={changeContent}
+          searchContent={searchContent}
+          data={props.data}
+          LikedData={props.data.liked_songs}
+          queue={queue}
+          changeQueue={changeQueue}
+          playlistData={playlistData}
+          changeData={changeData}
+          followData={props.data.follow}
+          changeTurn={changeTurn}
+          changeSrc={changeSrc}
+          audioRef={audioRef}
+          toPage={changePage}
+          changeQuery={changeQuery}
+        />
       ) : (
         <Home
           data={props.data}
@@ -94,9 +115,16 @@ export default function studio(props) {
           changeTurn={changeTurn}
           changeSrc={changeSrc}
           audioRef={audioRef}
+          
         />
       )}
-      <Tabs id="offcanvasScrolling" toPage={changePage} />
+      <Tabs
+        id="offcanvasScrolling"
+        toPage={changePage}
+        changeContent={changeContent}
+        query={query}
+        changeQuery={changeQuery}
+      />
       <AudioPlayer
         LikedData={props.data.liked_songs}
         queue={queue}

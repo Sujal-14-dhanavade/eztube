@@ -440,6 +440,11 @@ const getFollow = async(req, res) => {
     res.json({ user: users });
   }
 };
+
+const filterSearch = (req, res) => {
+  const regEx = req.body.regEx;
+  
+};
 module.exports = {
   register,
   registerUserPic,
@@ -462,5 +467,6 @@ module.exports = {
   topUser,
   followUser,
   getUserSongs,
-  getFollow
+  getFollow,
+  filterSearch
 };

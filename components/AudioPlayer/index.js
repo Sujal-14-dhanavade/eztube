@@ -138,34 +138,41 @@ export default function AudioPlayer(props) {
           </Accordion>
         </React.Fragment>
       ) : null}
-      <div className="px-5 d-flex flex-row justify-content-between">
-        <audio className="w-75" ref={props.audioRef} controls autoPlay={true}>
+      <div className="px-5 d-flex flex-lg-row flex-md-row flex-column justify-content-between">
+        <audio
+          style={{ width: "60%" }}
+          ref={props.audioRef}
+          controls
+          autoPlay={true}
+        >
           <source
             src={props.src ? `/watch/${props.src}` : ""}
             type="audio/mpeg"
           />
         </audio>
-        <IconButton
-          className="text-light"
-          onClick={() => {
-            props.changeQueue({ isChange: false, queue: [] });
-            props.changeSrc(null);
-            props.changeTurn(0);
-            props.audioRef.current.load();
-          }}
-        >
-          <i className="fa-solid fa-folder-minus text-light me-3" />
-          <Typography variant="body1">Clear Queue</Typography>
-        </IconButton>
-        {props.LikedData && props.queue.queue.length !== 0 ? (
-          <LikeButton
-            songId={props.queue.queue[props.turn]._id}
-            set={props.LikedData.includes(props.queue.queue[props.turn]._id)}
-          />
-        ) : null}
-        <IconButton href="#">
-          <NavigationIcon className="text-danger" />
-        </IconButton>
+        <div id="controls">
+          <IconButton
+            className="text-light"
+            onClick={() => {
+              props.changeQueue({ isChange: false, queue: [] });
+              props.changeSrc(null);
+              props.changeTurn(0);
+              props.audioRef.current.load();
+            }}
+          >
+            <i className="fa-solid fa-folder-minus text-light me-3" />
+            <Typography variant="body1">Clear Queue</Typography>
+          </IconButton>
+          {props.LikedData && props.queue.queue.length !== 0 ? (
+            <LikeButton
+              songId={props.queue.queue[props.turn]._id}
+              set={props.LikedData.includes(props.queue.queue[props.turn]._id)}
+            />
+          ) : null}
+          <IconButton href="#">
+            <NavigationIcon className="text-danger" />
+          </IconButton>
+        </div>
       </div>
     </div>
   );

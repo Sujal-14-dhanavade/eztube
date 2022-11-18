@@ -1,5 +1,6 @@
 import React from "react";
 import Footer from "../Footer";
+import Search from "../Search";
 
 export default function Tabs(props) {
   return (
@@ -8,9 +9,7 @@ export default function Tabs(props) {
       style={{ backgroundColor: "#000" }}
       data-bs-scroll="true"
       data-bs-backdrop="false"
-      tabindex="-1"
       id="offcanvasScrolling"
-      aria-labelledby="offcanvasScrollingLabel"
     >
       <div className="offcanvas-header">
         <a
@@ -23,8 +22,10 @@ export default function Tabs(props) {
               studio: false,
               playlist: false,
               likedSong: false,
+              follow: false,
+              search: false,
             });
-            props.setHomePage(false);
+            props.changeQuery("");
           }}
         >
           <img
@@ -44,23 +45,12 @@ export default function Tabs(props) {
         ></button>
       </div>
       <div className="offcanvas-body">
-        <div className="input-group">
-          <input
-            type="search"
-            className="form-control bg-black search text-light search"
-            id="search"
-            name="search"
-            placeholder="Search"
-            aria-label="Search"
-            aria-describedby="search-addon"
-          />
-          <span
-            className="input-group-text border-0 bg-black px-2"
-            id="search-addon"
-          >
-            <i className="fas fa-search red-shade"></i>
-          </span>
-        </div>
+        <Search
+          changeContent={props.changeContent}
+          toPage={props.toPage}
+          query={props.query}
+          changeQuery={props.changeQuery}
+        />
         <div className="d-flex flex-column mt-5 offcanvas-menu-link">
           <a
             className="text-light text-decoration-none fw-bold p-2"
@@ -72,8 +62,10 @@ export default function Tabs(props) {
                 studio: false,
                 playlist: false,
                 likedSong: false,
-                follow: false
+                follow: false,
+                search: false,
               });
+              props.changeQuery("");
             }}
           >
             <i className="fa-solid fa-house pe-3"></i>Home
@@ -88,8 +80,10 @@ export default function Tabs(props) {
                 studio: true,
                 playlist: false,
                 likedSong: false,
-                follow: false
+                follow: false,
+                search: false,
               });
+              props.changeQuery("");
             }}
           >
             <i className="fa-solid fa-folder pe-3"></i>Your Library
@@ -104,8 +98,10 @@ export default function Tabs(props) {
                 studio: false,
                 playlist: true,
                 likedSong: false,
-                follow: false
+                follow: false,
+                search: false,
               });
+              props.changeQuery("");
             }}
           >
             <i className="fa-solid fa-headphones pe-3"></i>Playlists
@@ -120,8 +116,10 @@ export default function Tabs(props) {
                 studio: false,
                 playlist: false,
                 likedSong: true,
-                follow: false
+                follow: false,
+                search: false,
               });
+              props.changeQuery("");
             }}
           >
             <i className="fa-solid fa-thumbs-up pe-3"></i>Liked Songs
@@ -136,11 +134,13 @@ export default function Tabs(props) {
                 studio: false,
                 playlist: false,
                 likedSong: false,
-                follow: true
+                follow: true,
+                search: false,
               });
+              props.changeQuery("");
             }}
           >
-            <i class="fa-solid fa-fire-flame-curved pe-3"></i>Follow
+            <i className="fa-solid fa-fire-flame-curved pe-3"></i>Follow
           </a>
         </div>
       </div>

@@ -21,7 +21,8 @@ const {
   topUser,
   followUser,
   getUserSongs,
-  getFollow
+  getFollow,
+  filterSearch
 } = require("../../controllers/api");
 
 router.route("/").get((req, res) => {
@@ -57,4 +58,5 @@ router.route("/topUser").get(topUser);
 router.route("/follow/:method").post(followUser);
 router.route("/getUserSongs").post(getUserSongs);
 router.route("/getFollow").get(getFollow);
+router.route("/filterSearch").post(filterSearch)
 module.exports = router;

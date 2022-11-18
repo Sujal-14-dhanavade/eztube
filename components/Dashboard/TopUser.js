@@ -59,7 +59,7 @@ export default function TopUser(props) {
         sx={{ textAlign: match ? "center" : "left" }}
         className="mx-3 my-5"
       >
-        <i class="fa-solid fa-fire me-3"></i>
+        <i className="fa-solid fa-fire me-3"></i>
         Top Artists
       </Typography>
 

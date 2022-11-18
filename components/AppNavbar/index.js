@@ -26,8 +26,10 @@ export default function AppNavbar(props) {
               studio: false,
               playlist: false,
               likedSong: false,
-              follow: false
+              follow: false,
+              search: false
             });
+            props.changeQuery("");
           }}
         >
           <img
@@ -86,8 +88,10 @@ export default function AppNavbar(props) {
                         studio: false,
                         playlist: false,
                         likedSong: false,
-                        follow: false
+                        follow: false,
+                        search: false
                       });
+                      props.changeQuery("");
                     }}
                   >
                     <PersonIcon /> Account
@@ -104,8 +108,10 @@ export default function AppNavbar(props) {
                         studio: false,
                         playlist: false,
                         likedSong: false,
-                        follow: false
+                        follow: false,
+                        search: false
                       });
+                      props.changeQuery("");
                     }}
                   >
                     <SettingsIcon /> Setting
@@ -117,7 +123,7 @@ export default function AppNavbar(props) {
               <Fab
                 className="text-light"
                 color="warning"
-                sx={{ backgroundColor: "#fa3434" }}
+                sx={{ backgroundColor: "#fa3434", zIndex: 0 }}
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasScrolling"
                 aria-controls="offcanvasScrolling"
@@ -130,7 +136,7 @@ export default function AppNavbar(props) {
               <Fab
                 className="text-light"
                 color="error"
-                sx={{ backgroundColor: "#000" }}
+                sx={{ backgroundColor: "#000", zIndex: 0 }}
                 onClick={logout}
                 size="small"
               >
