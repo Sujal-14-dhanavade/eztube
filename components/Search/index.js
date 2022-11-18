@@ -17,13 +17,13 @@ export default function Search(props) {
             return token.trim() !== "";
           });
         if (tokens.length) {
-          var searchTermRegex = new RegExp(tokens.join("|"), "gim");
           axios.request({
             method: "POST",
             url: "/api/filterSearch",
-            data: { regEx: searchTermRegex}
+            data: { token: tokens}
           }).then(res => {
             console.log(res.data);
+            props.changeContent(res.data);
           })
           props.toPage({
             account: false,

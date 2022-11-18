@@ -166,6 +166,7 @@ export default function TopCharts(props) {
                         <ul
                           className="dropdown-menu bg-dark"
                           aria-labelledby={`dropdownMenuButton${idx}`}
+                          style={{height: "100%", overflowY: "auto"}}
                         >
                           <li>
                             <a

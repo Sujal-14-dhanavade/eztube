@@ -29,7 +29,10 @@ export default function studio(props) {
   });
   const [turn, changeTurn] = React.useState(0);
   const [src, changeSrc] = React.useState(null);
-  const [searchContent, changeContent] = React.useState(null);
+  const [searchContent, changeContent] = React.useState({
+    songs: [],
+    users: []
+  });
   const [query, changeQuery] = React.useState("");
   useEffect(() => {
     axios
@@ -97,6 +100,7 @@ export default function studio(props) {
           playlistData={playlistData}
           changeData={changeData}
           followData={props.data.follow}
+          likedData = {props.data.follow}
           changeTurn={changeTurn}
           changeSrc={changeSrc}
           audioRef={audioRef}

@@ -1,6 +1,13 @@
 import React, { useEffect } from "react";
 import NavigationIcon from "@mui/icons-material/Navigation";
-import { Card, CardMedia, CardContent, IconButton, Chip } from "@mui/material";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  IconButton,
+  Chip,
+  useMediaQuery,
+} from "@mui/material";
 import {
   Accordion,
   AccordionDetails,
@@ -10,7 +17,73 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import axios from "axios";
 import LikeButton from "../LikeButton";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 export default function AudioPlayer(props) {
+  const match = useMediaQuery("(min-width: 768px)");
+  const nextSong = () => {
+    if (props.turn === props.queue.queue.length - 1) {
+      props.changeTurn(0);
+      props.changeSrc(props.queue.queue[0].song);
+      axios.request({
+        method: "post",
+        url: "/api/viewSong",
+        data: { songId: props.queue.queue[props.turn]._id },
+      });
+      axios.request({
+        method: "post",
+        url: "/api/recentSong",
+        data: { songId: props.queue.queue[props.turn]._id },
+      });
+      props.audioRef.current.load();
+    } else {
+      props.changeTurn(props.turn + 1);
+      props.changeSrc(props.queue.queue[props.turn + 1].song);
+      axios.request({
+        method: "post",
+        url: "/api/viewSong",
+        data: { songId: props.queue.queue[props.turn]._id },
+      });
+      axios.request({
+        method: "post",
+        url: "/api/recentSong",
+        data: { songId: props.queue.queue[props.turn]._id },
+      });
+      props.audioRef.current.load();
+    }
+  };
+
+  const prevSong = () => {
+    if (props.turn === 0) {
+      props.changeTurn(props.queue.queue.length - 1);
+      props.changeSrc(props.queue.queue[props.queue.queue.length - 1].song);
+      axios.request({
+        method: "post",
+        url: "/api/viewSong",
+        data: { songId: props.queue.queue[props.turn]._id },
+      });
+      axios.request({
+        method: "post",
+        url: "/api/recentSong",
+        data: { songId: props.queue.queue[props.turn]._id },
+      });
+      props.audioRef.current.load();
+    } else {
+      props.changeTurn(props.turn - 1);
+      props.changeSrc(props.queue.queue[props.turn - 1].song);
+      axios.request({
+        method: "post",
+        url: "/api/viewSong",
+        data: { songId: props.queue.queue[props.turn]._id },
+      });
+      axios.request({
+        method: "post",
+        url: "/api/recentSong",
+        data: { songId: props.queue.queue[props.turn]._id },
+      });
+      props.audioRef.current.load();
+    }
+  }
   useEffect(() => {
     setTimeout(() => {
       if (props.queue.isChange && props.queue.queue.length !== 0) {
@@ -24,35 +97,7 @@ export default function AudioPlayer(props) {
             props.audioRef.current.duration - 2 &&
           props.queue.queue.length !== 0
         ) {
-          if (props.turn === props.queue.queue.length - 1) {
-            props.changeTurn(0);
-            props.changeSrc(props.queue.queue[0].song);
-            axios.request({
-              method: "post",
-              url: "/api/viewSong",
-              data: { songId: props.queue.queue[props.turn]._id },
-            });
-            axios.request({
-              method: "post",
-              url: "/api/recentSong",
-              data: { songId: props.queue.queue[props.turn]._id },
-            });
-            props.audioRef.current.load();
-          } else {
-            props.changeTurn(props.turn + 1);
-            props.changeSrc(props.queue.queue[props.turn + 1].song);
-            axios.request({
-              method: "post",
-              url: "/api/viewSong",
-              data: { songId: props.queue.queue[props.turn]._id },
-            });
-            axios.request({
-              method: "post",
-              url: "/api/recentSong",
-              data: { songId: props.queue.queue[props.turn]._id },
-            });
-            props.audioRef.current.load();
-          }
+          nextSong();
         }
       }
     }, 1000);
@@ -140,7 +185,7 @@ export default function AudioPlayer(props) {
       ) : null}
       <div className="px-5 d-flex flex-lg-row flex-md-row flex-column justify-content-between">
         <audio
-          style={{ width: "60%" }}
+          style={{ width: match ? "60%" : "100%" }}
           ref={props.audioRef}
           controls
           autoPlay={true}
@@ -150,9 +195,23 @@ export default function AudioPlayer(props) {
             type="audio/mpeg"
           />
         </audio>
-        <div id="controls">
+        <div
+          id="controls"
+          className="d-flex justify-content-center align-items-center"
+        >
+          {props.queue.queue.length !== 0 ? (
+            <>
+              <IconButton className="text-info" onClick={prevSong}>
+                <SkipPreviousIcon />
+              </IconButton>
+              <IconButton className="text-info" onClick={nextSong}>
+                <SkipNextIcon />
+              </IconButton>
+            </>
+          ) : null}
+
           <IconButton
-            className="text-light"
+            className="text-light mx-2"
             onClick={() => {
               props.changeQueue({ isChange: false, queue: [] });
               props.changeSrc(null);
@@ -169,7 +228,7 @@ export default function AudioPlayer(props) {
               set={props.LikedData.includes(props.queue.queue[props.turn]._id)}
             />
           ) : null}
-          <IconButton href="#">
+          <IconButton href="#" className="mx-2">
             <NavigationIcon className="text-danger" />
           </IconButton>
         </div>

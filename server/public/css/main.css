@@ -282,6 +282,19 @@ button.create {
 .nohover:hover {
   background-color: #232425;
 }
+
+ul::-webkit-scrollbar {
+  width: 5px;               
+}
+
+ul::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0);       
+}
+
+ul::-webkit-scrollbar-thumb {
+  background-color: gray;    
+  border-radius: 50%;        
+}
 @media screen and (max-width: 768px) {
   .feature-content {
     text-align: center;

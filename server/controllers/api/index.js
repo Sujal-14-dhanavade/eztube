@@ -442,8 +442,23 @@ const getFollow = async(req, res) => {
 };
 
 const filterSearch = (req, res) => {
-  const regEx = req.body.regEx;
-  
+  const regEx = new RegExp(req.body.token.join("|"), "gi");
+  const data = {songs: [], users: []};
+  Song.find({name: {$regex: regEx}}, (err, result) => {
+    if(err) {
+      res.json(err);
+    } else {
+      data.songs = result;
+      User.find({username: {$regex: regEx}}, { username: 1, country: 1, userPic: 1, verified: 1, followers: 1 },(err, result) => {
+        if(err) {
+          res.json(err);
+        } else {
+          data.users = result;
+          res.json(data);
+        }
+      })
+    }
+  })
 };
 module.exports = {
   register,

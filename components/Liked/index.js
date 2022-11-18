@@ -144,6 +144,7 @@ export default function Liked(props) {
                       <ul
                         className="dropdown-menu bg-dark"
                         aria-labelledby={`dropdownMenuButton${idx}`}
+                        style={{height: "100%", overflowY: "auto"}}
                       >
                         <li>
                           <a
