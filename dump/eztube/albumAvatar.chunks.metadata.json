@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"files_id":{"$numberInt":"1"},"n":{"$numberInt":"1"}},"name":"files_id_1_n_1","background":false,"unique":true}],"uuid":"7f29fde5a6f84d0b92c5ecdaa784c7d5","collectionName":"albumAvatar.chunks","type":"collection"}

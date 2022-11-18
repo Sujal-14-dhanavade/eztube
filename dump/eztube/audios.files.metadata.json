@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"filename":{"$numberInt":"1"},"uploadDate":{"$numberInt":"1"}},"name":"filename_1_uploadDate_1","background":false}],"uuid":"6be46bd583af46368fce1d915d3ecc99","collectionName":"audios.files","type":"collection"}
