@@ -55,7 +55,22 @@ export default function Account(props) {
                         </div>
                       </div>
                       <div className="mt-5">
-                        <a href="/Ezport" className="btn btn-danger mx-3 p-2">
+                        <a
+                          style={{ cursor: "pointer" }}
+                          onClick={() => {
+                            props.toPage({
+                              account: false,
+                              setting: false,
+                              studio: false,
+                              playlist: false,
+                              likedSong: false,
+                              follow: false,
+                              search: false,
+                            });
+                            props.changeQuery("");
+                          }}
+                          className="btn btn-danger mx-3 p-2"
+                        >
                           Go Back &#9758;
                         </a>
                       </div>

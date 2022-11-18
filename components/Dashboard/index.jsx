@@ -49,9 +49,9 @@ export default function studio(props) {
     <div className="dashboard">
       <AppNavbar data={props.data} toPage={changePage} changeQuery={changeQuery}/>
       {page.account ? (
-        <Account data={props.data} />
+        <Account data={props.data} toPage={changePage} changeQuery={changeQuery}/>
       ) : page.setting ? (
-        <Settings data={props.data} />
+        <Settings data={props.data} toPage={changePage} changeQuery={changeQuery}/>
       ) : page.studio ? (
         <Studio
           data={props.data}

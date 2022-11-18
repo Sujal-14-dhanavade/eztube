@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { Alert } from "@mui/material";
 
 export default function Settings(props) {
-  const router = useRouter();
   const [data, changeData] = React.useState(props.data);
   const getDate = () => {
     const date = new Date();
@@ -189,7 +188,22 @@ export default function Settings(props) {
                           >
                             Save Changes
                           </button>
-                          <a href="/Ezport" className="btn btn-danger mx-3 p-2">
+                          <a
+                            style={{ cursor: "pointer" }}
+                            onClick={() => {
+                              props.toPage({
+                                account: false,
+                                setting: false,
+                                studio: false,
+                                playlist: false,
+                                likedSong: false,
+                                follow: false,
+                                search: false,
+                              });
+                              props.changeQuery("");
+                            }}
+                            className="btn btn-danger mx-3 p-2"
+                          >
                             Go Back &#9758;
                           </a>
                         </div>
