@@ -38,7 +38,7 @@ export default function Home(props) {
 
   return (
     <div>
-      <Container className="p-lg-5 p-md-5 p-0 mt-5">
+      <Container className="p-lg-5 p-md-5 p-0 mt-5" sx={{marginBottom: "100px"}}>
         <Typography
           variant="h4"
           className="text-center fw-bolder mb-4"

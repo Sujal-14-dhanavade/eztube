@@ -58,7 +58,7 @@ export default function Liked(props) {
       });
   }
   return (
-    <div className="d-flex flex-column p-lg-5 p-md-5 p-1">
+    <div className="d-flex flex-column p-lg-5 p-md-5 p-1" style={{marginBottom: "100px"}}>
       <Box className="mb-5">
         <Typography variant="h4" className="text-center">
           <ThumbUpIcon className="me-3" />

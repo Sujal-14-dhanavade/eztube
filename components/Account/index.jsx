@@ -4,7 +4,7 @@ import PersonIcon from "@mui/icons-material/Person";
 
 export default function Account(props) {
   return (
-    <div>
+    <div style={{marginBottom: "100px"}}>
       <section className="py-5">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center">

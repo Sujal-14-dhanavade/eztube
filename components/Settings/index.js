@@ -78,7 +78,7 @@ export default function Settings(props) {
     }
   };
   return (
-    <div>
+    <div style={{marginBottom: "100px"}}>
       <section className="py-5 rounded-5">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center">

@@ -91,7 +91,7 @@ export default function playListSongs(props) {
         </CardContent>
       </Card>
       <Box
-        sx={{ width: "100%" }}
+        sx={{ width: "100%", marginBottom: "100px" }}
         className="bg-dark w-75 mx-auto mt-2 p-lg-5 p-md-5 p-1 rounded shadow-lg"
       >
         {props.playlist.songs.length !== 0 && songData !== null ? (

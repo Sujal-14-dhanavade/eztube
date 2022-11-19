@@ -11,7 +11,7 @@ export default function Playlist(props) {
   return (
     <>
       {list ? (
-        <div className="mt-3">
+        <div className="mt-3" style={{marginBottom: "100px"}}>
           <Typography className="text-center" variant="h4">
             <i className="fa-brands fa-napster me-3"></i>Playlist
           </Typography>
