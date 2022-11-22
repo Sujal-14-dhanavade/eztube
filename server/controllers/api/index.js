@@ -1,15 +1,15 @@
 require("dotenv").config();
-const User = require("../../models/User/index");
+const User = require("../../models/User/index");    
 const Album = require("../../models/Album");
 const Song = require("../../models/Song");
 const Schema = require("mongoose").Schema;
 const Playlist = require("../../models/Playlist");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");   //password encrypt and decrypt uses hash value
 
 const register = (req, res) => {
   const data = req.body;
   bcrypt.hash(data.password, Number(process.env.ROUND)).then((hash) => {
-    const userData = new User({
+    const userData = new User({   //user schema
       username: data.username,
       password: hash,
       email: data.email,
@@ -442,7 +442,7 @@ const getFollow = async(req, res) => {
 };
 
 const filterSearch = (req, res) => {
-  const regEx = new RegExp(req.body.token.join("|"), "gi");
+  const regEx = new RegExp(req.body.token.join("|"), "gi");   //javascript regex modifier
   const data = {songs: [], users: []};
   Song.find({name: {$regex: regEx}}, (err, result) => {
     if(err) {
