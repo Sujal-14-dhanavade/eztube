@@ -1,25 +1,25 @@
-require("dotenv").config();
+require("dotenv").config();  //reading our own environment variables
 
-const { Server } = require("mongodb");
+const { Server } = require("mongodb"); 
 /*
     REQUIRED MODULES
 */
 const {
-  express,
-  next,
-  homeRoute,
-  bodyParser,
-  mongoose,
-  multer,
-  cors,
-  GridFsStorage,
-  watchRoute,
-  getPicRoute,
-  session,
-  MongoDbSession
+  express,  //express server
+  next, //next app server for accept request
+  homeRoute,      // crud operatuions
+  bodyParser,   //data parsing in json
+  mongoose,     //connecting to mongodb
+  multer,       //grid storages divide bigger file into smaller file using multer
+  cors,         //take req. resp. from different port number cross origin sever
+  GridFsStorage,        //Streaming data store in mongodb
+  watchRoute,       //audio playing
+  getPicRoute,      // surojeet part related to frontend
+  session,      //for se3ssion cookies
+  MongoDbSession        // for storing session in mongodb database
 } = require("./library");
 
-// importing GRID storages
+// importing GRID storages avatar is picture
 const {
   audioStorage,
   songAvatarStorage,
@@ -30,7 +30,7 @@ const {
 
 // importing controllers for storages
 
-const registerUserPic = require("./controllers/api").registerUserPic;
+const registerUserPic = require("./controllers/api").registerUserPic; //controller to store user pic in database
 
 // MONGO CONNECTION AND GRID FS MODALS AUDIO, AND PLAYLIST, ALBUM, USER AND SONG PIC
 
@@ -43,7 +43,7 @@ mongoose
     mongoose.connection.once("open", function () {
       console.log("connected");
     });
-
+//Gridfs schema is mongodb schema
     const audioGrid = new GridFsStorage(audioStorage);
     const userGrid = new GridFsStorage(userAvatarStorage);
     const albumGrid = new GridFsStorage(albumAvatarStorage);
@@ -73,7 +73,7 @@ const dev = process.env.NODE_ENV !== "production";
 
 const port = process.env.PORT || 3000;
 
-// next app
+// accessing next server app
 
 const app = next({ dir: ".", dev });
 
@@ -89,18 +89,18 @@ app.prepare().then(() => {
 
   // middlewares for server
   server.use(session({
-    secret: process.env.SECRET,
-    resave: false,
+    secret: process.env.SECRET,     //for decrypting cookie which we send to client 
+    resave: false,              //don't resave until it is changed
     saveUninitialized: false,
     store: sessionStorage,
     cookie: {
       maxAge: 3600000 * 24 * 14
     }
   }))
-  server.use(express.static(__dirname + "/public"));
-  server.use(bodyParser.urlencoded({extended: true}));
+  server.use(express.static(__dirname + "/public"));        // search images in public folder _dirname returns present directory
+  server.use(bodyParser.urlencoded({extended: true}));      //url encoded form
   server.use(bodyParser.json());
-  server.use(cors());
+  server.use(cors());       //use of cross origin
 
 
 
@@ -137,7 +137,7 @@ app.prepare().then(() => {
   });
 
   // @Routes POST /watch/audioTitle
-  // @desc get audios from mongo server
+  // @desc get audios from mongo server surojeet part
   server.use("/watch", watchRoute);
 
   // @Routes POST /avatar/picType/id
